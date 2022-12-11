@@ -3,6 +3,11 @@ package ba.unsa.etf.rpr.domain;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * holds basic information about the rents
+ *
+ * @author Aida Zametica
+ */
 public class Rents {
     private int rent_id;
     private int movie_id;
