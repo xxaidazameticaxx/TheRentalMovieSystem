@@ -3,7 +3,6 @@ package ba.unsa.etf.rpr.dao;
 import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Users;
 
-
 import java.util.List;
 import java.sql.*;
 
@@ -18,6 +17,30 @@ public class UsersDaoSQLImpl implements UsersDao{
         }
     }
 
+    public Users getUserByRentId(int rent_id) {
+        String query = "SELECT * FROM users WHERE user_id = (SELECT r.user_id FROM rents r WHERE r.id = ?)";
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(query);
+            stmt.setInt(1, rent_id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()){ // result set is iterator.
+                Users user = new Users();
+                user.setUser_id(rs.getInt("user_id"));
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                user.setAdmin(rs.getBoolean("admin"));
+                rs.close();
+                return user;
+            }
+            else{
+                return null; // if there is no elements in the result set return null
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace(); // poor error handling
+        }
+        return null;
+    }
     @Override
     public Users getById(int user_id) {
         String query = "SELECT * FROM users WHERE user_id = ?";
