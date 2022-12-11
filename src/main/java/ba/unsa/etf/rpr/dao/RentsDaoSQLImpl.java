@@ -17,9 +17,32 @@ public class RentsDaoSQLImpl implements RentsDao{
     }
 
     @Override
-    public Rents getById(int id) {
+    public Rents getById(int rent_id) {
+        String query = "SELECT * FROM rents WHERE rent_id = ?";
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(query);
+            stmt.setInt(1, rent_id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()){ // result set is iterator.
+                Rents rent = new Rents();
+                rent.setRent_id(rs.getInt("rent_id"));
+                rent.setMovie_id(rs.getInt("movie_id"));
+                rent.setUser_id(rs.getInt("user_id"));
+                rent.setRent_date(rs.getDate("rent_date"));
+                rent.setReturn_date(rs.getDate("return_date"));
+                rs.close();
+                return rent;
+            }
+            else{
+                return null; // if there is no elements in the result set return null
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace(); // poor error handling
+        }
         return null;
     }
+
 
     @Override
     public Rents add(Rents item) {
