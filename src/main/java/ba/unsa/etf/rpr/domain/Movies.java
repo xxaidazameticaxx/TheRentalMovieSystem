@@ -3,6 +3,10 @@ package ba.unsa.etf.rpr.domain;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * bean for movies
+ * @author Aida Zametica
+ */
 public class Movies {
     private int movie_id;
     private String movie_name;
