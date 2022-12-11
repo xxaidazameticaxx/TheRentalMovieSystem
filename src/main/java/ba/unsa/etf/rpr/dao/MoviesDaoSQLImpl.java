@@ -48,6 +48,26 @@ public class MoviesDaoSQLImpl implements MoviesDao{
 
     @Override
     public Movies add(Movies item) {
+        String insert = "INSERT INTO movies(movie_name,price,genre,duration,ratings,release_date,language) VALUES(?,?,?,?,?,?,?)";
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, item.getMovie_name());
+            stmt.setDouble(2, item.getPrice());
+            stmt.setString(3, item.getGenre());
+            stmt.setInt(4,item.getDuration());
+            stmt.setDouble(5,item.getRatings());
+            stmt.setDate(6, (Date) item.getRelease_date());
+            stmt.setString(7, item.getLanguage());
+            stmt.executeUpdate();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next(); // we know that there is one key
+            item.setMovie_id(rs.getInt(1)); //set id to return it back
+            return item;
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
         return null;
     }
 
@@ -60,7 +80,6 @@ public class MoviesDaoSQLImpl implements MoviesDao{
     public void delete(int id) {
 
     }
-
     @Override
     public List<Movies> getAll() {
         return null;
