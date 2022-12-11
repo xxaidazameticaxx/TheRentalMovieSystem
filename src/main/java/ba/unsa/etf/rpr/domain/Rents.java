@@ -50,5 +50,15 @@ public class Rents {
         this.return_date = return_date;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Rents rents = (Rents) o;
+        return rent_id == rents.rent_id;
+    }
+
+
+
 
 }
