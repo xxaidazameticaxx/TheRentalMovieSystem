@@ -84,4 +84,9 @@ public class Movies {
         Movies movies = (Movies) o;
         return movie_id == movies.movie_id;
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(movie_id, movie_name, price, genre, duration, ratings, release_date, language);
+    }
 }
