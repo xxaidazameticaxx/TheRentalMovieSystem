@@ -99,7 +99,8 @@ public class MoviesDaoSQLImpl implements MoviesDao{
             PreparedStatement stmt = this.conn.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, movie_id);
             stmt.executeUpdate();
-        }catch (SQLException e){
+        }
+        catch (SQLException e){
             e.printStackTrace();
         }
     }
