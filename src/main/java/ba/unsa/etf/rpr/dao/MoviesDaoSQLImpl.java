@@ -2,12 +2,10 @@ package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Movies;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.*;
 import java.util.List;
 
 public class MoviesDaoSQLImpl implements MoviesDao{
-
     private Connection conn;
 
     public MoviesDaoSQLImpl(){
@@ -17,6 +15,7 @@ public class MoviesDaoSQLImpl implements MoviesDao{
             e.printStackTrace();
         }
     }
+
     @Override
     public Movies getById(int id) {
         return null;
