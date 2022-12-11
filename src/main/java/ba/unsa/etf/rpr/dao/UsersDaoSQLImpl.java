@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.dao;
 
+import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Users;
 
 
@@ -45,6 +46,22 @@ public class UsersDaoSQLImpl implements UsersDao{
 
     @Override
     public Users add(Users item) {
+        String insert = "INSERT INTO users(username,password,admin) VALUES(?,?,?)";
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, item.getUsername());
+            stmt.setString(2, item.getPassword());
+            stmt.setBoolean(3, item.isAdmin());
+            stmt.executeUpdate();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next(); // we know that there is one key
+            item.setUser_id(rs.getInt(1)); //set id to return it back
+            return item;
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
         return null;
     }
 
