@@ -1,4 +1,12 @@
 package ba.unsa.etf.rpr.dao;
 
-public interface MoviesDao {
+import ba.unsa.etf.rpr.domain.Movies;
+
+/**
+ * Dao interface for Movies domain bean
+ *
+ * @author Aida Zametica
+ */
+
+public interface MoviesDao extends Dao<Movies>{
 }
