@@ -1,4 +1,12 @@
 package ba.unsa.etf.rpr.dao;
 
-public interface RentsDao {
+import ba.unsa.etf.rpr.domain.Rents;
+
+/**
+ * Dao interface for Rents domain bean
+ *
+ * @author Aida Zametica
+ */
+
+public interface RentsDao extends Dao<Rents>{
 }
