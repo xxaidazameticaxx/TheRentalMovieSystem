@@ -55,8 +55,16 @@ public class RentsDaoSQLImpl implements RentsDao{
     }
 
     @Override
-    public void delete(int id) {
-
+    public void delete(int rent_id) {
+        String insert = "DELETE FROM rents WHERE rent_id = ?";
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+            stmt.setObject(1, rent_id);
+            stmt.executeUpdate();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
