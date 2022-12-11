@@ -93,8 +93,15 @@ public class MoviesDaoSQLImpl implements MoviesDao{
     }
 
     @Override
-    public void delete(int id) {
-
+    public void delete(int movie_id) {
+        String insert = "DELETE FROM movies WHERE id = ?";
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+            stmt.setObject(1, movie_id);
+            stmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
     @Override
     public List<Movies> getAll() {
