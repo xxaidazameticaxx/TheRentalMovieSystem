@@ -58,7 +58,9 @@ public class Rents {
         return rent_id == rents.rent_id;
     }
 
-
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(rent_id, movie_id, user_id, rent_date, return_date);
+    }
 
 }
