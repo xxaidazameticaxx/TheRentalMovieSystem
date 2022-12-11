@@ -39,4 +39,13 @@ public class Users {
         this.admin = admin;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Users users = (Users) o;
+        return user_id == users.user_id;
+    }
+
+
 }
