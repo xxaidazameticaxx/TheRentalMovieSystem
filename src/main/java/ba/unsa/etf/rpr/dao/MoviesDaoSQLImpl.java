@@ -17,6 +17,35 @@ public class MoviesDaoSQLImpl implements MoviesDao{
         }
     }
 
+    public Movies getMovieByRentId(int rent_id) {
+        String query = "SELECT * FROM movies WHERE movie_id = (SELECT r.movie_id FROM rents r WHERE r.id = ?)";
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(query);
+            stmt.setInt(1, rent_id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()){ // result set is iterator.
+                Movies movie = new Movies();
+                movie.setMovie_id(rs.getInt("movie_id"));
+                movie.setMovie_name(rs.getString("movie_name"));
+                movie.setPrice(rs.getDouble("price"));
+                movie.setGenre(rs.getString("genre"));
+                movie.setDuration(rs.getInt("duration"));
+                movie.setRatings(rs.getDouble("ratings"));
+                movie.setRelease_date(rs.getDate("release_date"));
+                movie.setLanguage(rs.getString("language"));
+                rs.close();
+                return movie;
+            }
+            else{
+                return null; // if there is no elements in the result set return null
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace(); // poor error handling
+        }
+        return null;
+    }
+
     @Override
     public Movies getById(int movie_id) {
         String query = "SELECT * FROM movies WHERE movie_id = ?";

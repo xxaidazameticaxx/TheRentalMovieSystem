@@ -12,8 +12,8 @@ public class Rents {
     private int rent_id;
     private Date rent_date;
     private Date return_date;
-    private int movie_id;
-    private int user_id;
+    private Movies movie;   //movie_id;
+    private Users user;     //user_id;
 
     public int getRent_id() {
         return rent_id;
@@ -23,21 +23,17 @@ public class Rents {
         this.rent_id = rent_id;
     }
 
-    public int getMovie_id() {
-        return movie_id;
+    public Movies getMovie() { return movie; }
+
+    public void setMovie(Movies movie) {
+        this.movie = movie;
     }
 
-    public void setMovie_id(int movie_id) {
-        this.movie_id = movie_id;
+    public Users getUser() {
+        return user;
     }
 
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
+    public void setUser(Users user) { this.user = user; }
 
     public Date getRent_date() {
         return rent_date;
@@ -65,7 +61,7 @@ public class Rents {
 
     @Override
     public int hashCode() {
-        return Objects.hash(rent_id, movie_id, user_id, rent_date, return_date);
+        return Objects.hash(rent_id, rent_date, return_date, movie, user);
     }
 
 }

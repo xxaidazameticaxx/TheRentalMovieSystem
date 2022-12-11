@@ -26,8 +26,14 @@ public class RentsDaoSQLImpl implements RentsDao{
             if (rs.next()){ // result set is iterator.
                 Rents rent = new Rents();
                 rent.setRent_id(rs.getInt("rent_id"));
-                rent.setMovie_id(rs.getInt("movie_id"));
-                rent.setUser_id(rs.getInt("user_id"));
+                /*
+                rent.setMovie(new MoviesDaoSQLImpl().getById(rs.getInt("movie_id")));
+                rent.setUser(new UsersDaoSQLImpl().getById(rs.getInt("user_id")));
+
+                rent.setMovie(getMovieByRentId(rent_id));
+                rent.setUser(getUserByRentId(rent_id));
+                */
+
                 rent.setRent_date(rs.getDate("rent_date"));
                 rent.setReturn_date(rs.getDate("return_date"));
                 rs.close();
