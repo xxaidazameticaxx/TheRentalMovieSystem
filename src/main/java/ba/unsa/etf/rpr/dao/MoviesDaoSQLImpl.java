@@ -74,7 +74,7 @@ public class MoviesDaoSQLImpl implements MoviesDao{
 
     @Override
     public Movies update(Movies item) {
-        String insert = "UPDATE movies SET movie_name = ?, genre= ?, duration = ?, ratings = ?, release_date = ?, language = ?, price = ? WHERE id = ?";
+        String insert = "UPDATE movies SET movie_name = ?, genre= ?, duration = ?, ratings = ?, release_date = ?, language = ?, price = ? WHERE movie_id = ?";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, item.getMovie_name());
@@ -94,7 +94,7 @@ public class MoviesDaoSQLImpl implements MoviesDao{
 
     @Override
     public void delete(int movie_id) {
-        String insert = "DELETE FROM movies WHERE id = ?";
+        String insert = "DELETE FROM movies WHERE movie_id = ?";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, movie_id);

@@ -67,7 +67,7 @@ public class UsersDaoSQLImpl implements UsersDao{
 
     @Override
     public Users update(Users item) {
-        String insert = "UPDATE users SET username = ?,password = ?, admin = ? WHERE id = ?";
+        String insert = "UPDATE users SET username = ?,password = ?, admin = ? WHERE user_id = ?";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, item.getUsername());
@@ -82,8 +82,16 @@ public class UsersDaoSQLImpl implements UsersDao{
         }
     }
     @Override
-    public void delete(int id) {
-
+    public void delete(int user_id) {
+        String insert = "DELETE FROM users WHERE user_id = ?";
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+            stmt.setObject(1, user_id);
+            stmt.executeUpdate();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
