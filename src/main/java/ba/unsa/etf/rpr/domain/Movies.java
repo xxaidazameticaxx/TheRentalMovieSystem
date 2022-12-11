@@ -77,4 +77,11 @@ public class Movies {
         this.language = language;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Movies movies = (Movies) o;
+        return movie_id == movies.movie_id;
+    }
 }
