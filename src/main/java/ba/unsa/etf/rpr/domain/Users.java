@@ -48,4 +48,9 @@ public class Users {
     }
 
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(user_id, username, password, admin);
+    }
+
 }
