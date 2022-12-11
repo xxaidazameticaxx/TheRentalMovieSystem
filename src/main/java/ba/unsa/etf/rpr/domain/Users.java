@@ -1,6 +1,12 @@
 package ba.unsa.etf.rpr.domain;
 
 import java.util.Objects;
+
+/**
+ * Holds login details of all users
+ *
+ * @author Aida Zametica
+ */
 public class Users {
     private int user_id;
     private String username;
@@ -46,7 +52,6 @@ public class Users {
         Users users = (Users) o;
         return user_id == users.user_id;
     }
-
 
     @Override
     public int hashCode() {
