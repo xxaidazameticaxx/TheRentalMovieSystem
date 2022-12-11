@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Movies;
+import ba.unsa.etf.rpr.domain.Users;
 
 import java.sql.*;
 import java.util.List;
@@ -48,16 +49,16 @@ public class MoviesDaoSQLImpl implements MoviesDao{
 
     @Override
     public Movies add(Movies item) {
-        String insert = "INSERT INTO movies(movie_name,price,genre,duration,ratings,release_date,language) VALUES(?,?,?,?,?,?,?)";
+        String insert = "INSERT INTO movies(movie_name,genre,duration,ratings,release_date,language,price) VALUES(?,?,?,?,?,?,?)";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, item.getMovie_name());
-            stmt.setDouble(2, item.getPrice());
-            stmt.setString(3, item.getGenre());
-            stmt.setInt(4,item.getDuration());
-            stmt.setDouble(5,item.getRatings());
-            stmt.setDate(6, (Date) item.getRelease_date());
-            stmt.setString(7, item.getLanguage());
+            stmt.setString(2, item.getGenre());
+            stmt.setInt(3,item.getDuration());
+            stmt.setDouble(4,item.getRatings());
+            stmt.setDate(5, (Date) item.getRelease_date());
+            stmt.setString(6, item.getLanguage());
+            stmt.setDouble(7, item.getPrice());
             stmt.executeUpdate();
 
             ResultSet rs = stmt.getGeneratedKeys();
@@ -73,7 +74,22 @@ public class MoviesDaoSQLImpl implements MoviesDao{
 
     @Override
     public Movies update(Movies item) {
-        return null;
+        String insert = "UPDATE movies SET movie_name = ?, genre= ?, duration = ?, ratings = ?, release_date = ?, language = ?, price = ? WHERE id = ?";
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+            stmt.setObject(1, item.getMovie_name());
+            stmt.setObject(2, item.getGenre());
+            stmt.setObject(3, item.getDuration());
+            stmt.setObject(4, item.getRatings());
+            stmt.setObject(5, item.getRelease_date());
+            stmt.setObject(6, item.getLanguage());
+            stmt.setObject(7, item.getPrice());
+            stmt.executeUpdate();
+            return item;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

@@ -10,12 +10,12 @@ import java.util.Objects;
 public class Movies {
     private int movie_id;
     private String movie_name;
-    private double price;
     private String genre;
     private int duration;
     private double ratings;
     private Date release_date;
     private String language;
+    private double price;
 
     public int getMovie_id() {
         return movie_id;

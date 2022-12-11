@@ -10,10 +10,10 @@ import java.util.Objects;
  */
 public class Rents {
     private int rent_id;
-    private int movie_id;
-    private int user_id;
     private Date rent_date;
     private Date return_date;
+    private int movie_id;
+    private int user_id;
 
     public int getRent_id() {
         return rent_id;
