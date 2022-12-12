@@ -96,7 +96,24 @@ public class UsersDaoSQLImpl implements UsersDao{
 
     @Override
     public List<Users> getAll() {
-
+        String query = "SELECT * FROM users";
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            ArrayList<Users> usersLista = new ArrayList<>();
+            while (rs.next()) {
+                Users user = new Users();
+                user.setUser_id(rs.getInt("user_id"));
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                user.setAdmin(rs.getBoolean("admin"));
+                usersLista.add(user);
+            }
+            rs.close();
+            return usersLista;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }
