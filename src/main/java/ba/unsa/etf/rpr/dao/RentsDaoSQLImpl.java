@@ -5,6 +5,7 @@ import ba.unsa.etf.rpr.domain.Rents;
 import ba.unsa.etf.rpr.domain.Users;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RentsDaoSQLImpl implements RentsDao{
@@ -82,7 +83,7 @@ public class RentsDaoSQLImpl implements RentsDao{
             if (rs.next()){ // result set is iterator.
                 Rents rent = new Rents();
                 rent.setRent_id(rs.getInt("rent_id"));
-                rent.setMovie(getMovieByRentId(rent_id)); //rent.setMovie(new MoviesDaoSQLImpl().getById(rs.getInt("movie_id")));
+                rent.setMovie(getMovieByRentId(rent_id)); // rent.setMovie(new MoviesDaoSQLImpl().getById(rs.getInt("movie_id")));
                 rent.setUser(getUserByRentId(rent_id));   //rent.setUser(new UsersDaoSQLImpl().getById(rs.getInt("user_id")));
                 rent.setRent_date(rs.getDate("rent_date"));
                 rent.setReturn_date(rs.getDate("return_date"));
@@ -102,11 +103,40 @@ public class RentsDaoSQLImpl implements RentsDao{
 
     @Override
     public Rents add(Rents item) {
+        String insert = "INSERT INTO rents(rent_date,return_date,movie,user) VALUES (?,?,?,?)";
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement(insert,Statement.RETURN_GENERATED_KEYS);
+            stmt.setDate(1, (Date) item.getRent_date());
+            stmt.setDate(2, (Date) item.getReturn_date());
+            stmt.setInt(3,item.getMovie().getMovie_id());
+            stmt.setInt(4,item.getUser().getUser_id());
+            stmt.executeUpdate();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next(); // we know that there is one key
+            item.setRent_id(rs.getInt(1)); //set id to return it back
+            return item;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
     public Rents update(Rents item) {
+        String query = "UPDATE rents SET rent_date = ?, return_date = ?, movie = ?, user = ? WHERE rent_id=?";
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement(query);
+            stmt.setDate(1,(Date) item.getRent_date());
+            stmt.setDate(2, (Date) item.getReturn_date()); //zasto ja moram (Date) pisati??
+            stmt.setInt(3,item.getMovie().getMovie_id());
+            stmt.setInt(4,item.getUser().getUser_id());
+            stmt.executeUpdate();
+            return item;
+        } catch (SQLException e) {
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 
@@ -125,6 +155,26 @@ public class RentsDaoSQLImpl implements RentsDao{
 
     @Override
     public List<Rents> getAll() {
+        String query = "SELECT * FROM rents";
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            ArrayList<Rents> rentsLista = new ArrayList<>();
+            while (rs.next()) {
+                Rents rent = new Rents();
+                rent.setRent_id(rs.getInt("rent_id"));
+                rent.setRent_date(rs.getDate("rent_date"));
+                rent.setReturn_date(rs.getDate("return_date"));
+                rent.setMovie(new MoviesDaoSQLImpl().getById(rs.getInt("movie_id"))); //ili ono moje
+                rent.setUser(new UsersDaoSQLImpl().getById(rs.getInt("user_id")));
+
+                rentsLista.add(rent);
+            }
+            rs.close();
+            return rentsLista;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }
