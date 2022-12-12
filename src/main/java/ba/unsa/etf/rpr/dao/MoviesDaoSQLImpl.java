@@ -4,24 +4,32 @@ import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Rents;
 import ba.unsa.etf.rpr.domain.Users;
 
+import java.io.FileReader;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class MoviesDaoSQLImpl implements MoviesDao{
     private Connection conn;
 
     public MoviesDaoSQLImpl(){
         try{
-            this.conn = DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net:3306/root","root","root");
+            FileReader fr = new FileReader("src/main/resources/db.properties");
+            Properties p = new Properties();
+            p.load(fr);
+            String url = p.getProperty("url");
+            String user = p.getProperty("user");
+            String password = p.getProperty("password");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            this.conn = DriverManager.getConnection(url,user,password);
         } catch(Exception e){
             e.printStackTrace();
         }
     }
-
     @Override
     public Movies getById(int movie_id) {
-        String query = "SELECT * FROM movies WHERE movie_id = ?";
+        String query = "SELECT * FROM MOVIES WHERE movie_id = ?";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(query);
             stmt.setInt(1, movie_id);
@@ -51,14 +59,14 @@ public class MoviesDaoSQLImpl implements MoviesDao{
 
     @Override
     public Movies add(Movies item) {
-        String insert = "INSERT INTO movies(movie_name,genre,duration,ratings,release_date,language,price) VALUES(?,?,?,?,?,?,?)";
+        String insert = "INSERT INTO MOVIES(movie_name,genre,duration,ratings,release_date,language,price) VALUES(?,?,?,?,?,?,?)";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, item.getMovie_name());
             stmt.setString(2, item.getGenre());
             stmt.setInt(3,item.getDuration());
             stmt.setDouble(4,item.getRatings());
-            stmt.setDate(5, (Date) item.getRelease_date());
+            stmt.setDate(5, item.getRelease_date());
             stmt.setString(6, item.getLanguage());
             stmt.setDouble(7, item.getPrice());
             stmt.executeUpdate();
@@ -76,14 +84,14 @@ public class MoviesDaoSQLImpl implements MoviesDao{
 
     @Override
     public Movies update(Movies item) {
-        String insert = "UPDATE movies SET movie_name = ?, genre= ?, duration = ?, ratings = ?, release_date = ?, language = ?, price = ? WHERE movie_id = ?";
+        String insert = "UPDATE MOVIES SET movie_name = ?, genre= ?, duration = ?, ratings = ?, release_date = ?, language = ?, price = ? WHERE movie_id = ?";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, item.getMovie_name());
             stmt.setObject(2, item.getGenre());
             stmt.setObject(3, item.getDuration());
             stmt.setObject(4, item.getRatings());
-            stmt.setObject(5, item.getRelease_date());
+            stmt.setObject(5, item.getRelease_date()); //greska
             stmt.setObject(6, item.getLanguage());
             stmt.setObject(7, item.getPrice());
             stmt.executeUpdate();
@@ -96,7 +104,7 @@ public class MoviesDaoSQLImpl implements MoviesDao{
 
     @Override
     public void delete(int movie_id) {
-        String insert = "DELETE FROM movies WHERE movie_id = ?";
+        String insert = "DELETE FROM MOVIES WHERE movie_id = ?";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, movie_id);
@@ -108,7 +116,7 @@ public class MoviesDaoSQLImpl implements MoviesDao{
     }
     @Override
     public List<Movies> getAll() {
-        String query = "SELECT * FROM movies";
+        String query = "SELECT * FROM MOVIES";
         try {
             PreparedStatement stmt = this.conn.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();

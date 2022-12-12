@@ -4,23 +4,32 @@ import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Rents;
 import ba.unsa.etf.rpr.domain.Users;
 
+import java.io.FileReader;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class RentsDaoSQLImpl implements RentsDao{
     private Connection conn;
 
     public RentsDaoSQLImpl(){
         try{
-            this.conn = DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net:3306/root","root","root");
+            FileReader fr = new FileReader("src/main/resources/db.properties");
+            Properties p = new Properties();
+            p.load(fr);
+            String url = p.getProperty("url");
+            String user = p.getProperty("user");
+            String password = p.getProperty("password");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            this.conn = DriverManager.getConnection(url,user,password);
         } catch(Exception e){
             e.printStackTrace();
         }
     }
 
     public Movies getMovieByRentId(int rent_id) {
-        String query = "SELECT * FROM movies WHERE movie_id = (SELECT r.movie_id FROM rents r WHERE r.id = ?)";
+        String query = "SELECT * FROM MOVIES WHERE movie_id = (SELECT r.movie_id FROM RENTS r WHERE r.id = ?)";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(query);
             stmt.setInt(1, rent_id);
@@ -49,7 +58,7 @@ public class RentsDaoSQLImpl implements RentsDao{
     }
 
     public Users getUserByRentId(int rent_id) {
-        String query = "SELECT * FROM users WHERE user_id = (SELECT r.user_id FROM rents r WHERE r.id = ?)";
+        String query = "SELECT * FROM USERS WHERE user_id = (SELECT r.user_id FROM RENTS r WHERE r.id = ?)";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(query);
             stmt.setInt(1, rent_id);
@@ -75,7 +84,7 @@ public class RentsDaoSQLImpl implements RentsDao{
 
     @Override
     public Rents getById(int rent_id) {
-        String query = "SELECT * FROM rents WHERE rent_id = ?";
+        String query = "SELECT * FROM RENTS WHERE rent_id = ?";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(query);
             stmt.setInt(1, rent_id);
@@ -83,8 +92,8 @@ public class RentsDaoSQLImpl implements RentsDao{
             if (rs.next()){ // result set is iterator.
                 Rents rent = new Rents();
                 rent.setRent_id(rs.getInt("rent_id"));
-                rent.setMovie(getMovieByRentId(rent_id)); // rent.setMovie(new MoviesDaoSQLImpl().getById(rs.getInt("movie_id")));
-                rent.setUser(getUserByRentId(rent_id));   //rent.setUser(new UsersDaoSQLImpl().getById(rs.getInt("user_id")));
+                rent.setMovie(getMovieByRentId(rent_id)); // rent.setMovie(new MoviesDaoSQLImpl().getById(rs.getInt("movie_id"))); PROVJERITI
+                rent.setUser(getUserByRentId(rent_id));   //rent.setUser(new UsersDaoSQLImpl().getById(rs.getInt("user_id"))); PROVJERITI
                 rent.setRent_date(rs.getDate("rent_date"));
                 rent.setReturn_date(rs.getDate("return_date"));
                 rs.close();
@@ -103,7 +112,7 @@ public class RentsDaoSQLImpl implements RentsDao{
 
     @Override
     public Rents add(Rents item) {
-        String insert = "INSERT INTO rents(rent_date,return_date,movie,user) VALUES (?,?,?,?)";
+        String insert = "INSERT INTO RENTS(rent_date,return_date,movie,user) VALUES (?,?,?,?)";
         try {
             PreparedStatement stmt = this.conn.prepareStatement(insert,Statement.RETURN_GENERATED_KEYS);
             stmt.setDate(1, (Date) item.getRent_date());
@@ -124,7 +133,7 @@ public class RentsDaoSQLImpl implements RentsDao{
 
     @Override
     public Rents update(Rents item) {
-        String query = "UPDATE rents SET rent_date = ?, return_date = ?, movie = ?, user = ? WHERE rent_id=?";
+        String query = "UPDATE RENTS SET rent_date = ?, return_date = ?, movie = ?, user = ? WHERE rent_id=?";
         try {
             PreparedStatement stmt = this.conn.prepareStatement(query);
             stmt.setDate(1,(Date) item.getRent_date());
@@ -142,7 +151,7 @@ public class RentsDaoSQLImpl implements RentsDao{
 
     @Override
     public void delete(int rent_id) {
-        String insert = "DELETE FROM rents WHERE rent_id = ?";
+        String insert = "DELETE FROM RENTS WHERE rent_id = ?";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, rent_id);
@@ -155,7 +164,7 @@ public class RentsDaoSQLImpl implements RentsDao{
 
     @Override
     public List<Rents> getAll() {
-        String query = "SELECT * FROM rents";
+        String query = "SELECT * FROM RENTS";
         try {
             PreparedStatement stmt = this.conn.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
@@ -165,10 +174,11 @@ public class RentsDaoSQLImpl implements RentsDao{
                 rent.setRent_id(rs.getInt("rent_id"));
                 rent.setRent_date(rs.getDate("rent_date"));
                 rent.setReturn_date(rs.getDate("return_date"));
-                rent.setMovie(new MoviesDaoSQLImpl().getById(rs.getInt("movie_id"))); //ili ono moje
-                rent.setUser(new UsersDaoSQLImpl().getById(rs.getInt("user_id")));
+                rent.setMovie(new MoviesDaoSQLImpl().getById(rs.getInt("movie_id"))); //PROVJERITI
+                rent.setUser(new UsersDaoSQLImpl().getById(rs.getInt("user_id")));    //PROVJERITI
 
                 rentsLista.add(rent);
+
             }
             rs.close();
             return rentsLista;

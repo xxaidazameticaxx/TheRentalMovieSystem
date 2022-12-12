@@ -1,18 +1,26 @@
 package ba.unsa.etf.rpr.dao;
 
-import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Users;
 
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
+import java.util.Properties;
 
 public class UsersDaoSQLImpl implements UsersDao{
     private Connection conn;
 
     public UsersDaoSQLImpl(){
         try{
-            this.conn = DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net:3306/root","root","root");
+            FileReader fr = new FileReader("src/main/resources/db.properties");
+            Properties p = new Properties();
+            p.load(fr);
+            String url = p.getProperty("url");
+            String user = p.getProperty("user");
+            String password = p.getProperty("password");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            this.conn = DriverManager.getConnection(url,user,password);
         } catch(Exception e){
             e.printStackTrace();
         }
@@ -20,7 +28,7 @@ public class UsersDaoSQLImpl implements UsersDao{
 
     @Override
     public Users getById(int user_id) {
-        String query = "SELECT * FROM users WHERE user_id = ?";
+        String query = "SELECT * FROM USERS WHERE user_id = ?";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(query);
             stmt.setInt(1, user_id);
@@ -46,7 +54,7 @@ public class UsersDaoSQLImpl implements UsersDao{
 
     @Override
     public Users add(Users item) {
-        String insert = "INSERT INTO users(username,password,admin) VALUES(?,?,?)";
+        String insert = "INSERT INTO USERS(username,password,admin) VALUES(?,?,?)";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, item.getUsername());
@@ -67,7 +75,7 @@ public class UsersDaoSQLImpl implements UsersDao{
 
     @Override
     public Users update(Users item) {
-        String insert = "UPDATE users SET username = ?,password = ?, admin = ? WHERE user_id = ?";
+        String insert = "UPDATE USERS SET username = ?,password = ?, admin = ? WHERE user_id = ?";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, item.getUsername());
@@ -83,7 +91,7 @@ public class UsersDaoSQLImpl implements UsersDao{
     }
     @Override
     public void delete(int user_id) {
-        String insert = "DELETE FROM users WHERE user_id = ?";
+        String insert = "DELETE FROM USERS WHERE user_id = ?";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, user_id);
@@ -96,7 +104,7 @@ public class UsersDaoSQLImpl implements UsersDao{
 
     @Override
     public List<Users> getAll() {
-        String query = "SELECT * FROM users";
+        String query = "SELECT * FROM USERS";
         try {
             PreparedStatement stmt = this.conn.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();

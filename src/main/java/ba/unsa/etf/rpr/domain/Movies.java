@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr.domain;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 
 /**
@@ -92,5 +92,19 @@ public class Movies {
     @Override
     public int hashCode() {
         return Objects.hash(movie_id, movie_name, price, genre, duration, ratings, release_date, language);
+    }
+
+    @Override
+    public String toString() {
+        return "Movies{" +
+                "movie_id=" + movie_id +
+                ", movie_name='" + movie_name + '\'' +
+                ", genre='" + genre + '\'' +
+                ", duration=" + duration +
+                ", ratings=" + ratings +
+                ", release_date=" + release_date +
+                ", language='" + language + '\'' +
+                ", price=" + price +
+                '}';
     }
 }
