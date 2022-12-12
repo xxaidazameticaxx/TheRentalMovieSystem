@@ -3,6 +3,7 @@ package ba.unsa.etf.rpr.dao;
 import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Users;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
 
@@ -95,6 +96,7 @@ public class UsersDaoSQLImpl implements UsersDao{
 
     @Override
     public List<Users> getAll() {
+
         return null;
     }
 }
