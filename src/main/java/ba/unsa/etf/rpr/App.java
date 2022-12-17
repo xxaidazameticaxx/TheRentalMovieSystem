@@ -2,24 +2,24 @@ package ba.unsa.etf.rpr;
 
 import ba.unsa.etf.rpr.dao.MoviesDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Movies;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 import java.sql.Date;
 import java.util.List;
 
-public class App {
+public class App extends Application {
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        primaryStage.setTitle("Hello, World!");
+        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.show();
+    }
     public static void main(String[] args) {
-        System.out.println("Hello world!");
-        MoviesDaoSQLImpl filmic = new MoviesDaoSQLImpl();
-        Movies m = new Movies();
-        m.setDuration(125);
-        m.setMovie_name("Vlak u snijegu");
-        m.setRelease_date(new Date(2001,14,12));
-        m.setLanguage("bosanski");
-        m.setGenre("ljubavni");
-        m.setRatings(7.4);
-        filmic.add(m);
-        List<Movies>mm = filmic.getAll();
-        for(Movies x: mm) System.out.println(x);
-
+        launch(args);
     }
 }
