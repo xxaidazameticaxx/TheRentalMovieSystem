@@ -168,5 +168,33 @@ public class MoviesDaoSQLImpl implements MoviesDao{
         return null;
     }
 
+    @Override
+    public List<Movies> searchByLanguage(String language) {
+        String query = "SELECT * FROM MOVIES WHERE language = ?";
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(query);
+            stmt.setString(1, language);
+            ResultSet rs = stmt.executeQuery();
+            ArrayList<Movies>movieLista = new ArrayList<>();
+            while (rs.next()){ // result set is iterator.
+                Movies movie = new Movies();
+                movie.setMovie_id(rs.getInt("movie_id"));
+                movie.setMovie_name(rs.getString("movie_name"));
+                movie.setPrice(rs.getDouble("price"));
+                movie.setGenre(rs.getString("genre"));
+                movie.setDuration(rs.getInt("duration"));
+                movie.setRatings(rs.getDouble("ratings"));
+                movie.setRelease_date(rs.getDate("release_date"));
+                movie.setLanguage(rs.getString("language"));
+                movieLista.add(movie);
+            }
+            return movieLista;
+        }
+        catch (SQLException e){
+            e.printStackTrace(); // poor error handling
+        }
+        return null;
+    }
+
 
 }

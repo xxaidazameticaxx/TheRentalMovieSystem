@@ -12,8 +12,8 @@ import java.util.List;
 
 public interface MoviesDao extends Dao<Movies>{
 
-    //metoda koja bi trebala da izbaci sve info za filmove kad searchas po žanru
     List<Movies> searchByGenre(String genre);
 
     List<Movies> searchByLanguage(String language);
+
 }
