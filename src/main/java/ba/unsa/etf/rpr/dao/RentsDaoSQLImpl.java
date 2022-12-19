@@ -28,7 +28,7 @@ public class RentsDaoSQLImpl implements RentsDao{
         }
     }
 
-    public Movies getMovieByRentId(int rent_id) {
+    /*public Movies getMovieByRentId(int rent_id) {
         String query = "SELECT * FROM MOVIES WHERE movie_id = (SELECT r.movie_id FROM RENTS r WHERE r.id = ?)";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(query);
@@ -56,6 +56,8 @@ public class RentsDaoSQLImpl implements RentsDao{
         }
         return null;
     }
+
+     */
 
     public Users getUserByRentId(int rent_id) {
         String query = "SELECT * FROM USERS WHERE user_id = (SELECT r.user_id FROM RENTS r WHERE r.id = ?)";
@@ -92,8 +94,8 @@ public class RentsDaoSQLImpl implements RentsDao{
             if (rs.next()){ // result set is iterator.
                 Rents rent = new Rents();
                 rent.setRent_id(rs.getInt("rent_id"));
-                rent.setMovie(getMovieByRentId(rent_id)); // rent.setMovie(new MoviesDaoSQLImpl().getById(rs.getInt("movie_id"))); PROVJERITI
-                rent.setUser(getUserByRentId(rent_id));   //rent.setUser(new UsersDaoSQLImpl().getById(rs.getInt("user_id"))); PROVJERITI
+                rent.setMovie(new MoviesDaoSQLImpl().getById(rs.getInt("movie_id"))); //rent.setMovie(getMovieByRentId(rent_id));
+                rent.setUser(new UsersDaoSQLImpl().getById(rs.getInt("user_id")));    //rent.setUser(getUserByRentId(rent_id));   // PROVJERITI
                 rent.setRent_date(rs.getDate("rent_date"));
                 rent.setReturn_date(rs.getDate("return_date"));
                 rs.close();
