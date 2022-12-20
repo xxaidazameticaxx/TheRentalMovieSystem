@@ -18,5 +18,7 @@ public interface MoviesDao extends Dao<Movies>{
 
     List<Movies> searchByLanguage(String language);
 
+    List<Movies> getUserIssuedMovies(int user_id);
+
     //List<Movies> getUserIssuedMovies(int user_id);
 }
