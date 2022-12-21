@@ -67,22 +67,16 @@ public class loginController {
         }
 
         if(passwordField_id.getText().equals("admin") && usernameField_id.getText().equals("admin")) {
-            Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/adminMenu.fxml"));
-            stage.setTitle("Admin Menu");
-            stage.setResizable(false);
-            stage.setScene(new Scene(root));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminMenu.fxml"));
+            Parent root = loader.load();
+            userMenuController uMC = loader.getController();
+            uMC.setWelcomeTextField_id("Welcome " + usernameField_id.getText() + ", please select: ");
+            stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
             stage.show();
         }
         else{
-            /*Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/userMenu.fxml"));
-            stage.setTitle("User Menu");
-            stage.setResizable(false);
-            stage.setScene(new Scene(root));
-            stage.show();
-            /*
-             */
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/userMenu.fxml"));
             Parent root = loader.load();
             userMenuController uMC = loader.getController();
