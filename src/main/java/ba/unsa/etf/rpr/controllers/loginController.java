@@ -69,8 +69,8 @@ public class loginController {
         if(passwordField_id.getText().equals("admin") && usernameField_id.getText().equals("admin")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminMenu.fxml"));
             Parent root = loader.load();
-            userMenuController uMC = loader.getController();
-            uMC.setWelcomeTextField_id("Welcome " + usernameField_id.getText() + ", please select: ");
+            adminMenuController aMC = loader.getController();
+            aMC.setWelcomeTextField1_id("Welcome " + usernameField_id.getText() + ", please select: ");
             stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
