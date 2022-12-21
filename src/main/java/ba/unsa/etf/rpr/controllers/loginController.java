@@ -86,7 +86,7 @@ public class loginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/userMenu.fxml"));
             Parent root = loader.load();
             userMenuController uMC = loader.getController();
-            uMC.setWelcomeTextField_id("Welcome "+usernameField_id.getText());
+            uMC.setWelcomeTextField_id("Welcome " + usernameField_id.getText());
             stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
