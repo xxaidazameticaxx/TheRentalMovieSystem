@@ -5,6 +5,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,10 +16,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class loginController {
+    
+    private Stage stage;
+    private Scene scene;
     public Button signupButton_id;
     public Button loginButton_id;
     public TextField usernameField_id;
     public PasswordField passwordField_id;
+
 
     @FXML
     public void initialize() {
@@ -70,11 +75,21 @@ public class loginController {
             stage.show();
         }
         else{
-            Stage stage = new Stage();
+            /*Stage stage = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/userMenu.fxml"));
             stage.setTitle("User Menu");
             stage.setResizable(false);
             stage.setScene(new Scene(root));
+            stage.show();
+            /*
+             */
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/userMenu.fxml"));
+            Parent root = loader.load();
+            userMenuController uMC = loader.getController();
+            uMC.setWelcomeTextField_id("Welcome "+usernameField_id.getText());
+            stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
             stage.show();
         }
 
