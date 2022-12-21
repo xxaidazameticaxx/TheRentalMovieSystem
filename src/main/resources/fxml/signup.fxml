@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.loginController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.signupController">
    <stylesheets>
-      <URL value="@/css/login.css" />
+      <URL value="@/css/signup.css" />
    </stylesheets>
    <children>
       <ImageView fitHeight="382.0" fitWidth="681.0">
@@ -27,7 +27,7 @@
          <children>
             <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="200.0" style="-fx-background-color: #212121;">
                <children>
-                  <Label lineSpacing="4.0" text="LOGIN" textFill="WHITE">
+                  <Label lineSpacing="4.0" text="SIGNUP" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
@@ -39,7 +39,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #212121;">
                <children>
-                  <TextField fx:id="usernameField_id" promptText="username" />
+                  <TextField fx:id="usernameField1_id" promptText="username" />
                </children>
                <VBox.margin>
                   <Insets bottom="-30.0" left="-30.0" right="-30.0" top="-30.0" />
@@ -47,23 +47,16 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212121;">
                <children>
-                  <PasswordField fx:id="passwordField_id" promptText="password" />
+                  <PasswordField fx:id="passwordField1_id" promptText="password" />
                </children>
             </HBox>
             <HBox alignment="CENTER" minWidth="-Infinity" prefHeight="49.0" prefWidth="200.0" style="-fx-background-color: #212121;">
                <children>
-                  <Button fx:id="loginButton_id" mnemonicParsing="false" onAction="#loginclick" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: #c62828;" text="login" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="signupButton1_id" mnemonicParsing="false" onAction="#signupclick1" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: #c62828;" text="signup" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
-                     </font></Button>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="49.0" prefWidth="200.0" style="-fx-background-color: #212121;">
-               <children>
-                  <Button fx:id="signupButton_id" mnemonicParsing="false" onAction="#signupClick" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: #c62828;" text="sign up" textAlignment="CENTER" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font></Button>
+                     </font>
+                  </Button>
                </children>
             </HBox>
          </children>
