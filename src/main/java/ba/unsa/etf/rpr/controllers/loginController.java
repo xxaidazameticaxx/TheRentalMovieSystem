@@ -32,7 +32,7 @@ public class loginController {
         usernameField_id.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
-                if (usernameField_id.getText().trim().isEmpty()) {
+                if (usernameField_id.getText().trim().isEmpty() || usernameField_id.getText().contains(" ")) {
                     usernameField_id.getStyleClass().removeAll("fieldCorrect");
                     usernameField_id.getStyleClass().add("fieldNotCorrect");
                 } else {
@@ -45,7 +45,7 @@ public class loginController {
         passwordField_id.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
-                if (passwordField_id.getText().trim().isEmpty()) {
+                if (passwordField_id.getText().trim().isEmpty() || passwordField_id.getText().contains(" ")) {
                     passwordField_id.getStyleClass().removeAll("fieldCorrect");
                     passwordField_id.getStyleClass().add("fieldNotCorrect");
                 } else {
@@ -57,11 +57,11 @@ public class loginController {
     }
 
     public void loginclick(ActionEvent actionEvent) throws IOException {
-        if(usernameField_id.getText().isEmpty()){
+        if(usernameField_id.getText().isEmpty() || usernameField_id.getText().contains(" ")){
             usernameField_id.getStyleClass().add("fieldNotCorrect");
             return;
         }
-        if(passwordField_id.getText().isEmpty()){
+        if(passwordField_id.getText().isEmpty() || passwordField_id.getText().contains(" ")){
             passwordField_id.getStyleClass().add("fieldNotCorrect");
             return;
         }
