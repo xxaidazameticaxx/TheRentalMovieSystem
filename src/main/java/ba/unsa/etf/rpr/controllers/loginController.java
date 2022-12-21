@@ -27,8 +27,11 @@ public class loginController {
 
     @FXML
     public void initialize() {
-        usernameField_id.getStyleClass().add("poljeNijeIspravno");
-        passwordField_id.getStyleClass().add("poljeNijeIspravno");
+        usernameField_id.getStyleClass().add("fieldCorrect");
+        usernameField_id.getStyleClass().add("fieldNotCorrect");
+        passwordField_id.getStyleClass().add("fieldCorrect");
+        passwordField_id.getStyleClass().add("fieldNotCorrect");
+
         usernameField_id.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
