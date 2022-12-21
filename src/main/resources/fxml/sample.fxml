@@ -48,12 +48,12 @@
             </HBox>
             <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="49.0" prefWidth="200.0" style="-fx-background-color: #212121;">
                <children>
-                  <Button mnemonicParsing="false" onAction="#loginclick" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: #c62828;" text="login" textAlignment="CENTER" textFill="WHITE" />
+                  <Button fx:id="loginButton_id" mnemonicParsing="false" onAction="#loginclick" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: #c62828;" text="login" textAlignment="CENTER" textFill="WHITE" />
                </children>
             </HBox>
             <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="49.0" prefWidth="200.0" style="-fx-background-color: #212121;">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: #c62828;" text="sign up" textAlignment="CENTER" textFill="WHITE" />
+                  <Button fx:id="signupButton_id" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: #c62828;" text="sign up" textAlignment="CENTER" textFill="WHITE" />
                </children>
             </HBox>
          </children>
