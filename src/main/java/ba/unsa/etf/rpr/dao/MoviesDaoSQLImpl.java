@@ -224,6 +224,7 @@ public class MoviesDaoSQLImpl implements MoviesDao{
         return null;
     }
 
+    //mozda????????
     @Override
     public List<Movies> getUserIssuedMovies(int user_id) {
         String query = "SELECT * FROM MOVIES WHERE movie_id = (SELECT r.movie_id FROM RENTS r WHERE r.user_id = user_id AND r.return_date IS NOT NULL)";
