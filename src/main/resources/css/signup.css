@@ -1,0 +1,7 @@
+.fieldNotCorrect{
+    -fx-background-color: lightpink;
+}
+
+.fieldCorrect{
+    -fx-background-color: white;
+}
