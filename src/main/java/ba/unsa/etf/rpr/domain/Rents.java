@@ -66,4 +66,14 @@ public class Rents implements Idable{
         return rent_id;
     }
 
+    @Override
+    public String toString() {
+        return "Rents{" +
+                "rent_id=" + rent_id +
+                ", rent_date=" + rent_date +
+                ", return_date=" + return_date +
+                ", movie=" + movie +
+                ", user=" + user +
+                '}';
+    }
 }
