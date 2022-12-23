@@ -67,7 +67,7 @@ public class RentsDaoSQLImpl implements RentsDao{
             ResultSet rs = stmt.executeQuery();
             if (rs.next()){ // result set is iterator.
                 Users user = new Users();
-                user.setUser_id(rs.getInt("user_id"));
+                user.setId(rs.getInt("user_id"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 user.setAdmin(rs.getBoolean("admin"));
@@ -93,7 +93,7 @@ public class RentsDaoSQLImpl implements RentsDao{
             ResultSet rs = stmt.executeQuery();
             if (rs.next()){ // result set is iterator.
                 Rents rent = new Rents();
-                rent.setRent_id(rs.getInt("rent_id"));
+                rent.setId(rs.getInt("rent_id"));
                 rent.setMovie(new MoviesDaoSQLImpl().getById(rs.getInt("movie_id"))); //rent.setMovie(getMovieByRentId(rent_id));
                 rent.setUser(new UsersDaoSQLImpl().getById(rs.getInt("user_id")));    //rent.setUser(getUserByRentId(rent_id));   // PROVJERITI
                 rent.setRent_date(rs.getDate("rent_date"));
@@ -119,13 +119,13 @@ public class RentsDaoSQLImpl implements RentsDao{
             PreparedStatement stmt = this.conn.prepareStatement(insert,Statement.RETURN_GENERATED_KEYS);
             stmt.setDate(1, (Date) item.getRent_date());
             stmt.setDate(2, (Date) item.getReturn_date());
-            stmt.setInt(3,item.getMovie().getMovie_id());
-            stmt.setInt(4,item.getUser().getUser_id());
+            stmt.setInt(3,item.getMovie().getId());
+            stmt.setInt(4,item.getUser().getId());
             stmt.executeUpdate();
 
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next(); // we know that there is one key
-            item.setRent_id(rs.getInt(1)); //set id to return it back
+            item.setId(rs.getInt(1)); //set id to return it back
             return item;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -140,8 +140,8 @@ public class RentsDaoSQLImpl implements RentsDao{
             PreparedStatement stmt = this.conn.prepareStatement(query);
             stmt.setDate(1,(Date) item.getRent_date());
             stmt.setDate(2, (Date) item.getReturn_date()); //zasto ja moram (Date) pisati??
-            stmt.setInt(3,item.getMovie().getMovie_id());
-            stmt.setInt(4,item.getUser().getUser_id());
+            stmt.setInt(3,item.getMovie().getId());
+            stmt.setInt(4,item.getUser().getId());
             stmt.executeUpdate();
             return item;
         } catch (SQLException e) {
@@ -173,7 +173,7 @@ public class RentsDaoSQLImpl implements RentsDao{
             ArrayList<Rents> rentsLista = new ArrayList<>();
             while (rs.next()) {
                 Rents rent = new Rents();
-                rent.setRent_id(rs.getInt("rent_id"));
+                rent.setId(rs.getInt("rent_id"));
                 rent.setRent_date(rs.getDate("rent_date"));
                 rent.setReturn_date(rs.getDate("return_date"));
                 rent.setMovie(new MoviesDaoSQLImpl().getById(rs.getInt("movie_id"))); //PROVJERITI

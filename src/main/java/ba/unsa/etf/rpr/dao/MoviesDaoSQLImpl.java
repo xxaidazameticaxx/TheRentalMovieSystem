@@ -34,7 +34,7 @@ public class MoviesDaoSQLImpl implements MoviesDao{
             ResultSet rs = stmt.executeQuery();
             if (rs.next()){ // result set is iterator.
                 Movies movie = new Movies();
-                movie.setMovie_id(rs.getInt("movie_id"));
+                movie.setId(rs.getInt("movie_id"));
                 movie.setMovie_name(rs.getString("movie_name"));
                 movie.setPrice(rs.getDouble("price"));
                 movie.setGenre(rs.getString("genre"));
@@ -71,7 +71,7 @@ public class MoviesDaoSQLImpl implements MoviesDao{
 
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next(); // we know that there is one key
-            item.setMovie_id(rs.getInt(1)); //set id to return it back
+            item.setId(rs.getInt(1)); //set id to return it back
             return item;
         }
         catch (SQLException e){
@@ -121,7 +121,7 @@ public class MoviesDaoSQLImpl implements MoviesDao{
             ArrayList<Movies> moviesLista = new ArrayList<>();
             while (rs.next()) {
                 Movies movie = new Movies();
-                movie.setMovie_id(rs.getInt("movie_id"));
+                movie.setId(rs.getInt("movie_id"));
                 movie.setMovie_name(rs.getString("movie_name"));
                 movie.setGenre(rs.getString("genre"));
                 movie.setDuration(rs.getInt("duration"));
@@ -150,7 +150,7 @@ public class MoviesDaoSQLImpl implements MoviesDao{
             ArrayList<Movies>movieLista = new ArrayList<>();
             while (rs.next()){ // result set is iterator.
                 Movies movie = new Movies();
-                movie.setMovie_id(rs.getInt("movie_id"));
+                movie.setId(rs.getInt("movie_id"));
                 movie.setMovie_name(rs.getString("movie_name"));
                 movie.setPrice(rs.getDouble("price"));
                 movie.setGenre(rs.getString("genre"));
@@ -178,7 +178,7 @@ public class MoviesDaoSQLImpl implements MoviesDao{
             ArrayList<Movies>movieLista = new ArrayList<>();
             while (rs.next()){ // result set is iterator.
                 Movies movie = new Movies();
-                movie.setMovie_id(rs.getInt("movie_id"));
+                movie.setId(rs.getInt("movie_id"));
                 movie.setMovie_name(rs.getString("movie_name"));
                 movie.setPrice(rs.getDouble("price"));
                 movie.setGenre(rs.getString("genre"));
@@ -206,7 +206,7 @@ public class MoviesDaoSQLImpl implements MoviesDao{
             ArrayList<Movies>movieLista = new ArrayList<>();
             while (rs.next()){ // result set is iterator.
                 Movies movie = new Movies();
-                movie.setMovie_id(rs.getInt("movie_id"));
+                movie.setId(rs.getInt("movie_id"));
                 movie.setMovie_name(rs.getString("movie_name"));
                 movie.setPrice(rs.getDouble("price"));
                 movie.setGenre(rs.getString("genre"));
@@ -235,7 +235,7 @@ public class MoviesDaoSQLImpl implements MoviesDao{
             ArrayList<Movies>movieLista = new ArrayList<>();
             while (rs.next()){ // result set is iterator.
                 Movies movie = new Movies();
-                movie.setMovie_id(rs.getInt("movie_id"));
+                movie.setId(rs.getInt("movie_id"));
                 movie.setMovie_name(rs.getString("movie_name"));
                 movie.setPrice(rs.getDouble("price"));
                 movie.setGenre(rs.getString("genre"));

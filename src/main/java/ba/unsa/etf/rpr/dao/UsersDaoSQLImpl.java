@@ -35,7 +35,7 @@ public class UsersDaoSQLImpl implements UsersDao{
             ResultSet rs = stmt.executeQuery();
             if (rs.next()){ // result set is iterator.
                 Users user = new Users();
-                user.setUser_id(rs.getInt("user_id"));
+                user.setId(rs.getInt("user_id"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 user.setAdmin(rs.getBoolean("admin"));
@@ -64,7 +64,7 @@ public class UsersDaoSQLImpl implements UsersDao{
 
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next(); // we know that there is one key
-            item.setUser_id(rs.getInt(1)); //set id to return it back
+            item.setId(rs.getInt(1)); //set id to return it back
             return item;
         }
         catch (SQLException e){
@@ -81,7 +81,7 @@ public class UsersDaoSQLImpl implements UsersDao{
             stmt.setObject(1, item.getUsername());
             stmt.setObject(2, item.getPassword());
             stmt.setObject(3, item.isAdmin());
-            stmt.setObject(4, item.getUser_id());
+            stmt.setObject(4, item.getId());
             stmt.executeUpdate();
             return item;
         }catch (SQLException e){
@@ -111,7 +111,7 @@ public class UsersDaoSQLImpl implements UsersDao{
             ArrayList<Users> usersLista = new ArrayList<>();
             while (rs.next()) {
                 Users user = new Users();
-                user.setUser_id(rs.getInt("user_id"));
+                user.setId(rs.getInt("user_id"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 user.setAdmin(rs.getBoolean("admin"));
