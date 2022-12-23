@@ -7,19 +7,11 @@ import java.util.Objects;
  *
  * @author Aida Zametica
  */
-public class Users {
+public class Users implements Idable{
     private int user_id;
     private String username;
     private String password;
     private boolean admin;
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
 
     public String getUsername() {
         return username;
@@ -56,6 +48,16 @@ public class Users {
     @Override
     public int hashCode() {
         return Objects.hash(user_id, username, password, admin);
+    }
+
+    @Override
+    public void setId(int id) {
+        this.user_id = id;
+    }
+
+    @Override
+    public int getId() {
+        return user_id;
     }
 
 }
