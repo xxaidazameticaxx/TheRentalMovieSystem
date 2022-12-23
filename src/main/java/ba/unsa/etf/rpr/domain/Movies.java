@@ -7,7 +7,7 @@ import java.util.Objects;
  * bean for movies
  * @author Aida Zametica
  */
-public class Movies {
+public class Movies implements Idable{
     private int movie_id;
     private String movie_name;
     private String genre;
@@ -16,14 +16,6 @@ public class Movies {
     private Date release_date;
     private String language;
     private double price;
-
-    public int getMovie_id() {
-        return movie_id;
-    }
-
-    public void setMovie_id(int movie_id) {
-        this.movie_id = movie_id;
-    }
 
     public String getMovie_name() {
         return movie_name;
@@ -107,4 +99,15 @@ public class Movies {
                 ", price=" + price +
                 '}';
     }
+
+    @Override
+    public void setId(int id) {
+        this.movie_id = id;
+    }
+
+    @Override
+    public int getId() {
+        return movie_id;
+    }
+
 }
