@@ -30,4 +30,12 @@ public abstract class AbstractDao <T extends Idable>implements Dao<T> {
         }
     }
 
+    public Connection getConnection(){
+        return this.connection;
+    }
+
+    public void setConnection(Connection connection){
+        this.connection = connection;
+    }
+
 }
