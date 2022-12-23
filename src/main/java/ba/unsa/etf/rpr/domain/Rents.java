@@ -8,20 +8,12 @@ import java.util.Objects;
  *
  * @author Aida Zametica
  */
-public class Rents {
+public class Rents implements Idable{
     private int rent_id;
     private Date rent_date;
     private Date return_date = null;
     private Movies movie;   //movie_id;
     private Users user;     //user_id;
-
-    public int getRent_id() {
-        return rent_id;
-    }
-
-    public void setRent_id(int rent_id) {
-        this.rent_id = rent_id;
-    }
 
     public Movies getMovie() { return movie; }
 
@@ -62,6 +54,16 @@ public class Rents {
     @Override
     public int hashCode() {
         return Objects.hash(rent_id, rent_date, return_date, movie, user);
+    }
+
+    @Override
+    public void setId(int id) {
+        this.rent_id = id;
+    }
+
+    @Override
+    public int getId() {
+        return rent_id;
     }
 
 }
