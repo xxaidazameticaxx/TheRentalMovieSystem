@@ -155,5 +155,21 @@ public abstract class AbstractDao <T extends Idable>implements Dao<T> {
         }
     }
 
+    /**
+     * Utility for query execution that always return single record
+     * @param query - query that returns single record
+     * @param params - list of params for sql query
+     * @return Object
+     * @throws MovieException in case when object is not found
+     */
+    public T executeQueryUnique(String query, Object[] params) throws MovieException{
+        List<T> result = executeQuery(query, params);
+        if (result != null && result.size() == 1){
+            return result.get(0);
+        }else{
+            throw new MovieException("Object not found");
+        }
+    }
+
 
 }
