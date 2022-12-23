@@ -60,4 +60,13 @@ public class Users implements Idable{
         return user_id;
     }
 
+    @Override
+    public String toString() {
+        return "Users{" +
+                "user_id=" + user_id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", admin=" + admin +
+                '}';
+    }
 }
