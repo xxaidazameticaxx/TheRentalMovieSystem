@@ -7,7 +7,6 @@ import java.util.*;
 import java.sql.*;
 
 public class UsersDaoSQLImpl extends AbstractDao<Users> implements UsersDao{
-    private Connection conn;
 
     public UsersDaoSQLImpl(){
         super("USERS");
