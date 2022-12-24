@@ -4,12 +4,10 @@ import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.MovieException;
 
-import java.io.FileReader;
 import java.sql.*;
 import java.util.*;
 
 public class MoviesDaoSQLImpl extends AbstractDao<Movies> implements MoviesDao{
-    private Connection conn;
 
     public MoviesDaoSQLImpl(){
         super("MOVIES");

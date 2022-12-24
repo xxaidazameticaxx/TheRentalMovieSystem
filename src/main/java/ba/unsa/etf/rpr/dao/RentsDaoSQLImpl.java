@@ -1,20 +1,15 @@
 package ba.unsa.etf.rpr.dao;
 
-import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Rents;
-import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.MovieException;
 
-import java.io.FileReader;
 import java.sql.*;
-import java.sql.Date;
 import java.util.*;
 
 public class RentsDaoSQLImpl extends AbstractDao<Rents> implements RentsDao{
     public RentsDaoSQLImpl(){
        super("RENTS");
     }
-
 
     //refactor?????
     public List<Rents> getUserByRentId(int rent_id) throws MovieException {
