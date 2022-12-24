@@ -26,8 +26,8 @@ public class RentsDaoSQLImpl extends AbstractDao<Rents> implements RentsDao{
         try {
             Rents rent = new Rents();
             rent.setId(rs.getInt("id"));
-            rent.setMovie(DaoFactory.movieDao().getById(rs.getInt("movie_id"))); //REFACTOR UPITAN
-            rent.setUser(DaoFactory.userDao().getById(rs.getInt("user_id")));  //REFACTOR UPITAN
+            rent.setMovie(DaoFactory.moviesDao().getById(rs.getInt("movie_id"))); //REFACTOR UPITAN
+            rent.setUser(DaoFactory.usersDao().getById(rs.getInt("user_id")));  //REFACTOR UPITAN
             rent.setRent_date(rs.getDate("rent_date"));
             rent.setReturn_date(rs.getDate("return_date"));
             return rent;
