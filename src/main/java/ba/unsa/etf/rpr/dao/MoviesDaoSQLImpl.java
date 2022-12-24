@@ -70,5 +70,10 @@ public class MoviesDaoSQLImpl extends AbstractDao<Movies> implements MoviesDao{
        return executeQuery("SELECT * FROM MOVIES WHERE id IN (SELECT r.movie_id FROM RENTS r WHERE user_id = ?)",new Object[]{user.getId()});
     }
 
+    @Override
+    public List<Movies> searchByMovie_name(String movie_name) throws MovieException {
+        return executeQuery("SELECT * FROM MOVIES WHERE movie_name = ?",new Object[]{movie_name});
+    }
+
 
 }

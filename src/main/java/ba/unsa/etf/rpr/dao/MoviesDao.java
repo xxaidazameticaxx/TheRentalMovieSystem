@@ -22,4 +22,5 @@ public interface MoviesDao extends Dao<Movies>{
 
     List<Movies> getUserIssuedMovies(Users user) throws MovieException;
 
+    List<Movies> searchByMovie_name(String movie_name) throws MovieException;
 }
