@@ -27,15 +27,15 @@ public class UsersDaoSQLImpl implements UsersDao{
     }
 
     @Override
-    public Users getById(int user_id) {
-        String query = "SELECT * FROM USERS WHERE user_id = ?";
+    public Users getById(int id) {
+        String query = "SELECT * FROM USERS WHERE id = ?";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(query);
-            stmt.setInt(1, user_id);
+            stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()){ // result set is iterator.
                 Users user = new Users();
-                user.setId(rs.getInt("user_id"));
+                user.setId(rs.getInt("id"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 user.setAdmin(rs.getBoolean("admin"));
@@ -75,7 +75,7 @@ public class UsersDaoSQLImpl implements UsersDao{
 
     @Override
     public Users update(Users item) {
-        String insert = "UPDATE USERS SET username = ?,password = ?, admin = ? WHERE user_id = ?";
+        String insert = "UPDATE USERS SET username = ?,password = ?, admin = ? WHERE id = ?";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, item.getUsername());
@@ -90,11 +90,11 @@ public class UsersDaoSQLImpl implements UsersDao{
         }
     }
     @Override
-    public void delete(int user_id) {
-        String insert = "DELETE FROM USERS WHERE user_id = ?";
+    public void delete(int id) {
+        String insert = "DELETE FROM USERS WHERE id = ?";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-            stmt.setObject(1, user_id);
+            stmt.setObject(1, id);
             stmt.executeUpdate();
         }
         catch (SQLException e){
@@ -111,7 +111,7 @@ public class UsersDaoSQLImpl implements UsersDao{
             ArrayList<Users> usersLista = new ArrayList<>();
             while (rs.next()) {
                 Users user = new Users();
-                user.setId(rs.getInt("user_id"));
+                user.setId(rs.getInt("id"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 user.setAdmin(rs.getBoolean("admin"));

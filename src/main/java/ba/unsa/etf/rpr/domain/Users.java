@@ -8,7 +8,7 @@ import java.util.Objects;
  * @author Aida Zametica
  */
 public class Users implements Idable{
-    private int user_id;
+    private int id;
     private String username;
     private String password;
     private boolean admin;
@@ -42,28 +42,28 @@ public class Users implements Idable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Users users = (Users) o;
-        return user_id == users.user_id;
+        return id == users.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user_id, username, password, admin);
+        return Objects.hash(id, username, password, admin);
     }
 
     @Override
     public void setId(int id) {
-        this.user_id = id;
+        this.id = id;
     }
 
     @Override
     public int getId() {
-        return user_id;
+        return id;
     }
 
     @Override
     public String toString() {
         return "Users{" +
-                "user_id=" + user_id +
+                "user_id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", admin=" + admin +

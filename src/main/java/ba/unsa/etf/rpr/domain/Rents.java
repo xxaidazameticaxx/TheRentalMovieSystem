@@ -9,7 +9,7 @@ import java.util.Objects;
  * @author Aida Zametica
  */
 public class Rents implements Idable{
-    private int rent_id;
+    private int id;
     private Date rent_date;
     private Date return_date = null;
     private Movies movie;   //movie_id;
@@ -48,28 +48,28 @@ public class Rents implements Idable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Rents rents = (Rents) o;
-        return rent_id == rents.rent_id;
+        return id == rents.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(rent_id, rent_date, return_date, movie, user);
+        return Objects.hash(id, rent_date, return_date, movie, user);
     }
 
     @Override
     public void setId(int id) {
-        this.rent_id = id;
+        this.id = id;
     }
 
     @Override
     public int getId() {
-        return rent_id;
+        return id;
     }
 
     @Override
     public String toString() {
         return "Rents{" +
-                "rent_id=" + rent_id +
+                "rent_id=" + id +
                 ", rent_date=" + rent_date +
                 ", return_date=" + return_date +
                 ", movie=" + movie +

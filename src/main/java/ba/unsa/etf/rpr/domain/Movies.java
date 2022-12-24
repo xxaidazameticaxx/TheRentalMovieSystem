@@ -8,7 +8,7 @@ import java.util.Objects;
  * @author Aida Zametica
  */
 public class Movies implements Idable{
-    private int movie_id;
+    private int id;
     private String movie_name;
     private String genre;
     private int duration;
@@ -78,18 +78,18 @@ public class Movies implements Idable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Movies movies = (Movies) o;
-        return movie_id == movies.movie_id;
+        return id == movies.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(movie_id, movie_name, price, genre, duration, ratings, release_date, language);
+        return Objects.hash(id, movie_name, price, genre, duration, ratings, release_date, language);
     }
 
     @Override
     public String toString() {
         return "Movies{" +
-                "movie_id=" + movie_id +
+                "movie_id=" + id +
                 ", movie_name='" + movie_name + '\'' +
                 ", genre='" + genre + '\'' +
                 ", duration=" + duration +
@@ -102,12 +102,12 @@ public class Movies implements Idable{
 
     @Override
     public void setId(int id) {
-        this.movie_id = id;
+        this.id = id;
     }
 
     @Override
     public int getId() {
-        return movie_id;
+        return id;
     }
 
 }

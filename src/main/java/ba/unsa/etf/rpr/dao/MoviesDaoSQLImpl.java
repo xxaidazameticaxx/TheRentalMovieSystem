@@ -26,15 +26,15 @@ public class MoviesDaoSQLImpl implements MoviesDao{
         }
     }
     @Override
-    public Movies getById(int movie_id) {
-        String query = "SELECT * FROM MOVIES WHERE movie_id = ?";
+    public Movies getById(int id) {
+        String query = "SELECT * FROM MOVIES WHERE id = ?";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(query);
-            stmt.setInt(1, movie_id);
+            stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()){ // result set is iterator.
                 Movies movie = new Movies();
-                movie.setId(rs.getInt("movie_id"));
+                movie.setId(rs.getInt("id"));
                 movie.setMovie_name(rs.getString("movie_name"));
                 movie.setPrice(rs.getDouble("price"));
                 movie.setGenre(rs.getString("genre"));
@@ -82,14 +82,14 @@ public class MoviesDaoSQLImpl implements MoviesDao{
 
     @Override
     public Movies update(Movies item) {
-        String insert = "UPDATE MOVIES SET movie_name = ?, genre= ?, duration = ?, ratings = ?, release_date = ?, language = ?, price = ? WHERE movie_id = ?";
+        String insert = "UPDATE MOVIES SET movie_name = ?, genre= ?, duration = ?, ratings = ?, release_date = ?, language = ?, price = ? WHERE id = ?";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, item.getMovie_name());
             stmt.setObject(2, item.getGenre());
             stmt.setObject(3, item.getDuration());
             stmt.setObject(4, item.getRatings());
-            stmt.setObject(5, item.getRelease_date()); //greska
+            stmt.setObject(5, item.getRelease_date());
             stmt.setObject(6, item.getLanguage());
             stmt.setObject(7, item.getPrice());
             stmt.executeUpdate();
@@ -101,11 +101,11 @@ public class MoviesDaoSQLImpl implements MoviesDao{
     }
 
     @Override
-    public void delete(int movie_id) {
-        String insert = "DELETE FROM MOVIES WHERE movie_id = ?";
+    public void delete(int id) {
+        String insert = "DELETE FROM MOVIES WHERE id = ?";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-            stmt.setObject(1, movie_id);
+            stmt.setObject(1, id);
             stmt.executeUpdate();
         }
         catch (SQLException e){
@@ -121,7 +121,7 @@ public class MoviesDaoSQLImpl implements MoviesDao{
             ArrayList<Movies> moviesLista = new ArrayList<>();
             while (rs.next()) {
                 Movies movie = new Movies();
-                movie.setId(rs.getInt("movie_id"));
+                movie.setId(rs.getInt("id"));
                 movie.setMovie_name(rs.getString("movie_name"));
                 movie.setGenre(rs.getString("genre"));
                 movie.setDuration(rs.getInt("duration"));
@@ -150,7 +150,7 @@ public class MoviesDaoSQLImpl implements MoviesDao{
             ArrayList<Movies>movieLista = new ArrayList<>();
             while (rs.next()){ // result set is iterator.
                 Movies movie = new Movies();
-                movie.setId(rs.getInt("movie_id"));
+                movie.setId(rs.getInt("id"));
                 movie.setMovie_name(rs.getString("movie_name"));
                 movie.setPrice(rs.getDouble("price"));
                 movie.setGenre(rs.getString("genre"));
@@ -171,14 +171,14 @@ public class MoviesDaoSQLImpl implements MoviesDao{
     //mozda?????????
     @Override
     public List<Movies> getRentedMovies() {
-        String query = "SELECT * FROM MOVIES WHERE movie_id = (SELECT r.movie_id FROM RENTS r WHERE r.return_date IS NOT NULL";
+        String query = "SELECT * FROM MOVIES WHERE id = (SELECT r.movie_id FROM RENTS r WHERE r.return_date IS NOT NULL";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
             ArrayList<Movies>movieLista = new ArrayList<>();
             while (rs.next()){ // result set is iterator.
                 Movies movie = new Movies();
-                movie.setId(rs.getInt("movie_id"));
+                movie.setId(rs.getInt("id"));
                 movie.setMovie_name(rs.getString("movie_name"));
                 movie.setPrice(rs.getDouble("price"));
                 movie.setGenre(rs.getString("genre"));
@@ -206,7 +206,7 @@ public class MoviesDaoSQLImpl implements MoviesDao{
             ArrayList<Movies>movieLista = new ArrayList<>();
             while (rs.next()){ // result set is iterator.
                 Movies movie = new Movies();
-                movie.setId(rs.getInt("movie_id"));
+                movie.setId(rs.getInt("id"));
                 movie.setMovie_name(rs.getString("movie_name"));
                 movie.setPrice(rs.getDouble("price"));
                 movie.setGenre(rs.getString("genre"));
@@ -224,10 +224,10 @@ public class MoviesDaoSQLImpl implements MoviesDao{
         return null;
     }
 
-    //mozda????????
+    //mozda???????? URADJEN REFACTOR AL ONO...
     @Override
     public List<Movies> getUserIssuedMovies(int user_id) {
-        String query = "SELECT * FROM MOVIES WHERE movie_id = (SELECT r.movie_id FROM RENTS r WHERE r.user_id = user_id AND r.return_date IS NOT NULL)";
+        String query = "SELECT * FROM MOVIES WHERE id = (SELECT r.movie_id FROM RENTS r WHERE r.id = ? AND r.return_date IS NOT NULL)";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(query);
             stmt.setInt(1, user_id);
@@ -235,7 +235,7 @@ public class MoviesDaoSQLImpl implements MoviesDao{
             ArrayList<Movies>movieLista = new ArrayList<>();
             while (rs.next()){ // result set is iterator.
                 Movies movie = new Movies();
-                movie.setId(rs.getInt("movie_id"));
+                movie.setId(rs.getInt("id"));
                 movie.setMovie_name(rs.getString("movie_name"));
                 movie.setPrice(rs.getDouble("price"));
                 movie.setGenre(rs.getString("genre"));
