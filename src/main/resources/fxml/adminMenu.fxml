@@ -56,7 +56,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="227.0" GridPane.columnIndex="1">
                <children>
-                  <Button fx:id="viewRentedMoviesButton_id" alignment="CENTER" mnemonicParsing="false" onAction="#clickViewAllRentedMovies" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: #c62828;" text="VIEW RENTED MOVIES" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                  <Button fx:id="viewAllRentsButton_id" alignment="CENTER" mnemonicParsing="false" onAction="#clickViewAllRents" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: #c62828;" text="VIEW ALL RENTS" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
