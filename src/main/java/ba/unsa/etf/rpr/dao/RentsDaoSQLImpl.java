@@ -11,7 +11,7 @@ public class RentsDaoSQLImpl extends AbstractDao<Rents> implements RentsDao{
        super("RENTS");
     }
 
-    //refactor?????
+    //koja svrha ove metode Aida??
     public List<Rents> getUserByRentId(int rent_id) throws MovieException {
         return executeQuery("SELECT * FROM USERS WHERE id = (SELECT r.user_id FROM RENTS r WHERE r.id = ?)",new Object[]{rent_id});
     }

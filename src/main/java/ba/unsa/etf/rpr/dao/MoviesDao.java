@@ -22,5 +22,4 @@ public interface MoviesDao extends Dao<Movies>{
 
     List<Movies> getUserIssuedMovies(Users user) throws MovieException;
 
-    //List<Movies> getUserIssuedMovies(int user_id);
 }

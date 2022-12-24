@@ -12,8 +12,8 @@ public class Rents implements Idable{
     private int id;
     private Date rent_date;
     private Date return_date = null;
-    private Movies movie;   //movie_id;
-    private Users user;     //user_id;
+    private Movies movie;
+    private Users user;
 
     public Movies getMovie() { return movie; }
 
