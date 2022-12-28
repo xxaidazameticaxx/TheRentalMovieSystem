@@ -49,15 +49,15 @@ public class MoviesDaoSQLImpl extends AbstractDao<Movies> implements MoviesDao{
         return item;
     }
 
-    @Override
-    public List<Movies> searchByGenre(String genre) throws MovieException{
-        return executeQuery("SELECT * FROM MOVIES WHERE genre = ?",new Object[]{genre});
-    }
-
     //koja je svrha ove metode Aida?
     @Override
     public List<Movies> getRentedMovies() throws MovieException{
         return executeQuery("SELECT * FROM MOVIES INNER JOIN RENTS ON MOVIES.id = RENTS.movie_id AND RENTS.return_date IS NULL",null);
+    }
+
+    @Override
+    public List<Movies> searchByGenre(String genre) throws MovieException{
+        return executeQuery("SELECT * FROM MOVIES WHERE genre = ?",new Object[]{genre});
     }
 
     @Override

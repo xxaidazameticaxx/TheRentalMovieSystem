@@ -100,5 +100,6 @@ public class loginController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+
     }
 }
