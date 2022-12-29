@@ -34,4 +34,6 @@ public class usersManager {
     public Users getUserByUsernameAndPassword(String username, String password) throws MovieException {
         return DaoFactory.usersDao().getUserByUsernameAndPassword(username,password);
     }
+
+
 }

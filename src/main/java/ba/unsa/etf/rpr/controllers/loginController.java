@@ -1,6 +1,8 @@
 package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.usersManager;
+import ba.unsa.etf.rpr.domain.Users;
+import ba.unsa.etf.rpr.exceptions.MovieException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -82,8 +84,13 @@ public class loginController {
         }
         DA LI JE POTREBNO OVO??
         */
-
-        if(passwordField_id.getText().equals("admin") && usernameField_id.getText().equals("admin")) {
+        Users user = null;
+        try{
+            user = usersManager.getUserByUsernameAndPassword(usernameField_id.getText(),passwordField_id.getText());
+        } catch(MovieException error){
+            //poor error handling
+        }
+        if(user.isAdmin()) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminMenu.fxml"));
             Parent root = loader.load();
             adminMenuController aMC = loader.getController();
@@ -103,8 +110,6 @@ public class loginController {
             stage.setScene(scene);
             stage.show();
         }
-
-
 
     }
 

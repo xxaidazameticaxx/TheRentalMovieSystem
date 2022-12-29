@@ -47,7 +47,7 @@ public class UsersDaoSQLImpl extends AbstractDao<Users> implements UsersDao{
     }
 
     /**
-     *
+     * provjeriti da li radi
      * @param username
      * @param password
      * @return
