@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.business.usersManager;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -16,7 +17,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class loginController {
-    
+
+    //da li treba final private??
+    private usersManager usersManager = new usersManager();
     private Stage stage;
     private Scene scene;
     public Button signupButton_id;
@@ -25,6 +28,9 @@ public class loginController {
     public PasswordField passwordField_id;
 
 
+    /**
+     * Initialize method that sets the username and password text field in red if they are empty or contain any empty spaces
+     */
     @FXML
     public void initialize() {
         usernameField_id.getStyleClass().add("fieldCorrect");
@@ -59,7 +65,13 @@ public class loginController {
         });
     }
 
+    /**
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
     public void loginclick(ActionEvent actionEvent) throws IOException {
+        /*
         if(usernameField_id.getText().isEmpty() || usernameField_id.getText().contains(" ")){
             usernameField_id.getStyleClass().add("fieldNotCorrect");
             return;
@@ -68,6 +80,8 @@ public class loginController {
             passwordField_id.getStyleClass().add("fieldNotCorrect");
             return;
         }
+        DA LI JE POTREBNO OVO??
+        */
 
         if(passwordField_id.getText().equals("admin") && usernameField_id.getText().equals("admin")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminMenu.fxml"));

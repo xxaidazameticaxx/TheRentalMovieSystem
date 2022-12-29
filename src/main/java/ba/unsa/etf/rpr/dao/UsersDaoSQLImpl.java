@@ -12,6 +12,12 @@ public class UsersDaoSQLImpl extends AbstractDao<Users> implements UsersDao{
         super("USERS");
     }
 
+    /**
+     *
+     * @param rs - result set from database
+     * @return
+     * @throws MovieException
+     */
     @Override
     public Users row2object(ResultSet rs) throws MovieException {
         try {
@@ -38,6 +44,18 @@ public class UsersDaoSQLImpl extends AbstractDao<Users> implements UsersDao{
         item.put("password", object.getPassword());
         item.put("admin", object.isAdmin());
         return item;
+    }
+
+    /**
+     *
+     * @param username
+     * @param password
+     * @return
+     * @throws MovieException
+     */
+    @Override
+    public Users getUserByUsernameAndPassword(String username, String password) throws MovieException{
+        return executeQueryUnique("SELECT * FROM USERS WHERE username = ? AND password = ?",new Object[]{username,password});
     }
 
 }
