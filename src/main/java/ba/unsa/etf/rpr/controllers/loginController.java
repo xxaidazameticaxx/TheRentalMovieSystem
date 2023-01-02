@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -73,22 +74,18 @@ public class loginController {
      * @throws IOException
      */
     public void loginclick(ActionEvent actionEvent) throws IOException {
-        /*
-        if(usernameField_id.getText().isEmpty() || usernameField_id.getText().contains(" ")){
-            usernameField_id.getStyleClass().add("fieldNotCorrect");
-            return;
-        }
-        if(passwordField_id.getText().isEmpty() || passwordField_id.getText().contains(" ")){
-            passwordField_id.getStyleClass().add("fieldNotCorrect");
-            return;
-        }
-        DA LI JE POTREBNO OVO??
-        */
         Users user = null;
         try{
             user = usersManager.getUserByUsernameAndPassword(usernameField_id.getText(),passwordField_id.getText());
         } catch(TheMovieRentalSystemException error){
-            //poor error handling
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("User does not exist");
+            alert.setContentText("The username and password you entered do not match any existing users.");
+            // Apply the stylesheet to the alert (ako stignem)
+            //alert.getDialogPane().getStylesheets().add("/css/alert.css");
+            alert.showAndWait();
+            return;
         }
         if(user.isAdmin()) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminMenu.fxml"));
