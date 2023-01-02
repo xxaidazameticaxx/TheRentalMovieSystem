@@ -1,7 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Users;
-import ba.unsa.etf.rpr.exceptions.MovieException;
+import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 
 import java.util.*;
 import java.sql.*;
@@ -16,10 +16,10 @@ public class UsersDaoSQLImpl extends AbstractDao<Users> implements UsersDao{
      *
      * @param rs - result set from database
      * @return
-     * @throws MovieException
+     * @throws TheMovieRentalSystemException
      */
     @Override
-    public Users row2object(ResultSet rs) throws MovieException {
+    public Users row2object(ResultSet rs) throws TheMovieRentalSystemException {
         try {
             Users user = new Users();
             user.setId(rs.getInt("id"));
@@ -28,7 +28,7 @@ public class UsersDaoSQLImpl extends AbstractDao<Users> implements UsersDao{
             user.setAdmin(rs.getBoolean("admin"));
             return user;
         } catch (Exception e) {
-            throw new MovieException(e.getMessage(), e);
+            throw new TheMovieRentalSystemException(e.getMessage(), e);
         }
     }
 
@@ -51,10 +51,10 @@ public class UsersDaoSQLImpl extends AbstractDao<Users> implements UsersDao{
      * @param username
      * @param password
      * @return
-     * @throws MovieException
+     * @throws TheMovieRentalSystemException
      */
     @Override
-    public Users getUserByUsernameAndPassword(String username, String password) throws MovieException{
+    public Users getUserByUsernameAndPassword(String username, String password) throws TheMovieRentalSystemException {
         return executeQueryUnique("SELECT * FROM USERS WHERE username = ? AND password = ?",new Object[]{username,password});
     }
 

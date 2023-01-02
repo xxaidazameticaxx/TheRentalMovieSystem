@@ -2,7 +2,7 @@ package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Users;
-import ba.unsa.etf.rpr.exceptions.MovieException;
+import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 
 import java.util.List;
 
@@ -14,13 +14,13 @@ import java.util.List;
 
 public interface MoviesDao extends Dao<Movies>{
 
-    List<Movies> searchByGenre(String genre) throws MovieException;
+    List<Movies> searchByGenre(String genre) throws TheMovieRentalSystemException;
 
-    List<Movies> getRentedMovies() throws MovieException;
+    List<Movies> getRentedMovies() throws TheMovieRentalSystemException;
 
-    List<Movies> searchByLanguage(String language) throws MovieException;
+    List<Movies> searchByLanguage(String language) throws TheMovieRentalSystemException;
 
-    List<Movies> getUserIssuedMovies(Users user) throws MovieException;
+    List<Movies> getUserIssuedMovies(Users user) throws TheMovieRentalSystemException;
 
-    List<Movies> searchByMovie_name(String movie_name) throws MovieException;
+    List<Movies> searchByMovie_name(String movie_name) throws TheMovieRentalSystemException;
 }

@@ -2,7 +2,7 @@ package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.usersManager;
 import ba.unsa.etf.rpr.domain.Users;
-import ba.unsa.etf.rpr.exceptions.MovieException;
+import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -87,7 +87,7 @@ public class loginController {
         Users user = null;
         try{
             user = usersManager.getUserByUsernameAndPassword(usernameField_id.getText(),passwordField_id.getText());
-        } catch(MovieException error){
+        } catch(TheMovieRentalSystemException error){
             //poor error handling
         }
         if(user.isAdmin()) {

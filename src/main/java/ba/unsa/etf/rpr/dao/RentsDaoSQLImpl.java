@@ -1,7 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Rents;
-import ba.unsa.etf.rpr.exceptions.MovieException;
+import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 
 import java.sql.*;
 import java.util.*;
@@ -12,12 +12,12 @@ public class RentsDaoSQLImpl extends AbstractDao<Rents> implements RentsDao{
     }
 
     //koja svrha ove metode Aida??
-    public List<Rents> getUserByRentId(int rent_id) throws MovieException {
+    public List<Rents> getUserByRentId(int rent_id) throws TheMovieRentalSystemException {
         return executeQuery("SELECT * FROM USERS WHERE id = (SELECT r.user_id FROM RENTS r WHERE r.id = ?)",new Object[]{rent_id});
     }
 
     @Override
-    public Rents row2object(ResultSet rs) throws MovieException {
+    public Rents row2object(ResultSet rs) throws TheMovieRentalSystemException {
         try {
             Rents rent = new Rents();
             rent.setId(rs.getInt("id"));
@@ -27,7 +27,7 @@ public class RentsDaoSQLImpl extends AbstractDao<Rents> implements RentsDao{
             rent.setReturn_date(rs.getDate("return_date"));
             return rent;
         } catch (Exception e) {
-            throw new MovieException(e.getMessage(), e);
+            throw new TheMovieRentalSystemException(e.getMessage(), e);
         }
     }
 

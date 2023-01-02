@@ -2,7 +2,7 @@ package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Users;
-import ba.unsa.etf.rpr.exceptions.MovieException;
+import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 
 import java.sql.*;
 import java.util.*;
@@ -14,7 +14,7 @@ public class MoviesDaoSQLImpl extends AbstractDao<Movies> implements MoviesDao{
     }
 
     @Override
-    public Movies row2object(ResultSet rs) throws MovieException {
+    public Movies row2object(ResultSet rs) throws TheMovieRentalSystemException {
         try {
             Movies movie = new Movies();
             movie.setId(rs.getInt("id"));
@@ -27,7 +27,7 @@ public class MoviesDaoSQLImpl extends AbstractDao<Movies> implements MoviesDao{
             movie.setLanguage(rs.getString("language"));
             return movie;
         } catch (Exception e) {
-            throw new MovieException(e.getMessage(), e);
+            throw new TheMovieRentalSystemException(e.getMessage(), e);
         }
     }
 
@@ -51,27 +51,27 @@ public class MoviesDaoSQLImpl extends AbstractDao<Movies> implements MoviesDao{
 
     //koja je svrha ove metode Aida?
     @Override
-    public List<Movies> getRentedMovies() throws MovieException{
+    public List<Movies> getRentedMovies() throws TheMovieRentalSystemException {
         return executeQuery("SELECT * FROM MOVIES INNER JOIN RENTS ON MOVIES.id = RENTS.movie_id AND RENTS.return_date IS NULL",null);
     }
 
     @Override
-    public List<Movies> searchByGenre(String genre) throws MovieException{
+    public List<Movies> searchByGenre(String genre) throws TheMovieRentalSystemException {
         return executeQuery("SELECT * FROM MOVIES WHERE genre = ?",new Object[]{genre});
     }
 
     @Override
-    public List<Movies> searchByLanguage(String language) throws MovieException {
+    public List<Movies> searchByLanguage(String language) throws TheMovieRentalSystemException {
         return executeQuery("SELECT * FROM MOVIES WHERE language = ?",new Object[]{language});
     }
 
     @Override
-    public List<Movies> getUserIssuedMovies(Users user) throws MovieException{
+    public List<Movies> getUserIssuedMovies(Users user) throws TheMovieRentalSystemException {
        return executeQuery("SELECT * FROM MOVIES WHERE id IN (SELECT r.movie_id FROM RENTS r WHERE user_id = ?)",new Object[]{user.getId()});
     }
 
     @Override
-    public List<Movies> searchByMovie_name(String movie_name) throws MovieException {
+    public List<Movies> searchByMovie_name(String movie_name) throws TheMovieRentalSystemException {
         return executeQuery("SELECT * FROM MOVIES WHERE movie_name = ?",new Object[]{movie_name});
     }
 

@@ -1,7 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Users;
-import ba.unsa.etf.rpr.exceptions.MovieException;
+import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 
 /**
  * Dao interface for Users domain bean
@@ -10,5 +10,5 @@ import ba.unsa.etf.rpr.exceptions.MovieException;
  */
 public interface UsersDao extends Dao<Users> {
 
-    Users getUserByUsernameAndPassword(String username, String password) throws MovieException;
+    Users getUserByUsernameAndPassword(String username, String password) throws TheMovieRentalSystemException;
 }

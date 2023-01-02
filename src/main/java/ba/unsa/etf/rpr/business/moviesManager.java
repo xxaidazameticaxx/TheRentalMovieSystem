@@ -1,10 +1,9 @@
 package ba.unsa.etf.rpr.business;
 
-import ba.unsa.etf.rpr.dao.Dao;
 import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Users;
-import ba.unsa.etf.rpr.exceptions.MovieException;
+import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 
 import java.util.List;
 
@@ -14,42 +13,42 @@ import java.util.List;
  */
 public class moviesManager {
 
-    public Movies getById(int id) throws MovieException{
+    public Movies getById(int id) throws TheMovieRentalSystemException {
         return DaoFactory.moviesDao().getById(id);
     }
 
 
-    public Movies add(Movies m) throws MovieException{
+    public Movies add(Movies m) throws TheMovieRentalSystemException {
         return DaoFactory.moviesDao().add(m);
     }
 
 
-    public void update(Movies m) throws MovieException{
+    public void update(Movies m) throws TheMovieRentalSystemException {
         DaoFactory.moviesDao().update(m);
     }
 
 
-    void delete(int id) throws MovieException{
+    void delete(int id) throws TheMovieRentalSystemException {
         DaoFactory.moviesDao().delete(id);
     }
 
-    List<Movies> getAll() throws MovieException{
+    List<Movies> getAll() throws TheMovieRentalSystemException {
         return DaoFactory.moviesDao().getAll();
     }
 
-    public List<Movies> searchByGenre(String genre) throws MovieException {
+    public List<Movies> searchByGenre(String genre) throws TheMovieRentalSystemException {
         return DaoFactory.moviesDao().searchByGenre(genre);
     }
 
-    public List<Movies> searchByLanguage(String language) throws MovieException {
+    public List<Movies> searchByLanguage(String language) throws TheMovieRentalSystemException {
         return DaoFactory.moviesDao().searchByLanguage(language);
     }
 
-    public List<Movies> getUserIssuedMovies(Users user) throws MovieException{
+    public List<Movies> getUserIssuedMovies(Users user) throws TheMovieRentalSystemException {
         return DaoFactory.moviesDao().getUserIssuedMovies(user);
     }
 
-    public List<Movies> searchByMovie_name(String movie_name) throws MovieException {
+    public List<Movies> searchByMovie_name(String movie_name) throws TheMovieRentalSystemException {
         return DaoFactory.moviesDao().searchByMovie_name(movie_name);
     }
 
