@@ -13,7 +13,7 @@ public class Movies implements Idable{
     private String genre;
     private int duration;
     private double ratings;
-    private Date release_date;
+    private int release_year;
     private String language;
     private double price;
 
@@ -57,12 +57,12 @@ public class Movies implements Idable{
         this.ratings = ratings;
     }
 
-    public Date getRelease_date() {
-        return release_date;
+    public int getRelease_year() {
+        return release_year;
     }
 
-    public void setRelease_date(Date release_date) {
-        this.release_date = release_date;
+    public void setRelease_year(int release_year) {
+        this.release_year = release_year;
     }
 
     public String getLanguage() {
@@ -83,7 +83,7 @@ public class Movies implements Idable{
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, movie_name, price, genre, duration, ratings, release_date, language);
+        return Objects.hash(id, movie_name, price, genre, duration, ratings, release_year, language);
     }
 
     @Override
@@ -94,7 +94,7 @@ public class Movies implements Idable{
                 ", genre='" + genre + '\'' +
                 ", duration=" + duration +
                 ", ratings=" + ratings +
-                ", release_date=" + release_date +
+                ", release_year=" + release_year +
                 ", language='" + language + '\'' +
                 ", price=" + price +
                 '}';

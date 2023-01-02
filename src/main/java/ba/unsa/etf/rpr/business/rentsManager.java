@@ -21,7 +21,6 @@ public class rentsManager {
         return DaoFactory.rentsDao().add(r);
     }
 
-
     public void update(Rents r) throws MovieException{
         DaoFactory.rentsDao().update(r);
     }

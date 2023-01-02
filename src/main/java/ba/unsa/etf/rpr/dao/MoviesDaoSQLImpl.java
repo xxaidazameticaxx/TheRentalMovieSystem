@@ -23,7 +23,7 @@ public class MoviesDaoSQLImpl extends AbstractDao<Movies> implements MoviesDao{
             movie.setGenre(rs.getString("genre"));
             movie.setDuration(rs.getInt("duration"));
             movie.setRatings(rs.getDouble("ratings"));
-            movie.setRelease_date(rs.getDate("release_date"));
+            movie.setRelease_year(rs.getInt("release_year"));
             movie.setLanguage(rs.getString("language"));
             return movie;
         } catch (Exception e) {
@@ -44,7 +44,7 @@ public class MoviesDaoSQLImpl extends AbstractDao<Movies> implements MoviesDao{
         item.put("genre",object.getGenre());
         item.put("duration",object.getDuration());
         item.put("ratings",object.getRatings());
-        item.put("release_date",object.getRelease_date());
+        item.put("release_year",object.getRelease_year());
         item.put("language",object.getLanguage());
         return item;
     }

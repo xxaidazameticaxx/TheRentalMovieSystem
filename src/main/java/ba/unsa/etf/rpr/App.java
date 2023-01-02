@@ -13,7 +13,13 @@ import java.util.List;
 
 public class App {
     public static void main(String[] args) throws Exception {
+     Users m = new Users();
+     m.setUsername("admin");
+     m.setPassword("admin");
+     m.setAdmin(true);
 
+     UsersDaoSQLImpl filmic = new UsersDaoSQLImpl();
+     filmic.add(m);
 
     }
 }
