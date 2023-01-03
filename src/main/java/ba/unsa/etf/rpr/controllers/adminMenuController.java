@@ -6,34 +6,23 @@ import javafx.scene.control.TextField;
 
 public class adminMenuController {
     public TextField welcomeTextField1_id;
-    public Button viewAllMoviesButton_id;
-    public Button viewAllUsersButton_id;
-    public Button addMovieButton_id;
-    public Button rentAMovieButton_id;
-    public Button returnMovieButton_id;
-    public Button viewAllRentsButton_id;
+    public Button moviesButton_id;
+    public Button rentsButton_id;
+    public Button usersButton_id;
+
 
     public void setWelcomeTextField1_id(String welcomeAdminText) {
 
         welcomeTextField1_id.setText(welcomeAdminText);
     }
 
-    public void clickReturnMovie(ActionEvent actionEvent) {
+
+    public void clickMovies(ActionEvent actionEvent) {
     }
 
-    public void clickAddMovies(ActionEvent actionEvent) {
+    public void clickRents(ActionEvent actionEvent) {
     }
 
-    public void clickRentAMovie(ActionEvent actionEvent) {
-    }
-
-    public void clickViewAllUsers(ActionEvent actionEvent) {
-    }
-
-
-    public void clickViewAllMovies(ActionEvent actionEvent) {
-    }
-
-    public void clickViewAllRents(ActionEvent actionEvent) {
+    public void clickUsers(ActionEvent actionEvent) {
     }
 }

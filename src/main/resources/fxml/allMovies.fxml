@@ -46,7 +46,7 @@
       </HBox>
    </top>
    <center>
-      <TableView prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #212121; -fx-text-fill: #f5f5f5;" stylesheets="@../css/allMovies.css" BorderPane.alignment="CENTER">
+      <TableView fx:id="allMovieTable_id" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #212121; -fx-text-fill: #f5f5f5;" stylesheets="@../css/allMovies.css" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn prefWidth="75.0" style="-fx-background-color: #c62828;" text="NAME" />
           <TableColumn prefWidth="75.0" style="-fx-background-color: #c62828;" text="GENRE" />
