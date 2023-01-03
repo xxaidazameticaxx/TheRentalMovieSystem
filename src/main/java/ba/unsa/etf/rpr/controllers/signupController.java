@@ -87,8 +87,9 @@ public class signupController {
         }
 
         try{
-            if(passwordField1_id.getText().length()<5) throw new TheMovieRentalSystemException("Password");
-            if(usernameField1_id.getText().length()<5) throw new TheMovieRentalSystemException("Username");
+            if(passwordField1_id.getText().length()<6) throw new TheMovieRentalSystemException("Password");
+            if(usernameField1_id.getText().length()<6) throw new TheMovieRentalSystemException("Username");
+
             Users user = new Users();
             user.setUsername(usernameField1_id.getText());
             user.setAdmin(false);
