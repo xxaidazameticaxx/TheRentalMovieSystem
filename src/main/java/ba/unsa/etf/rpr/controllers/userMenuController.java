@@ -25,7 +25,7 @@ public class userMenuController {
     }
 
     public void allMoviesClick(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/allMovies.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/allMoviesUser.fxml"));
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -44,7 +44,7 @@ public class userMenuController {
     }
 
     public void myMoviesClick(ActionEvent actionEvent) throws IOException{
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/myMovies.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/myMoviesUser.fxml"));
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
