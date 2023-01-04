@@ -43,7 +43,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="moviesButton_id" alignment="CENTER" mnemonicParsing="false" onAction="#clickMovies" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #c62828;" text="MOVIES" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                  <Button fx:id="moviesButton_id" alignment="CENTER" mnemonicParsing="false" onAction="#clickMovies" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #c62828;" text="MOVIES" textAlignment="CENTER" textFill="WHITESMOKE" wrapText="true">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -55,7 +55,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="227.0" GridPane.columnIndex="1">
                <children>
-                  <Button fx:id="rentsButton_id" alignment="CENTER" mnemonicParsing="false" onAction="#clickRents" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #c62828;" text="RENTS" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                  <Button fx:id="rentsButton_id" alignment="CENTER" mnemonicParsing="false" onAction="#clickRents" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #c62828;" text="RENTS" textAlignment="CENTER" textFill="WHITESMOKE" wrapText="true">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -67,7 +67,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
                <children>
-                  <Button fx:id="usersButton_id" alignment="CENTER" mnemonicParsing="false" onAction="#clickUsers" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #c62828;" text="USERS" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                  <Button fx:id="usersButton_id" alignment="CENTER" mnemonicParsing="false" onAction="#clickUsers" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #c62828;" text="USERS" textAlignment="CENTER" textFill="WHITESMOKE" wrapText="true">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>

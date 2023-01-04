@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #212121;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.allMoviesUserController">
    <top>
       <HBox prefHeight="34.0" prefWidth="900.0" BorderPane.alignment="CENTER">
@@ -34,7 +33,7 @@
                   <Insets bottom="14.0" left="14.0" right="14.0" top="14.0" />
                </HBox.margin>
                <children>
-                  <TextField fx:id="searchButton_id" onAction="#searchButtonClick" prefHeight="21.0" prefWidth="145.0" promptText="Search" />
+                  <TextField fx:id="searchButton_id" onAction="#searchButtonClick" prefHeight="21.0" prefWidth="145.0" promptText="Search" style="-fx-background-color: whitesmoke;" />
                   <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/fa0e7b992eff03c576727e95c746005c.jpg" />
