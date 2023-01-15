@@ -47,9 +47,9 @@
       </HBox>
    </top>
    <left>
-      <VBox alignment="CENTER_RIGHT" prefHeight="468.0" prefWidth="199.0" BorderPane.alignment="BOTTOM_CENTER">
+      <VBox alignment="CENTER_RIGHT" prefHeight="468.0" prefWidth="199.0" style="-fx-background-color: #212121;" BorderPane.alignment="BOTTOM_CENTER">
          <children>
-            <VBox alignment="CENTER" prefHeight="432.0" prefWidth="199.0" style="-fx-background-color: 212121;">
+            <VBox alignment="CENTER" prefHeight="432.0" prefWidth="199.0" style="-fx-background-color: #212121;">
                <children>
                   <TextField fx:id="username_id" alignment="CENTER" promptText="username" style="-fx-background-color: whitesmoke;">
                      <VBox.margin>
@@ -96,7 +96,7 @@
       </VBox>
    </left>
    <center>
-      <TableView fx:id="userTable_id" prefHeight="507.0" prefWidth="675.0" style="-fx-background-color: 212121; -fx-text-fill: whitesmoke;" stylesheets="@../css/allMovies.css" BorderPane.alignment="CENTER">
+      <TableView fx:id="userTable_id" prefHeight="507.0" prefWidth="675.0" style="-fx-background-color: #212121; -fx-text-fill: #f5f5f5;" stylesheets="@../css/allMovies.css" BorderPane.alignment="CENTER">
          <columns>
             <TableColumn prefWidth="126.0" style="-fx-background-color: #c62828;" text="USERNAME" />
             <TableColumn prefWidth="75.0" style="-fx-background-color: #c62828;" text="PASSWORD" />

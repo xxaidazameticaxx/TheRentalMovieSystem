@@ -47,7 +47,7 @@
       </HBox>
    </top>
    <left>
-      <VBox prefHeight="547.0" prefWidth="199.0" BorderPane.alignment="BOTTOM_CENTER">
+      <VBox prefHeight="547.0" prefWidth="199.0" style="-fx-background-color: #212121;" BorderPane.alignment="BOTTOM_CENTER">
          <children>
             <TextField fx:id="name_id" alignment="CENTER" promptText="name" style="-fx-background-color: whitesmoke;">
                <VBox.margin>
@@ -84,7 +84,7 @@
                   <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
                </VBox.margin>
             </TextField>
-            <VBox alignment="CENTER" prefHeight="242.0" prefWidth="199.0" style="-fx-background-color: 212121;">
+            <VBox alignment="CENTER" prefHeight="242.0" prefWidth="199.0" style="-fx-background-color: #212121;">
                <children>
                   <Button fx:id="addButton_id" mnemonicParsing="false" onAction="#addClick" prefHeight="36.0" prefWidth="122.0" style="-fx-background-color: #c62828;" text="ADD" textAlignment="CENTER" textFill="WHITESMOKE">
                      <font>
@@ -116,7 +116,7 @@
       </VBox>
    </left>
    <center>
-      <TableView fx:id="MovieTable_id" prefHeight="507.0" prefWidth="675.0" style="-fx-background-color: 212121; -fx-text-fill: whitesmoke;" stylesheets="@../css/allMovies.css" BorderPane.alignment="CENTER">
+      <TableView fx:id="MovieTable_id" prefHeight="507.0" prefWidth="675.0" style="-fx-background-color: #212121; -fx-text-fill: #F5F5F5;" stylesheets="@../css/allMovies.css" BorderPane.alignment="CENTER">
          <columns>
             <TableColumn prefWidth="44.0" style="-fx-background-color: #c62828;" text="ID" />
             <TableColumn prefWidth="126.0" style="-fx-background-color: #c62828;" text="NAME" />
