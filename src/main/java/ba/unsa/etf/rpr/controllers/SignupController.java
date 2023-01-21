@@ -1,5 +1,5 @@
 package ba.unsa.etf.rpr.controllers;
-import ba.unsa.etf.rpr.business.usersManager;
+import ba.unsa.etf.rpr.business.UsersManager;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -22,12 +22,12 @@ import java.io.IOException;
 import java.util.List;
 
 
-public class signupController {
+public class SignupController {
     public Button signupButton1_id;
     public PasswordField passwordField1_id;
     public TextField usernameField1_id;
 
-    private final usersManager usersManager = new usersManager();
+    private final UsersManager usersManager = new UsersManager();
 
 
     @FXML
@@ -98,7 +98,7 @@ public class signupController {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/userMenu.fxml"));
             Parent root = loader.load();
-            userMenuController uMC = loader.getController();
+            UserMenuController uMC = loader.getController();
             uMC.setWelcomeTextField_id("Welcome " + usernameField1_id.getText() + ", please select: ");
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);

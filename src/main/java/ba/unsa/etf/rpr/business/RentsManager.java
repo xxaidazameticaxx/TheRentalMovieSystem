@@ -10,7 +10,7 @@ import java.util.List;
  * Business Logic Layer for Rents
  * @author Aida Zametica
  */
-public class rentsManager {
+public class RentsManager {
     public Rents getById(int id) throws TheMovieRentalSystemException {
         return DaoFactory.rentsDao().getById(id);
     }

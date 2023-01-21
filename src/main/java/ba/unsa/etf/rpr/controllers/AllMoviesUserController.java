@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-public class allMoviesUserController {
+public class AllMoviesUserController {
     public TextField searchButton_id;
     public TableView allMovieTable_id;
 

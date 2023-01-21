@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-public class usersAdminController {
+public class UsersAdminController {
     public TextField searchButton_id;
     public TextField username_id;
     public TextField password_id;

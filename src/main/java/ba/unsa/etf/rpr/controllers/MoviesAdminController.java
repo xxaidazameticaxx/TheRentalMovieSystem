@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-public class moviesAdminController {
+public class MoviesAdminController {
     public TableView MovieTable_id;
     public TextField searchButton_id;
     public TextField release_year_id;

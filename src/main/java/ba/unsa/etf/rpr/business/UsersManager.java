@@ -10,7 +10,7 @@ import java.util.List;
  * Business Logic Layer for Users
  * @author Aida Zametica
  */
-public class usersManager {
+public class UsersManager {
     public Users getById(int id) throws TheMovieRentalSystemException {
         return DaoFactory.usersDao().getById(id);
     }

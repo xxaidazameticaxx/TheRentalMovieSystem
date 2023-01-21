@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class adminMenuController {
+public class AdminMenuController {
     public TextField welcomeTextField1_id;
     public Button moviesButton_id;
     public Button rentsButton_id;

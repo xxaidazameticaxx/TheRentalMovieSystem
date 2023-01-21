@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
-import ba.unsa.etf.rpr.business.usersManager;
+import ba.unsa.etf.rpr.business.UsersManager;
 import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 import javafx.beans.value.ChangeListener;
@@ -19,10 +19,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class loginController {
+public class LoginController {
 
     //da li treba final private??
-    private usersManager usersManager = new usersManager();
+    private UsersManager usersManager = new UsersManager();
     private Stage stage;
     private Scene scene;
     public Button signupButton_id;
@@ -90,7 +90,7 @@ public class loginController {
         if(user.isAdmin()) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminMenu.fxml"));
             Parent root = loader.load();
-            adminMenuController aMC = loader.getController();
+            AdminMenuController aMC = loader.getController();
             aMC.setWelcomeTextField1_id("Welcome " + usernameField_id.getText() + ", please select: ");
             stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
             scene = new Scene(root);
@@ -100,7 +100,7 @@ public class loginController {
         else{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/userMenu.fxml"));
             Parent root = loader.load();
-            userMenuController uMC = loader.getController();
+            UserMenuController uMC = loader.getController();
             uMC.setWelcomeTextField_id("Welcome " + usernameField_id.getText() + ", please select: ");
             stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
             scene = new Scene(root);

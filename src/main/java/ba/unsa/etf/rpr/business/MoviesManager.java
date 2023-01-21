@@ -11,7 +11,7 @@ import java.util.List;
  * Business Logic Layer for Movies
  * @author Aida Zametica
  */
-public class moviesManager {
+public class MoviesManager {
 
     public Movies getById(int id) throws TheMovieRentalSystemException {
         return DaoFactory.moviesDao().getById(id);

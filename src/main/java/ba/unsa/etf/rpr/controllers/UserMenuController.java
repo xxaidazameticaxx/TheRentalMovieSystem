@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
-public class userMenuController {
+public class UserMenuController {
     public TextField welcomeTextField_id;
     public Button myMoviesButton_id;
     public Button allMoviesButton_id;
