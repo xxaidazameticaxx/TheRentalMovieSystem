@@ -125,6 +125,9 @@ public class UsersAdminController {
             user.setAdmin(Boolean.parseBoolean(admin_id.getText()));
             user.setPassword(password_id.getText());
             usersManager.add(user);
+            password_id.setText("");
+            admin_id.setText("");
+            username_id.setText("");
             refreshTable();
 
         }catch(TheMovieRentalSystemException e){
@@ -149,6 +152,30 @@ public class UsersAdminController {
 
 
     public void deleteClick(ActionEvent actionEvent) {
+        try {
+            userList = usersManager.getAll();
+            for(Users x:userList){
+                if(x.getUsername().equals(username_id.getText()) && x.getPassword().equals(password_id.getText())) {
+                    usersManager.delete(x.getId());
+                    password_id.setText("");
+                    admin_id.setText("");
+                    username_id.setText("");
+                    refreshTable();
+                    return;
+                }
+            }
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("User does not exist");
+            alert.setContentText("The username and password you entered doesn't match any existing user.");
+            alert.showAndWait();
+
+
+        }
+        catch(TheMovieRentalSystemException e) {
+            e.printStackTrace();
+        }
     }
 
     public void updateClick(ActionEvent actionEvent) {
