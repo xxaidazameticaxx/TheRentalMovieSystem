@@ -28,11 +28,11 @@ public class MoviesManager {
     }
 
 
-    void delete(int id) throws TheMovieRentalSystemException {
+    public void delete(int id) throws TheMovieRentalSystemException {
         DaoFactory.moviesDao().delete(id);
     }
 
-    List<Movies> getAll() throws TheMovieRentalSystemException {
+    public List<Movies> getAll() throws TheMovieRentalSystemException {
         return DaoFactory.moviesDao().getAll();
     }
 

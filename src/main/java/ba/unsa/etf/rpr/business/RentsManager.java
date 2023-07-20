@@ -23,11 +23,11 @@ public class RentsManager {
         DaoFactory.rentsDao().update(r);
     }
 
-    void delete(int id) throws TheMovieRentalSystemException {
+    public void delete(int id) throws TheMovieRentalSystemException {
         DaoFactory.rentsDao().delete(id);
     }
 
-    List<Rents> getAll() throws TheMovieRentalSystemException {
+    public List<Rents> getAll() throws TheMovieRentalSystemException {
         return DaoFactory.rentsDao().getAll();
     }
 

@@ -1,0 +1,15 @@
+#passwordField_id{
+-fx-focus-color:transparent
+}
+
+#usernameField_id{
+-fx-focus-color:transparent
+}
+
+.fieldNotCorrect{
+    -fx-background-color: lightpink;
+}
+
+.fieldCorrect{
+    -fx-background-color: white;
+}

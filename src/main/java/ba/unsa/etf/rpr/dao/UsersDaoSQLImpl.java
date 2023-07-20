@@ -47,15 +47,15 @@ public class UsersDaoSQLImpl extends AbstractDao<Users> implements UsersDao{
     }
 
     /**
-     * provjeriti da li radi
-     * @param username
-     * @param password
-     * @return
-     * @throws TheMovieRentalSystemException
      */
     @Override
     public Users getUserByUsernameAndPassword(String username, String password) throws TheMovieRentalSystemException {
         return executeQueryUnique("SELECT * FROM USERS WHERE username = ? AND password = ?",new Object[]{username,password});
+    }
+
+    @Override
+    public List<Users> getUsersByUsername(String username) throws TheMovieRentalSystemException {
+        return executeQuery("SELECT * FROM USERS WHERE username = ?",new Object[]{username});
     }
 
 }

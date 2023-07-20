@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.SignupController">
+   <stylesheets>
+      <URL value="@/css/signup.css" />
+   </stylesheets>
+   <children>
+      <ImageView fitHeight="382.0" fitWidth="681.0">
+         <image>
+            <Image url="@../img/movies-mad-max-the-dark-knight-interstellar-movie-wallpaper-preview.jpg" />
+         </image>
+      </ImageView>
+      <VBox alignment="CENTER" fillWidth="false" prefHeight="320.0" prefWidth="681.0">
+         <children>
+            <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="200.0" style="-fx-background-color: #212121;">
+               <children>
+                  <Label lineSpacing="4.0" text="SIGNUP" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #212121;">
+               <children>
+                  <TextField fx:id="usernameField1_id" promptText="username" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="-30.0" left="-30.0" right="-30.0" top="-30.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212121;">
+               <children>
+                  <PasswordField fx:id="passwordField1_id" promptText="password" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" minWidth="-Infinity" prefHeight="49.0" prefWidth="200.0" style="-fx-background-color: #212121;">
+               <children>
+                  <Button fx:id="signupButton1_id" mnemonicParsing="false" onAction="#signupclick1" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: #c62828;" text="signup" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
+      </VBox>
+   </children>
+</StackPane>

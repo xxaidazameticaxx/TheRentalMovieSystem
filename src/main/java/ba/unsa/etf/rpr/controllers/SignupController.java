@@ -50,22 +50,19 @@ public class SignupController {
             }
         });
 
-        passwordField1_id.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
-                if (passwordField1_id.getText().trim().isEmpty() || passwordField1_id.getText().contains(" ") ) {
-                    passwordField1_id.getStyleClass().removeAll("fieldCorrect");
-                    passwordField1_id.getStyleClass().add("fieldNotCorrect");
-                } else {
-                    passwordField1_id.getStyleClass().removeAll("fieldNotCorrect");
-                    passwordField1_id.getStyleClass().add("fieldCorrect");
-                }
+        passwordField1_id.textProperty().addListener((observableValue, o, n) -> {
+            if (passwordField1_id.getText().trim().isEmpty() || passwordField1_id.getText().contains(" ") ) {
+                passwordField1_id.getStyleClass().removeAll("fieldCorrect");
+                passwordField1_id.getStyleClass().add("fieldNotCorrect");
+            } else {
+                passwordField1_id.getStyleClass().removeAll("fieldNotCorrect");
+                passwordField1_id.getStyleClass().add("fieldCorrect");
             }
         });
     }
 
     /**
-     *
+     * can be improved
      * @param actionEvent
      * @throws IOException
      */

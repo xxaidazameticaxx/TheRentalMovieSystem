@@ -18,11 +18,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class LoginController {
 
-    //da li treba final private??
-    private UsersManager usersManager = new UsersManager();
+    private final UsersManager usersManager = new UsersManager();
     private Stage stage;
     private Scene scene;
     public Button signupButton_id;
@@ -69,7 +69,6 @@ public class LoginController {
     }
 
     /**
-     *
      * @param actionEvent
      * @throws IOException
      */
@@ -111,7 +110,7 @@ public class LoginController {
     }
 
     public void signupClick(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/signup.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/signup.fxml")));
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

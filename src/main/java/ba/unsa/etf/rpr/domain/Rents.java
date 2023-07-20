@@ -15,7 +15,9 @@ public class Rents implements Idable{
     private Movies movie;
     private Users user;
 
-    public Movies getMovie() { return movie; }
+    public Movies getMovie() {
+        return movie;
+    }
 
     public void setMovie(Movies movie) {
         this.movie = movie;
@@ -25,7 +27,9 @@ public class Rents implements Idable{
         return user;
     }
 
-    public void setUser(Users user) { this.user = user; }
+    public void setUser(Users user) {
+        this.user = user;
+    }
 
     public Date getRent_date() {
         return rent_date;
