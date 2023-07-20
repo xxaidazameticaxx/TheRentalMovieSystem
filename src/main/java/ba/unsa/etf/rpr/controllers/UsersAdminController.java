@@ -178,6 +178,38 @@ public class UsersAdminController {
         }
     }
 
+    /**
+     * admin has the option to change the admin status of other users
+     * @param actionEvent
+     */
     public void updateClick(ActionEvent actionEvent) {
+        try {
+            userList = usersManager.getAll();
+            for(Users x:userList){
+                if(x.getPassword().equals(password_id.getText()) && x.getUsername().equals(username_id.getText())) {
+                    Users user = new Users();
+                    user.setPassword(x.getPassword());
+                    user.setAdmin(Boolean.parseBoolean(admin_id.getText()));
+                    user.setUsername(x.getUsername());
+                    usersManager.update(user);
+                    password_id.setText("");
+                    admin_id.setText("");
+                    username_id.setText("");
+                    refreshTable();
+                    return;
+                }
+            }
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("User does not exist");
+            alert.setContentText("The username and password you entered doesn't match any existing user.");
+            alert.showAndWait();
+
+
+        }
+        catch(TheMovieRentalSystemException e) {
+            e.printStackTrace();
+        }
     }
 }
