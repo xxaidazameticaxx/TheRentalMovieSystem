@@ -2,6 +2,7 @@ package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.MoviesManager;
 import ba.unsa.etf.rpr.domain.Movies;
+import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -11,6 +12,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+
+import java.util.List;
 
 public class MoviesAdminController {
 
@@ -112,6 +115,18 @@ public class MoviesAdminController {
     public void addClick() {
     }
 
+    /**
+     * calls the DAO method to fetch all the users based on the search text field
+     * updates the TableView with the fetched user list
+     */
     public void searchButtonClick() {
+        String searchText = searchButtonTextField1_id.getText();
+        try {
+
+            List<Movies> searchedMovies = moviesManager.searchByMovie_name(searchText);
+            movieTable_id.setItems(FXCollections.observableArrayList(searchedMovies));
+        } catch (TheMovieRentalSystemException e) {
+            e.printStackTrace();
+        }
     }
 }
