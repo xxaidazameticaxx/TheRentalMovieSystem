@@ -1,21 +1,13 @@
 package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.UsersManager;
-import ba.unsa.etf.rpr.dao.UsersDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
-
 import java.util.List;
 import java.util.Objects;
 
@@ -151,7 +143,7 @@ public class UsersAdminController {
 
 
 
-    public void deleteClick(ActionEvent actionEvent) {
+    public void deleteClick() {
         try {
             userList = usersManager.getAll();
             for(Users x:userList){
@@ -180,9 +172,8 @@ public class UsersAdminController {
 
     /**
      * admin has the option to change the admin status of other users
-     * @param actionEvent
      */
-    public void updateClick(ActionEvent actionEvent) {
+    public void updateClick() {
         try {
             userList = usersManager.getAll();
             for(Users x:userList){
