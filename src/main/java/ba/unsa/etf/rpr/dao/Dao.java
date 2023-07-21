@@ -27,10 +27,10 @@ public interface Dao<T> {
 
     /**
      * Fully updates entity in database based on id (primary) match.
+     *
      * @param item - bean to be updated. id must be populated
-     * @return updated version of bean
      */
-    T update(T item) throws TheMovieRentalSystemException;
+    void update(T item) throws TheMovieRentalSystemException; //ja promijenila u void
 
     /**
      * Hard delete of item from database with given id

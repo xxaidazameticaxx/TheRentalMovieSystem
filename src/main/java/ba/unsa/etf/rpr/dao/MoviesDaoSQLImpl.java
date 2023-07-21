@@ -56,7 +56,7 @@ public class MoviesDaoSQLImpl extends AbstractDao<Movies> implements MoviesDao{
     }
 
     @Override
-    public List<Movies> searchByGenre(String genre) throws TheMovieRentalSystemException {
+    public List<Movies> filterByGenre(String genre) throws TheMovieRentalSystemException {
         return executeQuery("SELECT * FROM MOVIES WHERE genre = ?",new Object[]{genre});
     }
 

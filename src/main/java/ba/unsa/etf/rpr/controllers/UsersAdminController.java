@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.UsersManager;
+import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 import javafx.collections.FXCollections;
@@ -35,6 +36,13 @@ public class UsersAdminController {
             searchButtonClick();
         });
 
+        // this displays all the users when the search text field is empty
+        searchButtonTextField_id.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.isEmpty()) {
+                refreshTable();
+            }
+        });
+
         setupTableView();
         refreshTable();
     }
@@ -48,6 +56,9 @@ public class UsersAdminController {
 
         userTable_id.getColumns().clear();
 
+        TableColumn<Users, Integer> idColumn = new TableColumn<>("ID");
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+
         TableColumn<Users, String> usernameColumn = new TableColumn<>("USERNAME");
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
 
@@ -57,7 +68,7 @@ public class UsersAdminController {
         TableColumn<Users, Boolean> adminColumn = new TableColumn<>("ADMIN");
         adminColumn.setCellValueFactory(new PropertyValueFactory<>("admin"));
 
-        addColumnsToTableView(usernameColumn, passwordColumn, adminColumn);
+        addColumnsToTableView(idColumn,usernameColumn, passwordColumn, adminColumn);
 
     }
 
@@ -143,35 +154,34 @@ public class UsersAdminController {
 
 
 
+    /**
+     * this method gets the selected user from the TableView and removes it from the database
+     */
     public void deleteClick() {
-        try {
-            userList = usersManager.getAll();
-            for(Users x:userList){
-                if(x.getUsername().equals(username_id.getText()) && x.getPassword().equals(password_id.getText())) {
-                    usersManager.delete(x.getId());
-                    password_id.setText("");
-                    admin_id.setText("");
-                    username_id.setText("");
-                    refreshTable();
-                    return;
-                }
-            }
 
+        Users selectedUser = userTable_id.getSelectionModel().getSelectedItem();
+
+        if (selectedUser != null) {
+            try {
+                userTable_id.getItems().remove(selectedUser);
+                usersManager.delete(selectedUser.getId());
+
+            } catch (TheMovieRentalSystemException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("User does not exist");
-            alert.setContentText("The username and password you entered doesn't match any existing user.");
+            alert.setHeaderText("None selected");
+            alert.setContentText("You need to select a user to delete it!");
             alert.showAndWait();
-
-
-        }
-        catch(TheMovieRentalSystemException e) {
-            e.printStackTrace();
         }
     }
 
     /**
      * admin has the option to change the admin status of other users
+     * needs fixing
      */
     public void updateClick() {
         try {

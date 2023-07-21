@@ -6,10 +6,7 @@ import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 
@@ -34,11 +31,37 @@ public class MoviesAdminController {
     public Button updateButton_id;
     public ImageView searchButton1_id;
     public TextField name_id;
+    public ChoiceBox<String> movieGenreChoiceBox_id;
 
     public void initialize() {
 
         searchButton1_id.setOnMouseClicked(event -> {
             searchButtonClick();
+        });
+
+        // this displays all the movies when the search text field is empty
+        searchButtonTextField1_id.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.isEmpty()) {
+                refreshTable();
+            }
+        });
+
+        movieGenreChoiceBox_id.getItems().addAll("All genres", "Action", "Adventure","Comedy","Romance","Horror","Drama","Animation","Documentary");
+
+        movieGenreChoiceBox_id.setValue("All genres");
+
+        movieGenreChoiceBox_id.setOnAction(e -> {
+            String selectedGenre = movieGenreChoiceBox_id.getValue();
+            if(selectedGenre.equals("All genres")){
+                    refreshTable();
+            }
+            else{
+                try {
+                    movieTable_id.setItems(FXCollections.observableArrayList(moviesManager.filterByGenre(selectedGenre)));
+                } catch (TheMovieRentalSystemException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
         });
 
         setupTableView();
@@ -62,7 +85,6 @@ public class MoviesAdminController {
      * adds those columns to the TableView
      */
     private void setupTableView() {
-        // Set cell value factory for each column
 
         movieTable_id.getColumns().clear();
 
@@ -109,8 +131,31 @@ public class MoviesAdminController {
     public void updateClick() {
     }
 
+    /**
+     * this method gets the selected movie from the TableView and removes it from the database
+     */
     public void deleteClick() {
+
+        Movies selectedMovie = movieTable_id.getSelectionModel().getSelectedItem();
+
+        if (selectedMovie != null) {
+            try {
+                movieTable_id.getItems().remove(selectedMovie);
+                moviesManager.delete(selectedMovie.getId());
+
+            } catch (TheMovieRentalSystemException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("None selected");
+            alert.setContentText("You need to select a movie to delete it!");
+            alert.showAndWait();
+        }
     }
+
 
     public void addClick() {
     }

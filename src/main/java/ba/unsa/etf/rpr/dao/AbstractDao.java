@@ -100,7 +100,7 @@ public abstract class AbstractDao <T extends Idable>implements Dao<T> {
         }
     }
 
-    public T update(T item) throws TheMovieRentalSystemException {
+    public void update(T item) throws TheMovieRentalSystemException {
         Map<String, Object> row = object2row(item);
         String updateColumns = prepareUpdateParts(row);
         StringBuilder builder = new StringBuilder();
@@ -120,7 +120,6 @@ public abstract class AbstractDao <T extends Idable>implements Dao<T> {
             }
             stmt.setObject(counter, item.getId());
             stmt.executeUpdate();
-            return item;
         }catch (SQLException e){
             throw new TheMovieRentalSystemException(e.getMessage(), e);
         }

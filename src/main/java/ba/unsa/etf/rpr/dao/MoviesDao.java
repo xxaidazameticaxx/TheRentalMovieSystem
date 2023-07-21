@@ -14,7 +14,7 @@ import java.util.List;
 
 public interface MoviesDao extends Dao<Movies>{
 
-    List<Movies> searchByGenre(String genre) throws TheMovieRentalSystemException;
+    List<Movies> filterByGenre(String genre) throws TheMovieRentalSystemException;
 
     List<Movies> getRentedMovies() throws TheMovieRentalSystemException;
 
