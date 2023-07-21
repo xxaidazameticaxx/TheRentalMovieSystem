@@ -28,7 +28,19 @@ public class LoginController {
     public Button signupButton_id;
     public Button loginButton_id;
     public TextField usernameField_id;
+
     public PasswordField passwordField_id;
+
+    public static TextField usernameField;
+    public static PasswordField passwordField;
+
+    public static String getUsernameField() {
+        return usernameField.getText();
+    }
+
+    public static String getPasswordField() {
+        return passwordField.getText();
+    }
 
 
     /**
@@ -66,16 +78,20 @@ public class LoginController {
                 }
             }
         });
+
+
     }
 
     /**
-     * @param actionEvent
-     * @throws IOException
+     *
      */
     public void loginclick(ActionEvent actionEvent) throws IOException {
         Users user = null;
+        usernameField = usernameField_id;
+        passwordField = passwordField_id;
         try{
             user = usersManager.getUserByUsernameAndPassword(usernameField_id.getText(),passwordField_id.getText());
+
         } catch(TheMovieRentalSystemException error){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -86,26 +102,25 @@ public class LoginController {
             alert.showAndWait();
             return;
         }
+        FXMLLoader loader;
         if(user.isAdmin()) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminMenu.fxml"));
+            loader = new FXMLLoader(getClass().getResource("/fxml/adminMenu.fxml"));
             Parent root = loader.load();
             AdminMenuController aMC = loader.getController();
             aMC.setWelcomeTextField1_id("Welcome " + usernameField_id.getText() + ", please select: ");
             stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
             scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
         }
         else{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/userMenu.fxml"));
+            loader = new FXMLLoader(getClass().getResource("/fxml/userMenu.fxml"));
             Parent root = loader.load();
             UserMenuController uMC = loader.getController();
             uMC.setWelcomeTextField_id("Welcome " + usernameField_id.getText() + ", please select: ");
             stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
             scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
         }
+        stage.setScene(scene);
+        stage.show();
 
     }
 

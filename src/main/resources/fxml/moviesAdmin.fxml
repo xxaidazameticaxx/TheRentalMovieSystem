@@ -49,6 +49,15 @@
                   <ChoiceBox fx:id="movieGenreChoiceBox_id" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: whitesmoke;" />
                </children>
             </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="53.0" prefWidth="358.0">
+               <children>
+                  <ImageView fx:id="backButtonMovies_id" fitHeight="40.0" fitWidth="51.0" onMouseClicked="#backClick" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/white-arrow-icon-5.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
          </children>
       </HBox>
    </top>

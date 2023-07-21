@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -40,6 +41,18 @@
                      <image>
                         <Image url="@../img/fa0e7b992eff03c576727e95c746005c.jpg" />
                      </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="10.0" prefWidth="505.0">
+               <children>
+                  <ImageView fx:id="backButton_id" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#backclick" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/white-arrow-icon-5.png" />
+                     </image>
+                     <effect>
+                        <Blend mode="LIGHTEN" />
+                     </effect>
                   </ImageView>
                </children>
             </HBox>

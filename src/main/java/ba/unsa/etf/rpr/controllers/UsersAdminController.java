@@ -1,20 +1,28 @@
 package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.UsersManager;
-import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
 
 public class UsersAdminController {
+    @FXML
     public TextField username_id;
+    @FXML
     public TextField password_id;
     public TextField admin_id;
     public Button addButton_id;
@@ -29,12 +37,11 @@ public class UsersAdminController {
     private final UsersManager usersManager = new UsersManager();
     public TextField searchButtonTextField_id;
     public ImageView searchButtonImage_id;
+    public ImageView backButton_id;
 
     public void initialize() {
 
-        searchButtonImage_id.setOnMouseClicked(event -> {
-            searchButtonClick();
-        });
+        searchButtonImage_id.setOnMouseClicked(event -> searchButtonClick());
 
         // this displays all the users when the search text field is empty
         searchButtonTextField_id.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -46,6 +53,7 @@ public class UsersAdminController {
         setupTableView();
         refreshTable();
     }
+
 
     /**
      * creates the required table columns based on the Users table fields name
@@ -212,5 +220,46 @@ public class UsersAdminController {
         catch(TheMovieRentalSystemException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * same method as in LoginController but the problem
+     */
+    public void backclick(MouseEvent mouseEvent) throws IOException {
+        Users user;
+        try{
+            user = usersManager.getUserByUsernameAndPassword(LoginController.getUsernameField(),LoginController.getPasswordField());
+        } catch(TheMovieRentalSystemException error){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("User does not exist");
+            alert.setContentText("The username and password you entered do not match any existing users.");
+            // Apply the stylesheet to the alert (ako stignem)
+            //alert.getDialogPane().getStylesheets().add("/css/alert.css");
+            alert.showAndWait();
+            return;
+        }
+        Stage stage;
+        Scene scene;
+        FXMLLoader loader;
+        if(user.isAdmin()) {
+            loader = new FXMLLoader(getClass().getResource("/fxml/adminMenu.fxml"));
+            Parent root = loader.load();
+            AdminMenuController aMC = loader.getController();
+            aMC.setWelcomeTextField1_id("Welcome " + LoginController.getUsernameField() + ", please select: ");
+            stage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+        }
+        else{
+            loader = new FXMLLoader(getClass().getResource("/fxml/userMenu.fxml"));
+            Parent root = loader.load();
+            UserMenuController uMC = loader.getController();
+            uMC.setWelcomeTextField_id("Welcome " + LoginController.getUsernameField() + ", please select: ");
+            stage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+        }
+        stage.setScene(scene);
+        stage.show();
+
     }
 }
