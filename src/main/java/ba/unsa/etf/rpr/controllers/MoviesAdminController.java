@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 public class MoviesAdminController {
 
@@ -38,6 +39,7 @@ public class MoviesAdminController {
     public Button deleteButton_id;
     public Button updateButton_id;
     public ImageView searchButton1_id;
+    public List<Movies>movieList;
     private final UsersManager usersManager = new UsersManager();
     public TextField name_id;
     public ChoiceBox<String> movieGenreChoiceBox_id;
@@ -164,8 +166,34 @@ public class MoviesAdminController {
         }
     }
 
-
+    /**
+     * this method should be refactored so we can verify the input
+     */
     public void addClick() {
+        try {
+            //REFACTOR!!!
+            Movies movie = new Movies();
+            movie.setMovie_name(name_id.getText());
+            movie.setDuration(Integer.parseInt(duration_id.getText()));
+            movie.setGenre(genre_id.getText());
+            movie.setRatings(Double.parseDouble(ratings_id.getText()));
+            movie.setPrice(Double.parseDouble(price_id.getText()));
+            movie.setLanguage(language_id.getText());
+            movie.setRelease_year(Integer.parseInt(release_year_id.getText()));
+
+            moviesManager.add(movie);
+            name_id.setText("");
+            genre_id.setText("");
+            duration_id.setText("");
+            release_year_id.setText("");
+            language_id.setText("");
+            price_id.setText("");
+            ratings_id.setText("");
+            refreshTable();
+
+        }catch(TheMovieRentalSystemException e){
+                e.printStackTrace();
+        }
     }
 
     /**
