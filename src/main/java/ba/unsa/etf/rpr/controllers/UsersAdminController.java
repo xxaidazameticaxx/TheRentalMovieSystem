@@ -31,7 +31,6 @@ public class UsersAdminController {
     public TextField admin_id;
     public Button addButton_id;
     public Button deleteButton_id;
-    public Button updateButton_id;
     public List<Users>userList;
     public TextField searchButtonTextField_id;
     public ImageView searchButtonImage_id;
