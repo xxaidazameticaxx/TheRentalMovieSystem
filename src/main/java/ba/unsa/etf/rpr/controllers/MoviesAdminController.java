@@ -6,6 +6,7 @@ import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -13,11 +14,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.util.converter.DoubleStringConverter;
+
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 public class MoviesAdminController {
 
@@ -31,17 +38,18 @@ public class MoviesAdminController {
     public Button addButton_id;
     public TextField price_id;
     public Button deleteButton_id;
-    public Button updateButton_id;
     public TextField name_id;
     public ImageView backButtonMovies_id;
     public ImageView searchButton1_id;
     public TextField searchButtonTextField1_id;
     public ChoiceBox<String> movieGenreChoiceBox_id;
-    List<Movies> movieList;
     private final MoviesManager moviesManager = new MoviesManager();
     private final UsersManager usersManager = new UsersManager();
+    public Button helpButton_id;
 
     public void initialize() {
+
+        movieTable_id.setEditable(true);
 
         searchButton1_id.setOnMouseClicked(event -> searchButtonClick());
 
@@ -94,9 +102,6 @@ public class MoviesAdminController {
         TableColumn<Movies, Integer> durationColumn = new TableColumn<>("DURATION");
         durationColumn.setCellValueFactory(new PropertyValueFactory<>("duration"));
 
-        TableColumn<Movies, Double> ratingsColumn = new TableColumn<>("RATINGS");
-        ratingsColumn.setCellValueFactory(new PropertyValueFactory<>("ratings"));
-
         TableColumn<Movies, Integer> releaseYearColumn = new TableColumn<>("RELEASE YEAR");
         releaseYearColumn.setCellValueFactory(new PropertyValueFactory<>("release_year"));
 
@@ -105,6 +110,35 @@ public class MoviesAdminController {
 
         TableColumn<Movies, Double> priceColumn = new TableColumn<>("PRICE");
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        //allows the price column to be changed after double-clicking it to open edit field
+        priceColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+        priceColumn.setOnEditCommit(event -> {
+            Movies movie = event.getTableView().getItems().get(event.getTablePosition().getRow());
+            movie.setPrice(event.getNewValue());
+            try {
+                moviesManager.update(movie);
+                refreshTable();
+            } catch (TheMovieRentalSystemException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        TableColumn<Movies, Double> ratingsColumn = new TableColumn<>("RATINGS");
+        ratingsColumn.setCellValueFactory(new PropertyValueFactory<>("ratings"));
+
+        //allows the rating column to be changed after double-clicking it to open edit field
+        ratingsColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+        ratingsColumn.setOnEditCommit(event -> {
+            Movies movie = event.getTableView().getItems().get(event.getTablePosition().getRow());
+            movie.setRatings(event.getNewValue());
+            try {
+                moviesManager.update(movie);
+                refreshTable();
+            } catch (TheMovieRentalSystemException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
 
         addColumnsToTableView(idColumn, nameColumn, genreColumn,ratingsColumn,releaseYearColumn,languageColumn,durationColumn,priceColumn);
@@ -130,45 +164,6 @@ public class MoviesAdminController {
             movieTable_id.getItems().clear();
             movieTable_id.setItems(FXCollections.observableArrayList(moviesManager.getAll()));
         } catch (TheMovieRentalSystemException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    /**
-     * updated the movie ratings
-     */
-    public void updateClick() {
-        try {
-            movieList = moviesManager.getAll();
-            for(Movies x:movieList){
-                if(x.getMovie_name().equals(name_id.getText()) && x.getGenre().equals(genre_id.getText()) && x.getRelease_year() == Integer.parseInt(release_year_id.getText())) {
-                    x.setRatings(Double.parseDouble(ratings_id.getText()));
-
-                    moviesManager.update(x);
-
-                    name_id.setText("");
-                    genre_id.setText("");
-                    duration_id.setText("");
-                    release_year_id.setText("");
-                    language_id.setText("");
-                    price_id.setText("");
-                    ratings_id.setText("");
-
-                    refreshTable();
-                    return;
-                }
-            }
-
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("User does not exist");
-            alert.setContentText("The username and password you entered doesn't match any existing user.");
-            alert.showAndWait();
-
-
-        }
-        catch(TheMovieRentalSystemException e) {
             e.printStackTrace();
         }
     }
@@ -280,5 +275,19 @@ public class MoviesAdminController {
         stage.show();
 
 
+    }
+
+    @FXML
+    public void helpClick() {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/helpMovieAdmin.fxml")));
+            Stage stage = new Stage();
+            stage.getIcons().add(new Image("/img/questionIcon.png") );
+            stage.setResizable(false);
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

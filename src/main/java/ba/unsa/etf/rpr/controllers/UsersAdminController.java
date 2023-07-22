@@ -11,9 +11,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.converter.BooleanStringConverter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
@@ -36,6 +38,8 @@ public class UsersAdminController {
     private final UsersManager usersManager = new UsersManager();
 
     public void initialize() {
+
+        userTable_id.setEditable(true);
 
         searchButtonImage_id.setOnMouseClicked(event -> searchButtonClick());
 
@@ -70,6 +74,19 @@ public class UsersAdminController {
 
         TableColumn<Users, Boolean> adminColumn = new TableColumn<>("ADMIN");
         adminColumn.setCellValueFactory(new PropertyValueFactory<>("admin"));
+
+        //allows the admin column to be changed after double-clicking it to open edit field
+        adminColumn.setCellFactory(TextFieldTableCell.forTableColumn(new BooleanStringConverter()));
+        adminColumn.setOnEditCommit(event -> {
+            Users user = event.getTableView().getItems().get(event.getTablePosition().getRow());
+            user.setAdmin(event.getNewValue());
+            try {
+                usersManager.update(user);
+                refreshTable();
+            } catch (TheMovieRentalSystemException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         addColumnsToTableView(idColumn,usernameColumn, passwordColumn, adminColumn);
 

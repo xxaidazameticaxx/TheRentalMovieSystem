@@ -62,7 +62,7 @@
       </HBox>
    </top>
    <left>
-      <VBox prefHeight="547.0" prefWidth="199.0" style="-fx-background-color: #212121;" BorderPane.alignment="BOTTOM_CENTER">
+      <VBox alignment="CENTER" prefHeight="547.0" prefWidth="199.0" style="-fx-background-color: #212121;" BorderPane.alignment="BOTTOM_CENTER">
          <children>
             <TextField fx:id="name_id" alignment="CENTER" promptText="name" style="-fx-background-color: whitesmoke;">
                <VBox.margin>
@@ -99,17 +99,9 @@
                   <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
                </VBox.margin>
             </TextField>
-            <VBox alignment="CENTER" prefHeight="242.0" prefWidth="199.0" style="-fx-background-color: #212121;">
+            <VBox alignment="CENTER" prefHeight="130.0" prefWidth="199.0" style="-fx-background-color: #212121;">
                <children>
                   <Button fx:id="addButton_id" mnemonicParsing="false" onAction="#addClick" prefHeight="36.0" prefWidth="122.0" style="-fx-background-color: #c62828;" text="ADD" textAlignment="CENTER" textFill="WHITESMOKE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="updateButton_id" mnemonicParsing="false" onAction="#updateClick" prefHeight="36.0" prefWidth="122.0" style="-fx-background-color: #c62828;" text="UPDATE" textAlignment="CENTER" textFill="WHITESMOKE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -127,6 +119,11 @@
                   </Button>
                </children>
             </VBox>
+            <Button fx:id="helpButton_id" mnemonicParsing="false" onAction="#helpClick" prefHeight="19.0" prefWidth="84.0" style="-fx-background-color: #559dd6; -fx-border-color: whitesmoke;" text="How to?" textAlignment="CENTER" textFill="WHITESMOKE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
          </children>
       </VBox>
    </left>
