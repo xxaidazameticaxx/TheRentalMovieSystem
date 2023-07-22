@@ -119,7 +119,7 @@
                   </Button>
                </children>
             </VBox>
-            <Button fx:id="helpButton_id" mnemonicParsing="false" onAction="#helpClick" prefHeight="19.0" prefWidth="84.0" style="-fx-background-color: #559dd6; -fx-border-color: whitesmoke;" text="How to?" textAlignment="CENTER" textFill="WHITESMOKE">
+            <Button fx:id="helpButton_id" mnemonicParsing="false" onAction="#helpClick" prefHeight="29.0" prefWidth="88.0" style="-fx-background-color: #559dd6; -fx-border-color: whitesmoke;" text="How to?" textAlignment="CENTER" textFill="WHITESMOKE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

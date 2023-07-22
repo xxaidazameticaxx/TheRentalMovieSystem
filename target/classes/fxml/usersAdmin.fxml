@@ -62,7 +62,7 @@
    <left>
       <VBox alignment="CENTER_RIGHT" prefHeight="468.0" prefWidth="199.0" style="-fx-background-color: #212121;" BorderPane.alignment="BOTTOM_CENTER">
          <children>
-            <VBox alignment="CENTER" prefHeight="432.0" prefWidth="199.0" style="-fx-background-color: #212121;">
+            <VBox alignment="CENTER" prefHeight="464.0" prefWidth="199.0" style="-fx-background-color: #212121;">
                <children>
                   <TextField fx:id="username_id" alignment="CENTER" promptText="username" style="-fx-background-color: whitesmoke;">
                      <VBox.margin>
@@ -87,7 +87,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="updateButton_id" mnemonicParsing="false" onAction="#updateClick" prefHeight="36.0" prefWidth="122.0" style="-fx-background-color: #c62828;" text="UPDATE" textAlignment="CENTER" textFill="WHITESMOKE">
+                  <Button fx:id="deleteButton_id" mnemonicParsing="false" onAction="#deleteClick" prefHeight="36.0" prefWidth="122.0" style="-fx-background-color: #c62828;" text="DELETE" textAlignment="CENTER" textFill="WHITESMOKE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -95,12 +95,12 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="deleteButton_id" mnemonicParsing="false" onAction="#deleteClick" prefHeight="36.0" prefWidth="122.0" style="-fx-background-color: #c62828;" text="DELETE" textAlignment="CENTER" textFill="WHITESMOKE">
+                  <Button fx:id="helpButton1_id" mnemonicParsing="false" onAction="#helpClick1" prefHeight="19.0" prefWidth="84.0" style="-fx-background-color: #559dd6; -fx-border-color: whitesmoke;" text="How to?" textAlignment="CENTER" textFill="WHITESMOKE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets top="12.0" />
                      </VBox.margin>
                   </Button>
                </children>

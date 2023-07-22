@@ -6,7 +6,6 @@ import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -18,7 +17,6 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 
@@ -280,7 +278,7 @@ public class MoviesAdminController {
     @FXML
     public void helpClick() {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/helpMovieAdmin.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/helpMoviesAdmin.fxml")));
             Stage stage = new Stage();
             stage.getIcons().add(new Image("/img/questionIcon.png") );
             stage.setResizable(false);

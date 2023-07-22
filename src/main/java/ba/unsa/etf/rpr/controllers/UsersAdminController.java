@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -36,6 +37,7 @@ public class UsersAdminController {
     public ImageView searchButtonImage_id;
     public ImageView backButton_id;
     private final UsersManager usersManager = new UsersManager();
+    public Button helpButton1_id;
 
     public void initialize() {
 
@@ -280,5 +282,19 @@ public class UsersAdminController {
         stage.setScene(scene);
         stage.show();
 
+    }
+
+    @FXML
+    public void helpClick1() {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/helpUsersAdmin.fxml")));
+            Stage stage = new Stage();
+            stage.getIcons().add(new Image("/img/questionIcon.png") );
+            stage.setResizable(false);
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
