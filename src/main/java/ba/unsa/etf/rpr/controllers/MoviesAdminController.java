@@ -37,6 +37,7 @@ public class MoviesAdminController {
     public ImageView searchButton1_id;
     public TextField searchButtonTextField1_id;
     public ChoiceBox<String> movieGenreChoiceBox_id;
+    List<Movies> movieList;
     private final MoviesManager moviesManager = new MoviesManager();
     private final UsersManager usersManager = new UsersManager();
 
@@ -71,18 +72,6 @@ public class MoviesAdminController {
 
         setupTableView();
         refreshTable();
-    }
-
-    /**
-     * fetches all movies from the database using the moviesDao
-     * updates the TableView with the fetched movie list
-     */
-    private void refreshTable() {
-        try {
-            movieTable_id.setItems(FXCollections.observableArrayList(moviesManager.getAll()));
-        } catch (TheMovieRentalSystemException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -131,9 +120,57 @@ public class MoviesAdminController {
         movieTable_id.getColumns().addAll(columns);
     }
 
+    /**
+     * fetches all movies from the database using the moviesDao
+     * updates the TableView with the fetched movie list
+     */
+    private void refreshTable() {
+        try {
+            // data changes not refreshing in some cases, so I added the clear method to force the tableview to change
+            movieTable_id.getItems().clear();
+            movieTable_id.setItems(FXCollections.observableArrayList(moviesManager.getAll()));
+        } catch (TheMovieRentalSystemException e) {
+            e.printStackTrace();
+        }
+    }
 
 
+    /**
+     * updated the movie ratings
+     */
     public void updateClick() {
+        try {
+            movieList = moviesManager.getAll();
+            for(Movies x:movieList){
+                if(x.getMovie_name().equals(name_id.getText()) && x.getGenre().equals(genre_id.getText()) && x.getRelease_year() == Integer.parseInt(release_year_id.getText())) {
+                    x.setRatings(Double.parseDouble(ratings_id.getText()));
+
+                    moviesManager.update(x);
+
+                    name_id.setText("");
+                    genre_id.setText("");
+                    duration_id.setText("");
+                    release_year_id.setText("");
+                    language_id.setText("");
+                    price_id.setText("");
+                    ratings_id.setText("");
+
+                    refreshTable();
+                    return;
+                }
+            }
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("User does not exist");
+            alert.setContentText("The username and password you entered doesn't match any existing user.");
+            alert.showAndWait();
+
+
+        }
+        catch(TheMovieRentalSystemException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
