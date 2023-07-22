@@ -20,24 +20,20 @@ import java.util.Objects;
 
 
 public class UsersAdminController {
+
     @FXML
+    public TableView<Users> userTable_id;
     public TextField username_id;
-    @FXML
     public TextField password_id;
     public TextField admin_id;
     public Button addButton_id;
     public Button deleteButton_id;
     public Button updateButton_id;
-
     public List<Users>userList;
-
-    @FXML
-    public TableView<Users> userTable_id;
-
-    private final UsersManager usersManager = new UsersManager();
     public TextField searchButtonTextField_id;
     public ImageView searchButtonImage_id;
     public ImageView backButton_id;
+    private final UsersManager usersManager = new UsersManager();
 
     public void initialize() {
 
@@ -60,7 +56,6 @@ public class UsersAdminController {
      * adds those columns to the TableView
      */
     private void setupTableView() {
-        // Set cell value factory for each column
 
         userTable_id.getColumns().clear();
 
@@ -95,6 +90,8 @@ public class UsersAdminController {
      */
     private void refreshTable() {
         try {
+            // data changes not refreshing in some cases, so I added the clear method to force the tableview to change
+            userTable_id.getItems().clear();
             userTable_id.setItems(FXCollections.observableArrayList(usersManager.getAll()));
         } catch (TheMovieRentalSystemException e) {
             e.printStackTrace();
@@ -117,31 +114,38 @@ public class UsersAdminController {
     }
 
     /**
-     * treba dodati pop up za validaciju unesenih podataka
+     * adds a new user based on the input fields (same as sign up)
      */
 
     public void addClick() {
 
         try {
             userList = usersManager.getAll();
+
             for(Users x:userList){
                 if(x.getUsername().equals(username_id.getText())) throw new TheMovieRentalSystemException("A user with this username already exists.");
             }
 
-            if(password_id.getText().length()<6) throw new TheMovieRentalSystemException("Password");
-            if(username_id.getText().length()<6) throw new TheMovieRentalSystemException("Username");
+            if(password_id.getText().length()<6)
+                throw new TheMovieRentalSystemException("Password");
+            if(username_id.getText().length()<6)
+                throw new TheMovieRentalSystemException("Username");
 
             Users user = new Users();
             user.setUsername(username_id.getText());
             user.setAdmin(Boolean.parseBoolean(admin_id.getText()));
             user.setPassword(password_id.getText());
+
             usersManager.add(user);
+
             password_id.setText("");
             admin_id.setText("");
             username_id.setText("");
+
             refreshTable();
 
         }catch(TheMovieRentalSystemException e){
+
             if(Objects.equals(e.getMessage(), "A user with this username already exists.")){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
@@ -150,11 +154,11 @@ public class UsersAdminController {
                 alert.showAndWait();
             }
             else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(e.getMessage()+" too short!");
-            alert.setContentText(e.getMessage()+" must contain at least 6 characters.");
-            alert.showAndWait();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(e.getMessage()+" too short!");
+                alert.setContentText(e.getMessage()+" must contain at least 6 characters.");
+                alert.showAndWait();
             }
         }
     }
@@ -163,7 +167,7 @@ public class UsersAdminController {
 
 
     /**
-     * this method gets the selected user from the TableView and removes it from the database
+     * fetches the mouse selected user from the TableView and removes it from the database
      */
     public void deleteClick() {
 
@@ -188,19 +192,16 @@ public class UsersAdminController {
     }
 
     /**
-     * admin has the option to change the admin status of other users
-     * needs fixing
+     * changes the admin status of other users
+     * password and username can not be changed
      */
     public void updateClick() {
         try {
             userList = usersManager.getAll();
             for(Users x:userList){
                 if(x.getPassword().equals(password_id.getText()) && x.getUsername().equals(username_id.getText())) {
-                    Users user = new Users();
-                    user.setPassword(x.getPassword());
-                    user.setAdmin(Boolean.parseBoolean(admin_id.getText()));
-                    user.setUsername(x.getUsername());
-                    usersManager.update(user);
+                    x.setAdmin(Boolean.parseBoolean(admin_id.getText()));
+                    usersManager.update(x);
                     password_id.setText("");
                     admin_id.setText("");
                     username_id.setText("");
@@ -223,7 +224,8 @@ public class UsersAdminController {
     }
 
     /**
-     * same method as in LoginController but the problem
+     * same method as in LoginController
+     * possible refactor
      */
     public void backclick(MouseEvent mouseEvent) throws IOException {
         Users user;
@@ -234,14 +236,14 @@ public class UsersAdminController {
             alert.setTitle("Error");
             alert.setHeaderText("User does not exist");
             alert.setContentText("The username and password you entered do not match any existing users.");
-            // Apply the stylesheet to the alert (ako stignem)
-            //alert.getDialogPane().getStylesheets().add("/css/alert.css");
             alert.showAndWait();
             return;
         }
+
         Stage stage;
         Scene scene;
         FXMLLoader loader;
+
         if(user.isAdmin()) {
             loader = new FXMLLoader(getClass().getResource("/fxml/adminMenu.fxml"));
             Parent root = loader.load();

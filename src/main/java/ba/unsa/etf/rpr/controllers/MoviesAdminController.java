@@ -16,19 +16,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 public class MoviesAdminController {
 
     @FXML
     public TableView<Movies> movieTable_id;
-
-    public TextField searchButtonTextField1_id;
-
-    private final MoviesManager moviesManager = new MoviesManager();
     public TextField release_year_id;
     public TextField ratings_id;
     public TextField language_id;
@@ -38,12 +32,13 @@ public class MoviesAdminController {
     public TextField price_id;
     public Button deleteButton_id;
     public Button updateButton_id;
-    public ImageView searchButton1_id;
-    public List<Movies>movieList;
-    private final UsersManager usersManager = new UsersManager();
     public TextField name_id;
-    public ChoiceBox<String> movieGenreChoiceBox_id;
     public ImageView backButtonMovies_id;
+    public ImageView searchButton1_id;
+    public TextField searchButtonTextField1_id;
+    public ChoiceBox<String> movieGenreChoiceBox_id;
+    private final MoviesManager moviesManager = new MoviesManager();
+    private final UsersManager usersManager = new UsersManager();
 
     public void initialize() {
 
@@ -167,7 +162,7 @@ public class MoviesAdminController {
     }
 
     /**
-     * this method should be refactored so we can verify the input
+     * this method should be refactored, so we can verify the input
      */
     public void addClick() {
         try {
@@ -182,6 +177,7 @@ public class MoviesAdminController {
             movie.setRelease_year(Integer.parseInt(release_year_id.getText()));
 
             moviesManager.add(movie);
+
             name_id.setText("");
             genre_id.setText("");
             duration_id.setText("");
@@ -189,6 +185,7 @@ public class MoviesAdminController {
             language_id.setText("");
             price_id.setText("");
             ratings_id.setText("");
+
             refreshTable();
 
         }catch(TheMovieRentalSystemException e){
@@ -203,12 +200,12 @@ public class MoviesAdminController {
     public void searchButtonClick() {
         String searchText = searchButtonTextField1_id.getText();
         try {
-
             List<Movies> searchedMovies = moviesManager.searchByMovie_name(searchText);
             movieTable_id.setItems(FXCollections.observableArrayList(searchedMovies));
         } catch (TheMovieRentalSystemException e) {
             e.printStackTrace();
         }
+
     }
 
     public void backClick(MouseEvent mouseEvent) throws IOException {
@@ -220,8 +217,6 @@ public class MoviesAdminController {
             alert.setTitle("Error");
             alert.setHeaderText("User does not exist");
             alert.setContentText("The username and password you entered do not match any existing users.");
-            // Apply the stylesheet to the alert (ako stignem)
-            //alert.getDialogPane().getStylesheets().add("/css/alert.css");
             alert.showAndWait();
             return;
         }

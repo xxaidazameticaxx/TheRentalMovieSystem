@@ -7,7 +7,6 @@ import java.util.List;
 
 /**
  * Dao interface for Users domain bean
- *
  * @author Aida Zametica
  */
 public interface UsersDao extends Dao<Users> {

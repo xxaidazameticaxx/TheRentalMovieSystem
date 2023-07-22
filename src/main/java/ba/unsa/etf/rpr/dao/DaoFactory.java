@@ -7,6 +7,7 @@ package ba.unsa.etf.rpr.dao;
  * @author Aida Zametica
  */
 public class DaoFactory {
+
     private static final MoviesDao moviesDao = new MoviesDaoSQLImpl();
     private static final UsersDao usersDao = new UsersDaoSQLImpl();
     private static final RentsDao rentsDao = new RentsDaoSQLImpl();
@@ -25,4 +26,5 @@ public class DaoFactory {
     public static RentsDao rentsDao(){
         return rentsDao;
     }
+
 }
