@@ -32,18 +32,10 @@
                </padding>
             </Label>
             <Separator orientation="VERTICAL" prefHeight="22.0" prefWidth="5.0" visible="false" />
-            <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" prefWidth="170.0" style="-fx-background-color: #F5F5F5;">
+            <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" prefWidth="170.0" style="-fx-background-color: #212121;">
                <HBox.margin>
                   <Insets bottom="14.0" left="14.0" right="14.0" top="14.0" />
                </HBox.margin>
-               <children>
-                  <TextField fx:id="searchButtonTextField_id" prefHeight="21.0" prefWidth="145.0" promptText="Search" style="-fx-background-color: whitesmoke;" />
-                  <ImageView fx:id="searchButtonImage_id" fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/fa0e7b992eff03c576727e95c746005c.jpg" />
-                     </image>
-                  </ImageView>
-               </children>
             </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="10.0" prefWidth="505.0">
                <children>

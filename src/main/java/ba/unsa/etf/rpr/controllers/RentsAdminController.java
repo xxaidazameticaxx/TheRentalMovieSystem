@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -27,8 +28,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class RentsAdminController {
-    public TextField searchButtonTextField_id;
-    public ImageView searchButtonImage_id;
     public ImageView backButton_id;
     public TextField user_id;
     private final RentsManager rentsManager = new RentsManager();
@@ -47,22 +46,9 @@ public class RentsAdminController {
 
         rentTable_id.setEditable(true);
 
-        searchButtonImage_id.setOnMouseClicked(event -> searchButtonClick());
-
-        // this displays all the rents when the search text field is empty
-        searchButtonTextField_id.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.isEmpty()) {
-                refreshTable();
-            }
-        });
-
         setupTableView();
         refreshTable();
     }
-
-    private void searchButtonClick() {
-    }
-
 
     /**
      * creates the required table columns based on the Rents table fields name
@@ -199,5 +185,15 @@ public class RentsAdminController {
     }
 
     public void helpClick(ActionEvent actionEvent) {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/helpRentsAdmin.fxml")));
+            Stage stage = new Stage();
+            stage.getIcons().add(new Image("/img/questionIcon.png") );
+            stage.setResizable(false);
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
