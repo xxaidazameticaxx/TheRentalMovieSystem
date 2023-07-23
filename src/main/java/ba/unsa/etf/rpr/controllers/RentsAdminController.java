@@ -17,13 +17,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
+import javafx.util.converter.DateStringConverter;
+import javafx.util.converter.DoubleStringConverter;
+import javafx.util.converter.LocalDateStringConverter;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -67,11 +76,25 @@ public class RentsAdminController {
         TableColumn<Rents, Integer> movieColumn = new TableColumn<>("MOVIE ID");
         movieColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getMovie().getId()).asObject());
 
-        TableColumn<Rents, Date> returnColumn = new TableColumn<>("RETURN DATE");
-        returnColumn.setCellValueFactory(new PropertyValueFactory<>("return_date"));
 
         TableColumn<Rents, Date> rentColumn = new TableColumn<>("RENT DATE");
         rentColumn.setCellValueFactory(new PropertyValueFactory<>("rent_date"));
+
+        TableColumn<Rents, Date> returnColumn = new TableColumn<>("RETURN DATE");
+        returnColumn.setCellValueFactory(new PropertyValueFactory<>("return_date"));
+
+        returnColumn.setCellFactory(col -> new TextFieldTableCell<>(new DateStringConverter("yyyy-MM-dd")));
+
+        returnColumn.setOnEditCommit(event -> {
+            Rents rent = event.getTableView().getItems().get(event.getTablePosition().getRow());
+            rent.setReturn_date(event.getNewValue());
+            try {
+                rentsManager.update(rent);
+                refreshTable();
+            } catch (TheMovieRentalSystemException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         addColumnsToTableView(idColumn,rentColumn,returnColumn,userColumn,movieColumn);
 
