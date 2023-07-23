@@ -3,7 +3,6 @@ package ba.unsa.etf.rpr.controllers;
 import ba.unsa.etf.rpr.business.UsersManager;
 import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -25,7 +24,7 @@ public class UserAccountController {
 
     }
 
-    public void saveAccountChanges(ActionEvent actionEvent) throws TheMovieRentalSystemException {
+    public void saveAccountChanges() throws TheMovieRentalSystemException {
         Users u = usersManager.getUserByUsernameAndPassword(LoginController.getUsernameField(), LoginController.getPasswordField());
         u.setPassword(passwordField.getText());
         u.setUsername(usernameField.getText());
