@@ -1,13 +1,10 @@
 package ba.unsa.etf.rpr.controllers;
 
-import ba.unsa.etf.rpr.business.MoviesManager;
 import ba.unsa.etf.rpr.business.RentsManager;
 import ba.unsa.etf.rpr.business.UsersManager;
-import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Rents;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -17,9 +14,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -30,14 +24,32 @@ public class MyMoviesUserController {
 
     @FXML
     public TableView<Rents> myMoviesTable_id;
-    private final MoviesManager moviesManager = new MoviesManager();
     private final UsersManager usersManager = new UsersManager();
     private final RentsManager rentsManager = new RentsManager();
 
-    public void initialize() {;
+    public void initialize() {
 
         setupTableView();
         refreshTable();
+        checkOverdueMovies();
+    }
+
+    private void checkOverdueMovies() {
+        for (Rents rent : myMoviesTable_id.getItems()) {
+            if (rent.getReturn_date() == null) {
+                Date rentDate = rent.getRent_date();
+                Date currentDate = new Date();
+                long diffInMillies = Math.abs(currentDate.getTime() - rentDate.getTime());
+                long diffInDays = diffInMillies / (24 * 60 * 60 * 1000);
+                if (diffInDays > 7) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Overdue Movie");
+                    alert.setHeaderText("You have an overdue movie to return!");
+                    alert.setContentText("Please return the movie '" + rent.getMovie().getMovie_name() + "' to the store as soon as possible.");
+                    alert.showAndWait();
+                }
+            }
+        }
     }
 
     /**

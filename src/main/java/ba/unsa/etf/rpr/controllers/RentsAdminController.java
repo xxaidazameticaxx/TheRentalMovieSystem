@@ -35,7 +35,6 @@ public class RentsAdminController {
     public Button helpButton_id;
     public TableView<Rents> rentTable_id;
     public DatePicker rentDate_id;
-    public DatePicker returnDate_id;
 
     public void initialize() {
 
@@ -114,7 +113,7 @@ public class RentsAdminController {
         try {
             Rents rent = new Rents();
             rent.setRent_date(java.sql.Date.valueOf(rentDate_id.getValue()));
-            rent.setReturn_date(java.sql.Date.valueOf(returnDate_id.getValue()));
+            rent.setReturn_date(null);
             rent.setUser(usersManager.getById(Integer.parseInt(user_id.getText())));
             rent.setMovie(moviesManager.getById(Integer.parseInt(movie_id.getText())));
 
@@ -122,7 +121,6 @@ public class RentsAdminController {
 
             user_id.setText("");
             movie_id.setText("");
-            returnDate_id.setValue(null);
             rentDate_id.setValue(null);
 
             refreshTable();

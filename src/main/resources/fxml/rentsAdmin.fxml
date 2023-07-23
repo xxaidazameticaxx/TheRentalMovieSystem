@@ -72,11 +72,6 @@
                         <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
                      </VBox.margin>
                   </DatePicker>
-                  <DatePicker fx:id="returnDate_id" prefHeight="25.0" prefWidth="181.0" promptText="rent date">
-                     <VBox.margin>
-                        <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
-                     </VBox.margin>
-                  </DatePicker>
                   <Button fx:id="addButton_id" mnemonicParsing="false" onAction="#addClick" prefHeight="36.0" prefWidth="122.0" style="-fx-background-color: #c62828;" text="ADD" textAlignment="CENTER" textFill="WHITESMOKE">
                      <font>
                         <Font name="System Bold" size="12.0" />
