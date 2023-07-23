@@ -1,11 +1,12 @@
 package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.MoviesManager;
+import ba.unsa.etf.rpr.business.RentsManager;
 import ba.unsa.etf.rpr.business.UsersManager;
 import ba.unsa.etf.rpr.domain.Movies;
+import ba.unsa.etf.rpr.domain.Rents;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -20,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,6 +42,7 @@ public class MoviesUserController {
     public ChoiceBox<String> movieGenreChoiceBox_id;
     private final MoviesManager moviesManager = new MoviesManager();
     private final UsersManager usersManager = new UsersManager();
+    private final RentsManager rentsManager = new RentsManager();
     public Button helpButton_id;
     public Button rentButton_id;
 
@@ -179,12 +182,12 @@ public class MoviesUserController {
         Stage stage;
         FXMLLoader loader;
 
-            loader = new FXMLLoader(getClass().getResource("/fxml/userMenu.fxml"));
-            Parent root = loader.load();
-            UserMenuController uMC = loader.getController();
-            uMC.setWelcomeTextField_id("Welcome " + LoginController.getUsernameField() + ", please select: ");
-            stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-            scene = new Scene(root);
+        loader = new FXMLLoader(getClass().getResource("/fxml/userMenu.fxml"));
+        Parent root = loader.load();
+        UserMenuController uMC = loader.getController();
+        uMC.setWelcomeTextField_id("Welcome " + LoginController.getUsernameField() + ", please select: ");
+        stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        scene = new Scene(root);
 
         stage.setScene(scene);
         stage.show();
@@ -193,7 +196,6 @@ public class MoviesUserController {
     @FXML
     public void helpClick() {
         try {
-            // TODO: 23.7.2023. change to helpmoviesuser
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/helpMoviesAdmin.fxml")));
             Stage stage = new Stage();
             stage.getIcons().add(new Image("/img/questionIcon.png") );
@@ -205,6 +207,28 @@ public class MoviesUserController {
         }
     }
 
-    public void rentClick(ActionEvent actionEvent) {
+    public void rentClick() throws TheMovieRentalSystemException {
+        Movies selectedMovie = movieTable_id.getSelectionModel().getSelectedItem();
+        if(selectedMovie!=null){
+            Rents rent = new Rents();
+            rent.setRent_date(new Date());
+            rent.setUser(usersManager.getUserByUsernameAndPassword(LoginController.getUsernameField(),LoginController.getPasswordField()));
+            rent.setReturn_date(null);
+            rent.setMovie(selectedMovie);
+            rentsManager.add(rent);
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Successfully rented");
+            alert.setHeaderText("The movie is waiting for you in the nearest Movie Rental Shop!");
+            alert.setContentText("You have two days to pick it up...");
+            alert.showAndWait();
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("None selected");
+            alert.setContentText("You need to select a movie to rent it!");
+            alert.showAndWait();
+        }
     }
 }
