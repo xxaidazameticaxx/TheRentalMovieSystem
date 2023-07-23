@@ -3,6 +3,7 @@ package ba.unsa.etf.rpr.controllers;
 import ba.unsa.etf.rpr.business.MoviesManager;
 import ba.unsa.etf.rpr.business.RentsManager;
 import ba.unsa.etf.rpr.business.UsersManager;
+import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Rents;
 import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
@@ -131,7 +132,29 @@ public class RentsAdminController {
         }
     }
 
+    /**
+     * should be used only when a mistake is made, otherwise all rents stay in the system
+     * @param actionEvent
+     */
     public void deleteClick(ActionEvent actionEvent) {
+        Rents selectedRent = rentTable_id.getSelectionModel().getSelectedItem();
+
+        if (selectedRent != null) {
+            try {
+                rentTable_id.getItems().remove(selectedRent);
+                rentsManager.delete(selectedRent.getId());
+
+            } catch (TheMovieRentalSystemException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("None selected");
+            alert.setContentText("You need to select a rent to delete it!");
+            alert.showAndWait();
+        }
     }
 
     public void backclick(MouseEvent mouseEvent) {
