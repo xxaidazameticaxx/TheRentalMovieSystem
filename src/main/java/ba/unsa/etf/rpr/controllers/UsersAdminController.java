@@ -210,74 +210,22 @@ public class UsersAdminController {
     }
 
     /**
-     * changes the admin status of other users
-     * password and username can not be changed
-     */
-    public void updateClick() {
-        try {
-            userList = usersManager.getAll();
-            for(Users x:userList){
-                if(x.getPassword().equals(password_id.getText()) && x.getUsername().equals(username_id.getText())) {
-                    x.setAdmin(Boolean.parseBoolean(admin_id.getText()));
-                    usersManager.update(x);
-                    password_id.setText("");
-                    admin_id.setText("");
-                    username_id.setText("");
-                    refreshTable();
-                    return;
-                }
-            }
-
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("User does not exist");
-            alert.setContentText("The username and password you entered doesn't match any existing user.");
-            alert.showAndWait();
-
-
-        }
-        catch(TheMovieRentalSystemException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * same method as in LoginController
      * possible refactor
      */
     public void backclick(MouseEvent mouseEvent) throws IOException {
-        Users user;
-        try{
-            user = usersManager.getUserByUsernameAndPassword(LoginController.getUsernameField(),LoginController.getPasswordField());
-        } catch(TheMovieRentalSystemException error){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("User does not exist");
-            alert.setContentText("The username and password you entered do not match any existing users.");
-            alert.showAndWait();
-            return;
-        }
 
         Stage stage;
         Scene scene;
         FXMLLoader loader;
 
-        if(user.isAdmin()) {
-            loader = new FXMLLoader(getClass().getResource("/fxml/adminMenu.fxml"));
-            Parent root = loader.load();
-            AdminMenuController aMC = loader.getController();
-            aMC.setWelcomeTextField1_id("Welcome " + LoginController.getUsernameField() + ", please select: ");
-            stage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-        }
-        else{
-            loader = new FXMLLoader(getClass().getResource("/fxml/userMenu.fxml"));
-            Parent root = loader.load();
-            UserMenuController uMC = loader.getController();
-            uMC.setWelcomeTextField_id("Welcome " + LoginController.getUsernameField() + ", please select: ");
-            stage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-        }
+        loader = new FXMLLoader(getClass().getResource("/fxml/adminMenu.fxml"));
+        Parent root = loader.load();
+        AdminMenuController aMC = loader.getController();
+        aMC.setWelcomeTextField1_id("Welcome " + LoginController.getUsernameField() + ", please select: ");
+        stage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+
         stage.setScene(scene);
         stage.show();
 

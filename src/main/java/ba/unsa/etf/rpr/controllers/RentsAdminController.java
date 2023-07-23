@@ -4,7 +4,6 @@ import ba.unsa.etf.rpr.business.MoviesManager;
 import ba.unsa.etf.rpr.business.RentsManager;
 import ba.unsa.etf.rpr.business.UsersManager;
 import ba.unsa.etf.rpr.domain.Rents;
-import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -159,36 +158,17 @@ public class RentsAdminController {
     }
 
     public void backclick(MouseEvent mouseEvent) throws IOException {
-        Users user;
-        try{
-            user = usersManager.getUserByUsernameAndPassword(LoginController.getUsernameField(),LoginController.getPasswordField());
-        } catch(TheMovieRentalSystemException error){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("User does not exist");
-            alert.setContentText("The username and password you entered do not match any existing users.");
-            alert.showAndWait();
-            return;
-        }
         Scene scene;
         Stage stage;
         FXMLLoader loader;
-        if(user.isAdmin()) {
+
             loader = new FXMLLoader(getClass().getResource("/fxml/adminMenu.fxml"));
             Parent root = loader.load();
             AdminMenuController aMC = loader.getController();
             aMC.setWelcomeTextField1_id("Welcome " + LoginController.getUsernameField() + ", please select: ");
             stage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
             scene = new Scene(root);
-        }
-        else {
-            loader = new FXMLLoader(getClass().getResource("/fxml/userMenu.fxml"));
-            Parent root = loader.load();
-            UserMenuController uMC = loader.getController();
-            uMC.setWelcomeTextField_id("Welcome " + LoginController.getUsernameField() + ", please select: ");
-            stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-        }
+
         stage.setScene(scene);
         stage.show();
     }
