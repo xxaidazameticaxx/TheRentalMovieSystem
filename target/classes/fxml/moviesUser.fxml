@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #212121;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.MoviesAdminController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #212121;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.MoviesUserController">
    <top>
       <HBox prefHeight="34.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
@@ -124,7 +124,7 @@
             </TextField>
             <VBox alignment="CENTER" prefHeight="130.0" prefWidth="199.0" style="-fx-background-color: #212121;">
                <children>
-                  <Button fx:id="addButton_id" mnemonicParsing="false" onAction="#addClick" prefHeight="36.0" prefWidth="122.0" style="-fx-background-color: #c62828;" text="RENT" textAlignment="CENTER" textFill="WHITESMOKE">
+                  <Button fx:id="rentButton_id" mnemonicParsing="false" onAction="#rentClick" prefHeight="36.0" prefWidth="122.0" style="-fx-background-color: #c62828;" text="RENT" textAlignment="CENTER" textFill="WHITESMOKE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>

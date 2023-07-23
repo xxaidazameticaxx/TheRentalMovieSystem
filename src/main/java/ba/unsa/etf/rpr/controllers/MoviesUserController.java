@@ -6,6 +6,7 @@ import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -41,6 +42,7 @@ public class MoviesUserController {
     private final MoviesManager moviesManager = new MoviesManager();
     private final UsersManager usersManager = new UsersManager();
     public Button helpButton_id;
+    public Button rentButton_id;
 
     public void initialize() {
 
@@ -193,5 +195,8 @@ public class MoviesUserController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void rentClick(ActionEvent actionEvent) {
     }
 }
