@@ -39,8 +39,8 @@ public class MyMoviesUserController {
             if (rent.getReturn_date() == null) {
                 Date rentDate = rent.getRent_date();
                 Date currentDate = new Date();
-                long diffInMillies = Math.abs(currentDate.getTime() - rentDate.getTime());
-                long diffInDays = diffInMillies / (24 * 60 * 60 * 1000);
+                long diffInMillis = Math.abs(currentDate.getTime() - rentDate.getTime());
+                long diffInDays = diffInMillis / (24 * 60 * 60 * 1000);
                 if (diffInDays > 7) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Overdue Movie");
