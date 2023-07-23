@@ -11,11 +11,17 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
@@ -157,7 +163,39 @@ public class RentsAdminController {
         }
     }
 
-    public void backclick(MouseEvent mouseEvent) {
+    public void backclick(MouseEvent mouseEvent) throws IOException {
+        Users user;
+        try{
+            user = usersManager.getUserByUsernameAndPassword(LoginController.getUsernameField(),LoginController.getPasswordField());
+        } catch(TheMovieRentalSystemException error){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("User does not exist");
+            alert.setContentText("The username and password you entered do not match any existing users.");
+            alert.showAndWait();
+            return;
+        }
+        Scene scene;
+        Stage stage;
+        FXMLLoader loader;
+        if(user.isAdmin()) {
+            loader = new FXMLLoader(getClass().getResource("/fxml/adminMenu.fxml"));
+            Parent root = loader.load();
+            AdminMenuController aMC = loader.getController();
+            aMC.setWelcomeTextField1_id("Welcome " + LoginController.getUsernameField() + ", please select: ");
+            stage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+        }
+        else {
+            loader = new FXMLLoader(getClass().getResource("/fxml/userMenu.fxml"));
+            Parent root = loader.load();
+            UserMenuController uMC = loader.getController();
+            uMC.setWelcomeTextField_id("Welcome " + LoginController.getUsernameField() + ", please select: ");
+            stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+        }
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void helpClick(ActionEvent actionEvent) {
