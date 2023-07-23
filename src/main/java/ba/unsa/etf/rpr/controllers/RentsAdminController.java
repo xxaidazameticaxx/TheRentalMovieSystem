@@ -3,14 +3,11 @@ package ba.unsa.etf.rpr.controllers;
 import ba.unsa.etf.rpr.business.MoviesManager;
 import ba.unsa.etf.rpr.business.RentsManager;
 import ba.unsa.etf.rpr.business.UsersManager;
-import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Rents;
 import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -22,18 +19,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
 import javafx.util.converter.DateStringConverter;
-import javafx.util.converter.DoubleStringConverter;
-import javafx.util.converter.LocalDateStringConverter;
-
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
 public class RentsAdminController {
@@ -43,7 +31,6 @@ public class RentsAdminController {
     private final MoviesManager moviesManager = new MoviesManager();
     private final UsersManager usersManager = new UsersManager();
     public TextField movie_id;
-    public List<Rents> rentList;
     public Button deleteButton_id;
     public Button addButton_id;
     public Button helpButton_id;
@@ -124,7 +111,7 @@ public class RentsAdminController {
     }
 
 
-    public void addClick(ActionEvent actionEvent) {
+    public void addClick() {
         try {
             Rents rent = new Rents();
             rent.setRent_date(java.sql.Date.valueOf(rentDate_id.getValue()));
@@ -149,9 +136,8 @@ public class RentsAdminController {
 
     /**
      * should be used only when a mistake is made, otherwise all rents stay in the system
-     * @param actionEvent
      */
-    public void deleteClick(ActionEvent actionEvent) {
+    public void deleteClick() {
         Rents selectedRent = rentTable_id.getSelectionModel().getSelectedItem();
 
         if (selectedRent != null) {
@@ -207,7 +193,7 @@ public class RentsAdminController {
         stage.show();
     }
 
-    public void helpClick(ActionEvent actionEvent) {
+    public void helpClick() {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/helpRentsAdmin.fxml")));
             Stage stage = new Stage();

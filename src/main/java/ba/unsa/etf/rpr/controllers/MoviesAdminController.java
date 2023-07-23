@@ -19,7 +19,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
