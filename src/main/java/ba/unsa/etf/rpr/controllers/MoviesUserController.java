@@ -3,7 +3,6 @@ package ba.unsa.etf.rpr.controllers;
 import ba.unsa.etf.rpr.business.MoviesManager;
 import ba.unsa.etf.rpr.business.UsersManager;
 import ba.unsa.etf.rpr.domain.Movies;
-import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -75,6 +74,18 @@ public class MoviesUserController {
             }
         });
 
+        movieTable_id.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                name_id.setText(newSelection.getMovie_name());
+                genre_id.setText(newSelection.getGenre());
+                duration_id.setText(String.valueOf(newSelection.getDuration()));
+                ratings_id.setText(String.valueOf(newSelection.getRatings()));
+                release_year_id.setText(String.valueOf(newSelection.getRelease_year()));
+                price_id.setText(String.valueOf(newSelection.getPrice()));
+                language_id.setText(newSelection.getLanguage());
+            }
+        });
+
         setupTableView();
         refreshTable();
     }
@@ -86,9 +97,6 @@ public class MoviesUserController {
     private void setupTableView() {
 
         movieTable_id.getColumns().clear();
-
-        TableColumn<Movies, Integer> idColumn = new TableColumn<>("ID");
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
 
         TableColumn<Movies, String> nameColumn = new TableColumn<>("NAME");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("movie_name"));
@@ -124,7 +132,7 @@ public class MoviesUserController {
         TableColumn<Movies, Double> ratingsColumn = new TableColumn<>("RATINGS");
         ratingsColumn.setCellValueFactory(new PropertyValueFactory<>("ratings"));
 
-        addColumnsToTableView(idColumn, nameColumn, genreColumn,ratingsColumn,releaseYearColumn,languageColumn,durationColumn,priceColumn);
+        addColumnsToTableView(nameColumn, genreColumn,ratingsColumn,releaseYearColumn,languageColumn,durationColumn,priceColumn);
 
     }
 
