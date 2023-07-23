@@ -63,7 +63,7 @@
             </HBox>
          </children>
       </GridPane>
-      <ImageView fx:id="informationUser_id" fitHeight="33.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="informationUser_id" fitHeight="33.0" fitWidth="35.0" onMouseClicked="#informationClick" pickOnBounds="true" preserveRatio="true">
          <GridPane.margin>
             <Insets bottom="70.0" left="70.0" right="70.0" top="70.0" />
          </GridPane.margin>
@@ -71,7 +71,7 @@
             <Image url="@../img/584019.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="userAccount_id" fitHeight="33.0" fitWidth="35.0" layoutX="35.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="userAccount_id" fitHeight="33.0" fitWidth="35.0" layoutX="35.0" layoutY="21.0" onMouseClicked="#accountClick" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/account-profile-icon-1.png" />
          </image>

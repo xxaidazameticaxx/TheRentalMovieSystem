@@ -1,51 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.MoviesUserController">
-    <children>
-        <TableView fx:id="movieTable_id" layoutX="10.0" layoutY="70.0" prefHeight="420.0" prefWidth="780.0">
-            <columns>
-                <TableColumn fx:id="nameColumn" prefWidth="180.0" text="Name"/>
-                <TableColumn fx:id="genreColumn" prefWidth="100.0" text="Genre"/>
-                <TableColumn fx:id="ratingsColumn" prefWidth="80.0" text="Ratings"/>
-                <TableColumn fx:id="releaseYearColumn" prefWidth="100.0" text="Release Year"/>
-                <TableColumn fx:id="languageColumn" prefWidth="100.0" text="Language"/>
-                <TableColumn fx:id="durationColumn" prefWidth="80.0" text="Duration"/>
-                <TableColumn fx:id="priceColumn" prefWidth="80.0" text="Price"/>
-            </columns>
-        </TableView>
-        <TextField fx:id="searchButtonTextField1_id" layoutX="390.0" layoutY="30.0" prefWidth="240.0" promptText="Search movies..."/>
-        <ImageView fx:id="searchButton1_id" layoutX="640.0" layoutY="25.0" onMouseClicked="#searchButtonClick" pickOnBounds="true" preserveRatio="true">
-            <!-- Add your search icon image here -->
-        </ImageView>
-        <ChoiceBox fx:id="movieGenreChoiceBox_id" layoutX="520.0" layoutY="30.0" prefWidth="150.0"/>
-        <TextField fx:id="name_id" layoutX="130.0" layoutY="510.0" prefWidth="220.0" promptText="Movie Name" />
-        <TextField fx:id="genre_id" layoutX="130.0" layoutY="540.0" prefWidth="220.0" promptText="Genre" />
-        <TextField fx:id="ratings_id" layoutX="130.0" layoutY="570.0" prefWidth="220.0" promptText="Ratings" />
-        <TextField fx:id="release_year_id" layoutX="400.0" layoutY="510.0" prefWidth="130.0" promptText="Release Year" />
-        <TextField fx:id="language_id" layoutX="400.0" layoutY="540.0" prefWidth="130.0" promptText="Language" />
-        <TextField fx:id="duration_id" layoutX="400.0" layoutY="570.0" prefWidth="130.0" promptText="Duration" />
-        <TextField fx:id="price_id" layoutX="570.0" layoutY="510.0" prefWidth="130.0" promptText="Price" />
-        <Button fx:id="rentButton_id" layoutX="620.0" layoutY="540.0" onAction="#rentClick" text="Rent" />
-        <Button fx:id="helpButton_id" layoutX="620.0" layoutY="570.0" onAction="#helpClick" text="Help" />
-        <ImageView fx:id="backButtonMovies_id" layoutX="10.0" layoutY="10.0" onMouseClicked="#backClick" pickOnBounds="true" preserveRatio="true">
-            <!-- Add your back button icon image here -->
-        </ImageView>
-        <Label layoutX="130.0" layoutY="480.0" prefWidth="220.0" text="Movie Details" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
-        <Label layoutX="10.0" layoutY="510.0" prefWidth="100.0" text="Name:" />
-        <Label layoutX="10.0" layoutY="540.0" prefWidth="100.0" text="Genre:" />
-        <Label layoutX="10.0" layoutY="570.0" prefWidth="100.0" text="Ratings:" />
-        <Label layoutX="300.0" layoutY="510.0" prefWidth="100.0" text="Release Year:" />
-        <Label layoutX="300.0" layoutY="540.0" prefWidth="100.0" text="Language:" />
-        <Label layoutX="300.0" layoutY="570.0" prefWidth="100.0" text="Duration:" />
-        <Label layoutX="470.0" layoutY="510.0" prefWidth="100.0" text="Price:" />
-    </children>
-</AnchorPane>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="627.0" prefWidth="611.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox alignment="TOP_CENTER" prefHeight="554.0" prefWidth="406.0" style="-fx-background-color: whitesmoke;" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="#c62828" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to the Movie Rental System!" textAlignment="CENTER" wrappingWidth="338.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="15.0" top="20.0" />
+               </VBox.margin>
+            </Text>
+            <TextArea prefHeight="574.0" prefWidth="611.0" text="&#10;Our Movie Rental App offers you the best of both worlds - the convenience of digital browsing and the nostalgic charm of in-store pick-up. We believe that the joy of physical movie rental should never fade, and that's why we're dedicated to providing you with a delightful movie-watching experience.&#10;&#10;Thank you for choosing our Movie Rental App, where the love for movies and cherished memories come together. Enjoy your movie nights and happy watching!&#10;&#10;Step 1: Browse Movies&#10;&#10;Upon opening the app, you'll be presented with a diverse selection of movies.&#10;Explore the movie library to find the perfect film for your movie night.&#10;&#10;Step 2: Rent a Movie&#10;&#10;Once you've found the movie you want to watch, click the &quot;Rent&quot; button.&#10;Choose your preferred rental period, which typically includes a two-day grace period for in-store pick-up.&#10;&#10;Step 3: In-Store Pick-Up&#10;&#10;After renting the movie, visit our physical store within two days to pick up your DVD.&#10;Our friendly staff will assist you in finding your movie and making sure you have everything you need for a delightful movie night.&#10;&#10;Step 5: Enjoy Movie Night&#10;&#10;Now that you have your movie in hand, head home to enjoy a fantastic movie night with your loved ones.&#10;Experience the joy of physically inserting the DVD, just like the good old days!&#10;&#10;Step 6: Return the Movie&#10;&#10;Once you've finished watching the movie, return it to our store at your convenience.&#10;There's no need to worry about return deadlines; simply drop it off when you're ready.&#10;&#10;Step 7: Discover More Movies&#10;&#10;Our movie collection is ever-expanding, so visit the app frequently to find new and exciting films to enjoy.&#10;&#10;&#10;" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="15.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+</BorderPane>
