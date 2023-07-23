@@ -1,8 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 import ba.unsa.etf.rpr.business.UsersManager;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,11 +11,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-
 import ba.unsa.etf.rpr.dao.UsersDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Users;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -37,16 +33,13 @@ public class SignupController {
         passwordField1_id.getStyleClass().add("fieldCorrect");
         passwordField1_id.getStyleClass().add("fieldNotCorrect");
 
-        usernameField1_id.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
-                if (usernameField1_id.getText().trim().isEmpty() || usernameField1_id.getText().contains(" ")) {
-                    usernameField1_id.getStyleClass().removeAll("fieldCorrect");
-                    usernameField1_id.getStyleClass().add("fieldNotCorrect");
-                } else {
-                    usernameField1_id.getStyleClass().removeAll("fieldNotCorrect");
-                    usernameField1_id.getStyleClass().add("fieldCorrect");
-                }
+        usernameField1_id.textProperty().addListener((observableValue, o, n) -> {
+            if (usernameField1_id.getText().trim().isEmpty() || usernameField1_id.getText().contains(" ")) {
+                usernameField1_id.getStyleClass().removeAll("fieldCorrect");
+                usernameField1_id.getStyleClass().add("fieldNotCorrect");
+            } else {
+                usernameField1_id.getStyleClass().removeAll("fieldNotCorrect");
+                usernameField1_id.getStyleClass().add("fieldCorrect");
             }
         });
 
@@ -63,8 +56,6 @@ public class SignupController {
 
     /**
      * can be improved
-     * @param actionEvent
-     * @throws IOException
      */
     public void signupclick1(ActionEvent actionEvent) throws IOException {
         try {
