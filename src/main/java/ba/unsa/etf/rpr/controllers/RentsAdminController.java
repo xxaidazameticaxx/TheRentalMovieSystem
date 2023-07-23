@@ -125,7 +125,8 @@ public class RentsAdminController {
 
             refreshTable();
 
-        }catch(TheMovieRentalSystemException e){
+        }
+        catch(TheMovieRentalSystemException e){
 
             e.printStackTrace();
         }
