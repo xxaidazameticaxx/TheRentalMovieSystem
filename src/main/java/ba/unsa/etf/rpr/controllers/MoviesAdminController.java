@@ -1,9 +1,7 @@
 package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.MoviesManager;
-import ba.unsa.etf.rpr.business.UsersManager;
 import ba.unsa.etf.rpr.domain.Movies;
-import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -41,7 +39,6 @@ public class MoviesAdminController {
     public TextField searchButtonTextField1_id;
     public ChoiceBox<String> movieGenreChoiceBox_id;
     private final MoviesManager moviesManager = new MoviesManager();
-    private final UsersManager usersManager = new UsersManager();
     public Button helpButton_id;
 
     public void initialize() {
