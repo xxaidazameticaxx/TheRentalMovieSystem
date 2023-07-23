@@ -32,6 +32,8 @@ public class UserAccountController {
         try{
             if(passwordField.getText().length()<6) throw new TheMovieRentalSystemException("Password");
             usersManager.update(u);
+            LoginController.setUsernameField(usernameField.getText());
+            LoginController.setPasswordField(passwordField.getText());
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Successfully changed");
             alert.setHeaderText("You can now log into your account using the new password!");

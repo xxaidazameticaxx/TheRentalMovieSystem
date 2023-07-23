@@ -40,6 +40,14 @@ public class LoginController {
         return passwordField.getText();
     }
 
+    public static void setUsernameField(String username) {
+        usernameField.setText(username);
+    }
+
+    public static void setPasswordField(String password) {
+        passwordField.setText(password);
+    }
+
 
     /**
      * Initialize method that sets the username and password text field in red if they are empty or contain any empty spaces
