@@ -10,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -69,7 +68,7 @@ public class UserMenuController {
         stage.show();
     }
 
-    public void informationClick(MouseEvent mouseEvent) {
+    public void informationClick() {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/userInformation.fxml")));
             Stage stage = new Stage();
@@ -82,7 +81,7 @@ public class UserMenuController {
         }
     }
 
-    public void accountClick(MouseEvent mouseEvent) {
+    public void accountClick() {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/userAccount.fxml")));
             Stage stage = new Stage();
