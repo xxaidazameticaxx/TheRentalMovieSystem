@@ -26,6 +26,7 @@ public class UserMenuController {
     public ImageView informationUser_id;
     public ImageView userAccount_id;
 
+
     public void setWelcomeTextField_id(String welcomeUserText) {
 
         welcomeTextField_id.setText(welcomeUserText);
@@ -82,5 +83,16 @@ public class UserMenuController {
     }
 
     public void accountClick(MouseEvent mouseEvent) {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/userAccount.fxml")));
+            Stage stage = new Stage();
+            stage.getIcons().add(new Image("/img/icon.jpg") );
+            stage.setResizable(false);
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 }

@@ -3,8 +3,6 @@ package ba.unsa.etf.rpr.controllers;
 import ba.unsa.etf.rpr.business.UsersManager;
 import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,29 +51,23 @@ public class LoginController {
         passwordField_id.getStyleClass().add("fieldCorrect");
         passwordField_id.getStyleClass().add("fieldNotCorrect");
 
-        usernameField_id.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
-                if (usernameField_id.getText().trim().isEmpty() || usernameField_id.getText().contains(" ")) {
-                    usernameField_id.getStyleClass().removeAll("fieldCorrect");
-                    usernameField_id.getStyleClass().add("fieldNotCorrect");
-                } else {
-                    usernameField_id.getStyleClass().removeAll("fieldNotCorrect");
-                    usernameField_id.getStyleClass().add("fieldCorrect");
-                }
+        usernameField_id.textProperty().addListener((observableValue, o, n) -> {
+            if (usernameField_id.getText().trim().isEmpty() || usernameField_id.getText().contains(" ")) {
+                usernameField_id.getStyleClass().removeAll("fieldCorrect");
+                usernameField_id.getStyleClass().add("fieldNotCorrect");
+            } else {
+                usernameField_id.getStyleClass().removeAll("fieldNotCorrect");
+                usernameField_id.getStyleClass().add("fieldCorrect");
             }
         });
 
-        passwordField_id.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
-                if (passwordField_id.getText().trim().isEmpty() || passwordField_id.getText().contains(" ")) {
-                    passwordField_id.getStyleClass().removeAll("fieldCorrect");
-                    passwordField_id.getStyleClass().add("fieldNotCorrect");
-                } else {
-                    passwordField_id.getStyleClass().removeAll("fieldNotCorrect");
-                    passwordField_id.getStyleClass().add("fieldCorrect");
-                }
+        passwordField_id.textProperty().addListener((observableValue, o, n) -> {
+            if (passwordField_id.getText().trim().isEmpty() || passwordField_id.getText().contains(" ")) {
+                passwordField_id.getStyleClass().removeAll("fieldCorrect");
+                passwordField_id.getStyleClass().add("fieldNotCorrect");
+            } else {
+                passwordField_id.getStyleClass().removeAll("fieldNotCorrect");
+                passwordField_id.getStyleClass().add("fieldCorrect");
             }
         });
 
@@ -86,7 +78,7 @@ public class LoginController {
      *
      */
     public void loginclick(ActionEvent actionEvent) throws IOException {
-        Users user = null;
+        Users user;
         usernameField = usernameField_id;
         passwordField = passwordField_id;
         try{
@@ -97,8 +89,6 @@ public class LoginController {
             alert.setTitle("Error");
             alert.setHeaderText("User does not exist");
             alert.setContentText("The username and password you entered do not match any existing users.");
-            // Apply the stylesheet to the alert (ako stignem)
-            //alert.getDialogPane().getStylesheets().add("/css/alert.css");
             alert.showAndWait();
             return;
         }
