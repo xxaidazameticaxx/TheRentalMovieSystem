@@ -84,10 +84,8 @@ public class SignupController {
             user.setPassword(passwordField1_id.getText());
             usersManager.add(user);
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/userMenu.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
             Parent root = loader.load();
-            UserMenuController uMC = loader.getController();
-            uMC.setWelcomeTextField_id("Welcome " + usernameField1_id.getText() + ", please select: ");
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
