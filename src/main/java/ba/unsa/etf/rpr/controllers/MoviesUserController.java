@@ -43,7 +43,6 @@ public class MoviesUserController {
     private final MoviesManager moviesManager = new MoviesManager();
     private final UsersManager usersManager = new UsersManager();
     private final RentsManager rentsManager = new RentsManager();
-    public Button helpButton_id;
     public Button rentButton_id;
 
     public void initialize() {

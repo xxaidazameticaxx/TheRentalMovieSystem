@@ -49,25 +49,9 @@ public class MoviesDaoSQLImpl extends AbstractDao<Movies> implements MoviesDao{
         return item;
     }
 
-    //koja je svrha ove metode Aida?
-    @Override
-    public List<Movies> getRentedMovies() throws TheMovieRentalSystemException {
-        return executeQuery("SELECT * FROM MOVIES INNER JOIN RENTS ON MOVIES.id = RENTS.movie_id AND RENTS.return_date IS NULL",null);
-    }
-
     @Override
     public List<Movies> filterByGenre(String genre) throws TheMovieRentalSystemException {
         return executeQuery("SELECT * FROM MOVIES WHERE genre = ?",new Object[]{genre});
-    }
-
-    @Override
-    public List<Movies> searchByLanguage(String language) throws TheMovieRentalSystemException {
-        return executeQuery("SELECT * FROM MOVIES WHERE language = ?",new Object[]{language});
-    }
-
-    @Override
-    public List<Movies> getUserIssuedMovies(Users user) throws TheMovieRentalSystemException {
-       return executeQuery("SELECT * FROM MOVIES WHERE id IN (SELECT r.movie_id FROM RENTS r WHERE user_id = ?)",new Object[]{user.getId()});
     }
 
     @Override

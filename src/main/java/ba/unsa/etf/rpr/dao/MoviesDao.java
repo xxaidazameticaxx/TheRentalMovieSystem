@@ -16,11 +16,5 @@ public interface MoviesDao extends Dao<Movies>{
 
     List<Movies> filterByGenre(String genre) throws TheMovieRentalSystemException;
 
-    List<Movies> getRentedMovies() throws TheMovieRentalSystemException;
-
-    List<Movies> searchByLanguage(String language) throws TheMovieRentalSystemException;
-
-    List<Movies> getUserIssuedMovies(Users user) throws TheMovieRentalSystemException;
-
     List<Movies> searchByMovie_name(String movie_name) throws TheMovieRentalSystemException;
 }

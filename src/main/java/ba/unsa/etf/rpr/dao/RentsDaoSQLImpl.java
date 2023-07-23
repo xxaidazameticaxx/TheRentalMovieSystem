@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Rents;
+import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 
 import java.sql.*;
@@ -9,11 +10,6 @@ import java.util.*;
 public class RentsDaoSQLImpl extends AbstractDao<Rents> implements RentsDao{
     public RentsDaoSQLImpl(){
        super("RENTS");
-    }
-
-    //koja svrha ove metode Aida??
-    public List<Rents> getUserByRentId(int rent_id) throws TheMovieRentalSystemException {
-        return executeQuery("SELECT * FROM USERS WHERE id = (SELECT r.user_id FROM RENTS r WHERE r.id = ?)",new Object[]{rent_id});
     }
 
     @Override
@@ -45,6 +41,11 @@ public class RentsDaoSQLImpl extends AbstractDao<Rents> implements RentsDao{
         item.put("return_date", object.getReturn_date());
 
         return item;
+    }
+
+    @Override
+    public List<Rents> getUserIssuedMovies(Users user) throws TheMovieRentalSystemException {
+        return executeQuery("SELECT * FROM RENTS WHERE user_id = ?",new Object[]{user.getId()});
     }
 
 }

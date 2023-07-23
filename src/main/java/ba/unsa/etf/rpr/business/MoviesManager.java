@@ -40,14 +40,6 @@ public class MoviesManager {
         return DaoFactory.moviesDao().filterByGenre(genre);
     }
 
-    public List<Movies> searchByLanguage(String language) throws TheMovieRentalSystemException {
-        return DaoFactory.moviesDao().searchByLanguage(language);
-    }
-
-    public List<Movies> getUserIssuedMovies(Users user) throws TheMovieRentalSystemException {
-        return DaoFactory.moviesDao().getUserIssuedMovies(user);
-    }
-
     public List<Movies> searchByMovie_name(String movie_name) throws TheMovieRentalSystemException {
         return DaoFactory.moviesDao().searchByMovie_name(movie_name);
     }
