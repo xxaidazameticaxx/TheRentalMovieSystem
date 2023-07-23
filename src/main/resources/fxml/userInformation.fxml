@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="611.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox alignment="TOP_CENTER" prefHeight="676.0" prefWidth="611.0" style="-fx-background-color: whitesmoke;" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="#c62828" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to the Movie Rental System!" textAlignment="CENTER" wrappingWidth="520.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="15.0" top="20.0" />
+               </VBox.margin>
+            </Text>
+            <TextArea prefHeight="604.0" prefWidth="611.0" text="Step into the world of Movie Rental App and experience the best of both movie traditions - modern convenience and cherished nostalgia. Thank you for choosing us to be part of your movie-watching journey. &#10;&#10;Step 1: Browse Movies&#10;&#10;Upon launching the app, you'll be greeted with a wide collection of movies to explore. Browse through our diverse selection and discover the perfect film for your next movie night.&#10;&#10;Step 2: Rent a Movie&#10;&#10;Once you've found the movie you can't wait to watch, simply select it and click the &quot;Rent&quot; button. Your rental period includes two days to pick up the movie from our physical store.&#10;&#10;Step 3: In-Store Pick-Up&#10;&#10;After renting the movie, head to our physical store within two days to pick up your DVD. Our friendly staff will be delighted to assist you in finding your movie, ensuring you have everything you need for an enjoyable movie night.&#10;&#10;Step 5: Enjoy Movie Night&#10;&#10;Now that you have your movie in hand, head home and savor the excitement of movie night with your loved ones. Experience the delight of physically inserting the DVD, reminiscing about the good old days!&#10;&#10;Step 6: Return the Movie&#10;&#10;When you've finished watching the movie, you'll have seven days to return it to our store at your convenience. There's no need to worry about strict return deadlines during this period.&#10;&#10;Step 7: Discover More Movies&#10;&#10;Our movie collection continues to grow, so make sure to visit the app regularly to find new and thrilling films to enjoy.&#10;&#10;" wrapText="true" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="15.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+</BorderPane>

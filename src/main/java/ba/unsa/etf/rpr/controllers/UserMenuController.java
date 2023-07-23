@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -20,6 +21,8 @@ public class UserMenuController {
     public TextField welcomeTextField_id;
     public Button myMoviesButton_id;
     public Button allMoviesButton_id;
+    public ImageView informationUser_id;
+    public ImageView userAccount_id;
 
     public void setWelcomeTextField_id(String welcomeUserText) {
 

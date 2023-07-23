@@ -87,6 +87,11 @@
    <right>
       <VBox alignment="CENTER" prefHeight="547.0" prefWidth="186.0" style="-fx-background-color: #212121;" BorderPane.alignment="CENTER">
          <children>
+            <Label alignment="CENTER" prefWidth="220.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Movie Details" textFill="WHITESMOKE">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </Label>
             <TextField fx:id="name_id" alignment="CENTER" editable="false" promptText="name" style="-fx-background-color: whitesmoke;">
                <VBox.margin>
                   <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
@@ -134,11 +139,6 @@
                   </Button>
                </children>
             </VBox>
-            <Button fx:id="helpButton_id" mnemonicParsing="false" onAction="#helpClick" prefHeight="29.0" prefWidth="88.0" style="-fx-background-color: #559dd6; -fx-border-color: whitesmoke;" text="How to?" textAlignment="CENTER" textFill="WHITESMOKE">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Button>
          </children>
       </VBox>
    </right>

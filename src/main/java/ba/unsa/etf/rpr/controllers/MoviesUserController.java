@@ -196,7 +196,7 @@ public class MoviesUserController {
     @FXML
     public void helpClick() {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/helpMoviesAdmin.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/helpMoviesUser.fxml")));
             Stage stage = new Stage();
             stage.getIcons().add(new Image("/img/questionIcon.png") );
             stage.setResizable(false);
@@ -209,7 +209,7 @@ public class MoviesUserController {
 
     public void rentClick() throws TheMovieRentalSystemException {
         Movies selectedMovie = movieTable_id.getSelectionModel().getSelectedItem();
-        if(selectedMovie!=null){
+        if(selectedMovie != null){
             Rents rent = new Rents();
             rent.setRent_date(new Date());
             rent.setUser(usersManager.getUserByUsernameAndPassword(LoginController.getUsernameField(),LoginController.getPasswordField()));
