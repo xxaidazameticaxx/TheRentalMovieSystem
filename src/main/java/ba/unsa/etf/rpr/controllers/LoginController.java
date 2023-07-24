@@ -26,9 +26,7 @@ public class LoginController {
     public Button signupButton_id;
     public Button loginButton_id;
     public TextField usernameField_id;
-
     public PasswordField passwordField_id;
-
     public static TextField usernameField;
     public static PasswordField passwordField;
 

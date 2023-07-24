@@ -30,7 +30,7 @@ public interface Dao<T> {
      *
      * @param item - bean to be updated. id must be populated
      */
-    void update(T item) throws TheMovieRentalSystemException; //ja promijenila u void
+    void update(T item) throws TheMovieRentalSystemException;
 
     /**
      * Hard delete of item from database with given id

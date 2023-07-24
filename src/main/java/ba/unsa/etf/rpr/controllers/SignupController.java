@@ -19,10 +19,10 @@ import java.util.List;
 
 
 public class SignupController {
+
     public Button signupButton1_id;
     public PasswordField passwordField1_id;
     public TextField usernameField1_id;
-
     private final UsersManager usersManager = new UsersManager();
 
 

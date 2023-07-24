@@ -38,8 +38,8 @@ public class MoviesAdminController {
     public ImageView searchButton1_id;
     public TextField searchButtonTextField1_id;
     public ChoiceBox<String> movieGenreChoiceBox_id;
-    private final MoviesManager moviesManager = new MoviesManager();
     public Button helpButton_id;
+    private final MoviesManager moviesManager = new MoviesManager();
 
     public void initialize() {
 
