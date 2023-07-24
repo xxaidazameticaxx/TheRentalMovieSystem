@@ -26,6 +26,9 @@ public class SignupController {
     private final UsersManager usersManager = new UsersManager();
 
 
+    /**
+     * Initializes the SignupController by adding listeners to the username and password fields for input validation.
+     */
     @FXML
     public void initialize() {
         usernameField1_id.getStyleClass().add("fieldCorrect");
@@ -55,7 +58,12 @@ public class SignupController {
     }
 
     /**
-     * can be improved
+     * Handles the sign-up button click event.
+     * Validates the input fields (username and password) and creates a new user if the input is valid.
+     * Displays appropriate error messages for invalid input.
+     *
+     * @param actionEvent
+     * @throws IOException
      */
     public void signupclick1(ActionEvent actionEvent) throws IOException {
         try {

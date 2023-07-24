@@ -27,6 +27,9 @@ public class MyMoviesUserController {
     private final UsersManager usersManager = new UsersManager();
     private final RentsManager rentsManager = new RentsManager();
 
+    /**
+     * Initializes the MyMoviesUserController by setting up the TableView, checking for overdue movies, and refreshing the table.
+     */
     public void initialize() {
 
         setupTableView();
@@ -34,6 +37,9 @@ public class MyMoviesUserController {
         checkOverdueMovies();
     }
 
+    /**
+     * Checks for overdue movies and displays a warning alert if any of the user's rented movies are overdue.
+     */
     private void checkOverdueMovies() {
         for (Rents rent : myMoviesTable_id.getItems()) {
             if (rent.getReturn_date() == null) {
@@ -53,8 +59,7 @@ public class MyMoviesUserController {
     }
 
     /**
-     * creates the required table columns based on the Movies table fields name
-     * adds those columns to the TableView
+     * Sets up the required table columns based on the Rents and Movies table fields' names and adds those columns to the TableView.
      */
     private void setupTableView() {
 
@@ -77,8 +82,9 @@ public class MyMoviesUserController {
     }
 
     /**
-     * google it
-     * indicates that the method does not perform potentially unsafe operations on the varargs parameter
+     * Helper method to add the provided columns to the TableView.
+     *
+     * @param columns The columns to be added to the TableView.
      */
     @SafeVarargs
     private final void addColumnsToTableView(TableColumn<Rents, ?>... columns) {
@@ -86,8 +92,8 @@ public class MyMoviesUserController {
     }
 
     /**
-     * fetches all movies from the database using the moviesDao
-     * updates the TableView with the fetched movie list
+     * Fetches all the user's rented movies from the database using the RentsManager
+     * and updates the TableView with the fetched movie list.
      */
     private void refreshTable() {
         try {
@@ -99,6 +105,13 @@ public class MyMoviesUserController {
         }
     }
 
+    /**
+     * Handles the button click event for the "Back" button.
+     * Navigates back to the user menu.
+     *
+     * @param mouseEvent
+     * @throws IOException
+     */
     public void backClick(MouseEvent mouseEvent) throws IOException {
         Scene scene;
         Stage stage;

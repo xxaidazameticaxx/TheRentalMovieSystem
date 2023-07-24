@@ -38,6 +38,9 @@ public class UsersAdminController {
     private final UsersManager usersManager = new UsersManager();
     public Button helpButton1_id;
 
+    /**
+     * Initializes the UsersAdminController by setting up the TableView, search functionality, and loading existing users.
+     */
     public void initialize() {
 
         userTable_id.setEditable(true);
@@ -57,8 +60,7 @@ public class UsersAdminController {
 
 
     /**
-     * creates the required table columns based on the Users table fields name
-     * adds those columns to the TableView
+     * Creates the required table columns based on the Users table fields' names and adds those columns to the TableView.
      */
     private void setupTableView() {
 
@@ -94,8 +96,9 @@ public class UsersAdminController {
     }
 
     /**
-     * google it
-     * indicates that the method does not perform potentially unsafe operations on the varargs parameter
+     * Indicates that the method does not perform potentially unsafe operations on the varargs parameter.
+     *
+     * @param columns The TableColumn objects to be added to the TableView.
      */
     @SafeVarargs
     private final void addColumnsToTableView(TableColumn<Users, ?>... columns) {
@@ -103,8 +106,7 @@ public class UsersAdminController {
     }
 
     /**
-     * fetches all users from the database using the usersDao
-     * updates the TableView with the fetched user list
+     * Fetches all users from the database using the UsersManager and updates the TableView with the fetched user list.
      */
     private void refreshTable() {
         try {
@@ -117,8 +119,7 @@ public class UsersAdminController {
     }
 
     /**
-     * calls the DAO method to fetch all the users based on the search text field
-     * updates the TableView with the fetched user list
+     * Calls the DAO method to fetch all users based on the search text field and updates the TableView accordingly.
      */
     public void searchButtonClick() {
         String searchText = searchButtonTextField_id.getText();
@@ -132,9 +133,9 @@ public class UsersAdminController {
     }
 
     /**
-     * adds a new user based on the input fields (same as sign up)
+     * Adds a new user based on the input fields (same as sign up).
+     * Displays appropriate error messages for invalid input.
      */
-
     public void addClick() {
 
         try {
@@ -185,7 +186,7 @@ public class UsersAdminController {
 
 
     /**
-     * fetches the mouse selected user from the TableView and removes it from the database
+     * Fetches the mouse-selected user from the TableView and removes it from the database.
      */
     public void deleteClick() {
 
@@ -210,8 +211,7 @@ public class UsersAdminController {
     }
 
     /**
-     * same method as in LoginController
-     * possible refactor
+     * Navigates the user back to the admin menu when the back button is clicked.
      */
     public void backclick(MouseEvent mouseEvent) throws IOException {
 
@@ -231,6 +231,9 @@ public class UsersAdminController {
 
     }
 
+    /**
+     * Displays a help window with information about user administration.
+     */
     @FXML
     public void helpClick1() {
         try {

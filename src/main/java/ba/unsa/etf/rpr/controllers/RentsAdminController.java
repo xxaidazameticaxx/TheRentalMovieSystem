@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class RentsAdminController {
+
     public ImageView backButton_id;
     public TextField user_id;
     private final RentsManager rentsManager = new RentsManager();
@@ -39,17 +40,18 @@ public class RentsAdminController {
     public TableView<Rents> rentTable_id;
     public DatePicker rentDate_id;
 
+    /**
+     * Initializes the RentsAdminController by setting up the TableView and refreshing the table.
+     */
     public void initialize() {
 
         rentTable_id.setEditable(true);
-
         setupTableView();
         refreshTable();
     }
 
     /**
-     * creates the required table columns based on the Rents table fields name
-     * adds those columns to the TableView
+     * Sets up the required table columns based on the Rents table fields' names and adds those columns to the TableView.
      */
     private void setupTableView() {
 
@@ -89,8 +91,9 @@ public class RentsAdminController {
     }
 
     /**
-     * google it
-     * indicates that the method does not perform potentially unsafe operations on the varargs parameter
+     * Helper method to add the provided columns to the TableView.
+     *
+     * @param columns The columns to be added to the TableView.
      */
     @SafeVarargs
     private final void addColumnsToTableView(TableColumn<Rents, ?>... columns) {
@@ -98,8 +101,7 @@ public class RentsAdminController {
     }
 
     /**
-     * fetches all rents from the database using the rentsDao
-     * updates the TableView with the fetched rent list
+     * Fetches all rents from the database using the RentsManager and updates the TableView with the fetched rent list.
      */
     private void refreshTable() {
         try {
@@ -112,6 +114,11 @@ public class RentsAdminController {
     }
 
 
+    /**
+     * Handles the button click event for the "Add" button.
+     * Adds a new rent to the system based on the provided user and movie IDs and the selected rent date.
+     * Displays an error alert if the user or movie with the given IDs does not exist in the system.
+     */
     public void addClick() {
         try {
             Rents rent = new Rents();
@@ -168,7 +175,9 @@ public class RentsAdminController {
     }
 
     /**
-     * should be used only when a mistake is made, otherwise all rents stay in the system
+     * Handles the button click event for the "Delete" button.
+     * Deletes the selected rent from the system.
+     * Displays an error alert if no rent is selected.
      */
     public void deleteClick() {
         Rents selectedRent = rentTable_id.getSelectionModel().getSelectedItem();
@@ -191,6 +200,13 @@ public class RentsAdminController {
         }
     }
 
+    /**
+     * Handles the button click event for the "Back" button.
+     * Navigates back to the admin menu.
+     *
+     * @param mouseEvent
+     * @throws IOException
+     */
     public void backclick(MouseEvent mouseEvent) throws IOException {
         Scene scene;
         Stage stage;
@@ -207,6 +223,10 @@ public class RentsAdminController {
         stage.show();
     }
 
+    /**
+     * Handles the button click event for the "Help" button.
+     * Displays a new stage with help information for the rents administration.
+     */
     public void helpClick() {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/helpRentsAdmin.fxml")));

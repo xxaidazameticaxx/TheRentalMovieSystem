@@ -24,12 +24,23 @@ public class UserMenuController {
     public ImageView informationUser_id;
     public ImageView userAccount_id;
 
-
+    /**
+     * Sets the welcome text for the user in the GUI.
+     *
+     * @param welcomeUserText The text to be displayed as a welcome message for the user.
+     */
     public void setWelcomeTextField_id(String welcomeUserText) {
 
         welcomeTextField_id.setText(welcomeUserText);
     }
 
+    /**
+     * Handles the "All Movies" button click event.
+     * Redirects the user to the screen displaying all available movies.
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
     public void allMoviesClick(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/moviesUser.fxml")));
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
@@ -49,6 +60,13 @@ public class UserMenuController {
 
     }
 
+    /**
+     * Handles the "My Movies" button click event.
+     * Redirects the user to the screen displaying the movies rented by the user.
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
     public void myMoviesClick(ActionEvent actionEvent) throws IOException{
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/myMoviesUser.fxml")));
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
@@ -67,6 +85,10 @@ public class UserMenuController {
         stage.show();
     }
 
+    /**
+     * Handles the "Information" button click event.
+     * Displays the user information in a separate window.
+     */
     public void informationClick() {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/userInformation.fxml")));
@@ -80,6 +102,10 @@ public class UserMenuController {
         }
     }
 
+    /**
+     * Handles the "Account" button click event.
+     * Displays the user account settings in a separate window.
+     */
     public void accountClick() {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/userAccount.fxml")));

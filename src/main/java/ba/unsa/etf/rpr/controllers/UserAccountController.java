@@ -14,6 +14,10 @@ public class UserAccountController {
     public TextField usernameField;
     private final UsersManager usersManager = new UsersManager();
 
+    /**
+     * Initializes the UserAccountController by setting the initial values for the username and password fields.
+     * The username field is set to the current logged-in user's username, and the password field is editable and set to the current password.
+     */
     public void initialize() {
 
         passwordField.setEditable(true);
@@ -24,6 +28,13 @@ public class UserAccountController {
 
     }
 
+    /**
+     * Handles the "Save Changes" button click event for updating the user's account information.
+     * It validates the new password and updates the user's password in the system if it meets the requirements.
+     * Displays appropriate success or error messages for the password update.
+     *
+     * @throws TheMovieRentalSystemException If the new password is too short (less than 6 characters).
+     */
     public void saveAccountChanges() throws TheMovieRentalSystemException {
         Users u = usersManager.getUserByUsernameAndPassword(LoginController.getUsernameField(), LoginController.getPasswordField());
         u.setPassword(passwordField.getText());
