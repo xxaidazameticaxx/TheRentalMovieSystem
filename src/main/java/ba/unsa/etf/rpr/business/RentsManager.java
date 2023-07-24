@@ -1,7 +1,6 @@
 package ba.unsa.etf.rpr.business;
 
 import ba.unsa.etf.rpr.dao.DaoFactory;
-import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Rents;
 import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
@@ -13,6 +12,7 @@ import java.util.List;
  * @author Aida Zametica
  */
 public class RentsManager {
+
     public Rents getById(int id) throws TheMovieRentalSystemException {
         return DaoFactory.rentsDao().getById(id);
     }
