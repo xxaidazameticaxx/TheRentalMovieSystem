@@ -41,6 +41,9 @@ public class MoviesAdminController {
     public Button helpButton_id;
     private final MoviesManager moviesManager = new MoviesManager();
 
+    /**
+     * Initializes the MoviesAdminController by setting up the TableView and ChoiceBox, and populating the movie list.
+     */
     public void initialize() {
 
         movieTable_id.setEditable(true);
@@ -77,8 +80,7 @@ public class MoviesAdminController {
     }
 
     /**
-     * creates the required table columns based on the Movies table fields name
-     * adds those columns to the TableView
+     * Sets up the required table columns based on the Movies table fields' names and adds those columns to the TableView.
      */
     private void setupTableView() {
 
@@ -140,8 +142,9 @@ public class MoviesAdminController {
     }
 
     /**
-     * google it
-     * indicates that the method does not perform potentially unsafe operations on the varargs parameter
+     * Helper method to add multiple columns to the TableView.
+     *
+     * @param columns The columns to add to the TableView.
      */
     @SafeVarargs
     private final void addColumnsToTableView(TableColumn<Movies, ?>... columns) {
@@ -149,8 +152,7 @@ public class MoviesAdminController {
     }
 
     /**
-     * fetches all movies from the database using the moviesDao
-     * updates the TableView with the fetched movie list
+     * Fetches all movies from the database using the MoviesManager, updates the TableView with the fetched movie list.
      */
     private void refreshTable() {
         try {
@@ -163,7 +165,8 @@ public class MoviesAdminController {
     }
 
     /**
-     * this method gets the selected movie from the TableView and removes it from the database
+     * Handles the button click event for the "Delete" button.
+     * This method gets the selected movie from the TableView and removes it from the database.
      */
     public void deleteClick() {
 
@@ -188,7 +191,9 @@ public class MoviesAdminController {
     }
 
     /**
-     * this method should be refactored, so we can verify the input
+     * Handles the button click event for the "Add" button.
+     * This method adds a new movie to the database based on the input in the GUI.
+     * The method should be refactored to validate the input.
      */
     public void addClick() {
         try {
@@ -220,8 +225,8 @@ public class MoviesAdminController {
     }
 
     /**
-     * calls the DAO method to fetch all the users based on the search text field
-     * updates the TableView with the fetched user list
+     * Handles the button click event for the "Search" button.
+     * Calls the MoviesManager to fetch all the movies based on the search text field, and updates the TableView with the fetched movie list.
      */
     public void searchButtonClick() {
         String searchText = searchButtonTextField1_id.getText();
@@ -234,6 +239,13 @@ public class MoviesAdminController {
 
     }
 
+    /**
+     * Handles the button click event for the "Back" button.
+     * Navigates back to the admin menu.
+     *
+     * @param mouseEvent
+     * @throws IOException
+     */
     public void backClick(MouseEvent mouseEvent) throws IOException {
         Scene scene;
         Stage stage;
@@ -252,6 +264,10 @@ public class MoviesAdminController {
 
     }
 
+    /**
+     * Handles the button click event for the "Help" button.
+     * Displays a help window with information about movie administration.
+     */
     @FXML
     public void helpClick() {
         try {

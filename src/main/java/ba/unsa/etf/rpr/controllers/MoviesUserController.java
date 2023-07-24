@@ -43,6 +43,9 @@ public class MoviesUserController {
     private final RentsManager rentsManager = new RentsManager();
     public Button rentButton_id;
 
+    /**
+     * Initializes the MoviesUserController by setting up the TableView, ChoiceBox, and movie list.
+     */
     public void initialize() {
 
         movieTable_id.setEditable(true);
@@ -91,8 +94,7 @@ public class MoviesUserController {
     }
 
     /**
-     * creates the required table columns based on the Movies table fields name
-     * adds those columns to the TableView
+     * Sets up the required table columns based on the Movies table fields' names and adds those columns to the TableView.
      */
     private void setupTableView() {
 
@@ -136,9 +138,11 @@ public class MoviesUserController {
 
     }
 
+
     /**
-     * google it
-     * indicates that the method does not perform potentially unsafe operations on the varargs parameter
+     * Helper method to add the provided columns to the TableView.
+     *
+     * @param columns The columns to be added to the TableView.
      */
     @SafeVarargs
     private final void addColumnsToTableView(TableColumn<Movies, ?>... columns) {
@@ -146,8 +150,7 @@ public class MoviesUserController {
     }
 
     /**
-     * fetches all movies from the database using the moviesDao
-     * updates the TableView with the fetched movie list
+     * Fetches all movies from the database using the MoviesManager and updates the TableView with the fetched movie list.
      */
     private void refreshTable() {
         try {
@@ -160,8 +163,8 @@ public class MoviesUserController {
     }
 
     /**
-     * calls the DAO method to fetch all the users based on the search text field
-     * updates the TableView with the fetched user list
+     * Handles the button click event for the "Search" button.
+     * Calls the MoviesManager to fetch all the movies based on the search text field and updates the TableView with the fetched movie list.
      */
     public void searchButtonClick() {
         String searchText = searchButtonTextField1_id.getText();
@@ -174,6 +177,13 @@ public class MoviesUserController {
 
     }
 
+    /**
+     * Handles the button click event for the "Back" button.
+     * Navigates back to the user menu.
+     *
+     * @param mouseEvent
+     * @throws IOException
+     */
     public void backClick(MouseEvent mouseEvent) throws IOException {
         Scene scene;
         Stage stage;
@@ -191,6 +201,11 @@ public class MoviesUserController {
     }
 
 
+    /**
+     * Handles the button click event for the "Rent" button.
+     * Rents the selected movie and adds a new Rent record to the database.
+     * Shows a confirmation alert upon successful renting.
+     */
     public void rentClick() throws TheMovieRentalSystemException {
         Movies selectedMovie = movieTable_id.getSelectionModel().getSelectedItem();
         if(selectedMovie != null){

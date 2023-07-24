@@ -48,7 +48,8 @@ public class LoginController {
 
 
     /**
-     * Initialize method that sets the username and password text field in red if they are empty or contain any empty spaces
+     * Initialize method that sets the username and password text field styles to indicate correctness.
+     * The fields will be displayed in red if they are empty or contain any empty spaces.
      */
     @FXML
     public void initialize() {
@@ -81,7 +82,11 @@ public class LoginController {
     }
 
     /**
+     * Handles the button click event for the "Login" button.
+     * Attempts to perform login with the provided inputs and navigates to the appropriate user/admin menu.
      *
+     * @param actionEvent
+     * @throws IOException
      */
     public void loginclick(ActionEvent actionEvent) throws IOException {
         Users user;
@@ -120,6 +125,13 @@ public class LoginController {
 
     }
 
+
+    /**
+     * Handles the button click event for the "Signup" button.
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
     public void signupClick(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/signup.fxml")));
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
