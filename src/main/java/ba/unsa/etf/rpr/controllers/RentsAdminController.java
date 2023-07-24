@@ -3,7 +3,9 @@ package ba.unsa.etf.rpr.controllers;
 import ba.unsa.etf.rpr.business.MoviesManager;
 import ba.unsa.etf.rpr.business.RentsManager;
 import ba.unsa.etf.rpr.business.UsersManager;
+import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Rents;
+import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -21,6 +23,7 @@ import javafx.stage.Stage;
 import javafx.util.converter.DateStringConverter;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class RentsAdminController {
@@ -114,6 +117,38 @@ public class RentsAdminController {
             Rents rent = new Rents();
             rent.setRent_date(java.sql.Date.valueOf(rentDate_id.getValue()));
             rent.setReturn_date(null);
+            List<Users> listOfUsers = usersManager.getAll();
+            boolean userExists=false;
+            for(Users x:listOfUsers){
+                if(x.getId()== Integer.parseInt(user_id.getText()))
+                    userExists = true;
+            }
+
+            if(!userExists){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Invalid data. User ID does not exist in the system!");
+                alert.showAndWait();
+                return;
+            }
+
+
+            List<Movies> listOfMovies = moviesManager.getAll();
+            boolean movieExists=false;
+            for(Movies x:listOfMovies){
+                if(x.getId()== Integer.parseInt(movie_id.getText()))
+                    movieExists = true;
+            }
+
+            if(!movieExists){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Invalid data. Movie ID does not exist in the system!");
+                alert.showAndWait();
+                return;
+            }
+
+
             rent.setUser(usersManager.getById(Integer.parseInt(user_id.getText())));
             rent.setMovie(moviesManager.getById(Integer.parseInt(movie_id.getText())));
 
