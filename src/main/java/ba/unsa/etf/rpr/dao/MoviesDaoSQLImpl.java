@@ -2,7 +2,6 @@ package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
-
 import java.sql.*;
 import java.util.*;
 
@@ -12,6 +11,11 @@ public class MoviesDaoSQLImpl extends AbstractDao<Movies> implements MoviesDao{
         super("MOVIES");
     }
 
+    /**
+     * @param rs - result set from database
+     * @return
+     * @throws TheMovieRentalSystemException
+     */
     @Override
     public Movies row2object(ResultSet rs) throws TheMovieRentalSystemException {
         try {
@@ -48,11 +52,23 @@ public class MoviesDaoSQLImpl extends AbstractDao<Movies> implements MoviesDao{
         return item;
     }
 
+    /**
+     * Filters movies by the specified genre.
+     * @param genre The genre to filter the movies by.
+     * @return A List of Movies that belong to the specified genre.
+     * @throws TheMovieRentalSystemException If an error occurs while executing the query.
+     */
     @Override
     public List<Movies> filterByGenre(String genre) throws TheMovieRentalSystemException {
         return executeQuery("SELECT * FROM MOVIES WHERE genre = ?",new Object[]{genre});
     }
 
+    /**
+     * Searches for movies by the specified movie name.
+     * @param movie_name The movie name to search for.
+     * @return A List of Movies that match the specified movie name.
+     * @throws TheMovieRentalSystemException  If an error occurs while executing the query.
+     */
     @Override
     public List<Movies> searchByMovie_name(String movie_name) throws TheMovieRentalSystemException {
         return executeQuery("SELECT * FROM MOVIES WHERE movie_name = ?",new Object[]{movie_name});

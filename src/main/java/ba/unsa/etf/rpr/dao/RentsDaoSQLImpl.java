@@ -8,6 +8,7 @@ import java.sql.*;
 import java.util.*;
 
 public class RentsDaoSQLImpl extends AbstractDao<Rents> implements RentsDao{
+
     public RentsDaoSQLImpl(){
        super("RENTS");
     }
@@ -17,8 +18,8 @@ public class RentsDaoSQLImpl extends AbstractDao<Rents> implements RentsDao{
         try {
             Rents rent = new Rents();
             rent.setId(rs.getInt("id"));
-            rent.setMovie(DaoFactory.moviesDao().getById(rs.getInt("movie_id"))); //REFACTOR UPITAN
-            rent.setUser(DaoFactory.usersDao().getById(rs.getInt("user_id")));  //REFACTOR UPITAN
+            rent.setMovie(DaoFactory.moviesDao().getById(rs.getInt("movie_id")));
+            rent.setUser(DaoFactory.usersDao().getById(rs.getInt("user_id")));
             rent.setRent_date(rs.getDate("rent_date"));
             rent.setReturn_date(rs.getDate("return_date"));
             return rent;
@@ -43,6 +44,12 @@ public class RentsDaoSQLImpl extends AbstractDao<Rents> implements RentsDao{
         return item;
     }
 
+    /**
+     * Retrieves a list of rents representing movies issued by the specified user.
+     * @param user The user whose issued movies are to be retrieved.
+     * @return A List of Rents representing the movies issued by the specified user.
+     * @throws TheMovieRentalSystemException If an error occurs while executing the query.
+     */
     @Override
     public List<Rents> getUserIssuedMovies(Users user) throws TheMovieRentalSystemException {
         return executeQuery("SELECT * FROM RENTS WHERE user_id = ?",new Object[]{user.getId()});
