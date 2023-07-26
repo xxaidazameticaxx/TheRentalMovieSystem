@@ -1,19 +1,27 @@
 package ba.unsa.etf.rpr.business;
 
+import ba.unsa.etf.rpr.dao.DaoFactory;
+import ba.unsa.etf.rpr.dao.RentsDao;
 import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Rents;
 import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
+
+import static ba.unsa.etf.rpr.dao.DaoFactory.rentsDao;
 
 
 class RentsManagerTest {
 
     @Test
-    void testGetUserIssuedMovies() throws TheMovieRentalSystemException {
+    void getUserIssuedMovies() throws TheMovieRentalSystemException {
 
         RentsManager rentManager = new RentsManager();
 
@@ -72,4 +80,5 @@ class RentsManagerTest {
         moviesManager.delete(testMovie.getId());
 
     }
+
 }
