@@ -9,6 +9,8 @@ import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -28,8 +30,11 @@ import java.util.Objects;
 
 public class RentsAdminController {
 
+    @FXML
+    private ComboBox<Users> userComboBox;
+    @FXML
+    private ComboBox<Movies> movieComboBox;
     public ImageView backButton_id;
-    public TextField user_id;
     private final RentsManager rentsManager = new RentsManager();
     private final MoviesManager moviesManager = new MoviesManager();
     private final UsersManager usersManager = new UsersManager();
@@ -45,10 +50,86 @@ public class RentsAdminController {
      */
     public void initialize() {
 
+        setupUserComboBox();
+        setupMovieComboBox();
         rentTable_id.setEditable(true);
         setupTableView();
         refreshTable();
     }
+
+    private void setupUserComboBox() {
+        try {
+            List<Users> usersList = usersManager.getAll();
+            ObservableList<Users> observableUsersList = FXCollections.observableArrayList(usersList);
+            userComboBox.setItems(observableUsersList);
+
+            userComboBox.setCellFactory(param -> new ListCell<Users>() {
+                @Override
+                protected void updateItem(Users user, boolean empty) {
+                    super.updateItem(user, empty);
+                    if (empty || user == null) {
+                        setText("select user"); // Display the prompt text
+                    } else {
+                        setText(user.getUsername()); // Display the username for selected items
+                    }
+                }
+            });
+
+            // Customizing the display of the selected item in the collapsed ComboBox
+            userComboBox.setButtonCell(new ListCell<Users>() {
+                @Override
+                protected void updateItem(Users user, boolean empty) {
+                    super.updateItem(user, empty);
+                    if (empty || user == null) {
+                        setText("select user"); // Display the prompt text
+                    } else {
+                        setText(user.getUsername()); // Display the username for selected items
+                    }
+                }
+            });
+        } catch (TheMovieRentalSystemException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void setupMovieComboBox() {
+        try {
+            List<Movies> moviesList = moviesManager.getAll();
+            ObservableList<Movies> observableUsersList = FXCollections.observableArrayList(moviesList);
+            movieComboBox.setItems(observableUsersList);
+
+            movieComboBox.setCellFactory(param -> new ListCell<Movies>() {
+                @Override
+                protected void updateItem(Movies movie, boolean empty) {
+                    super.updateItem(movie, empty);
+                    if (empty || movie == null) {
+                        setText("select movie"); // Display the prompt text
+                    } else {
+                        setText(movie.getMovie_name()); // Display the username for selected items
+                    }
+                }
+            });
+
+            // Customizing the display of the selected item in the collapsed ComboBox
+            movieComboBox.setButtonCell(new ListCell<Movies>() {
+                @Override
+                protected void updateItem(Movies movie, boolean empty) {
+                    super.updateItem(movie, empty);
+                    if (empty || movie == null) {
+                        setText("select movie"); // Display the prompt text
+                    } else {
+                        setText(movie.getMovie_name()); // Display the username for selected items
+                    }
+                }
+            });
+        } catch (TheMovieRentalSystemException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 
     /**
      * Sets up the required table columns based on the Rents table fields' names and adds those columns to the TableView.
@@ -65,7 +146,6 @@ public class RentsAdminController {
 
         TableColumn<Rents, Integer> movieColumn = new TableColumn<>("MOVIE ID");
         movieColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getMovie().getId()).asObject());
-
 
         TableColumn<Rents, Date> rentColumn = new TableColumn<>("RENT DATE");
         rentColumn.setCellValueFactory(new PropertyValueFactory<>("rent_date"));
@@ -124,45 +204,34 @@ public class RentsAdminController {
             Rents rent = new Rents();
             rent.setRent_date(java.sql.Date.valueOf(rentDate_id.getValue()));
             rent.setReturn_date(null);
-            List<Users> listOfUsers = usersManager.getAll();
-            boolean userExists=false;
-            for(Users x:listOfUsers){
-                if(x.getId()== Integer.parseInt(user_id.getText()))
-                    userExists = true;
-            }
 
-            if(!userExists){
+            Users selectedUser = userComboBox.getValue();
+            if (selectedUser == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
-                alert.setHeaderText("Invalid data. User ID does not exist in the system!");
+                alert.setHeaderText("Invalid data. Please select a user!");
                 alert.showAndWait();
                 return;
             }
 
 
-            List<Movies> listOfMovies = moviesManager.getAll();
-            boolean movieExists=false;
-            for(Movies x:listOfMovies){
-                if(x.getId()== Integer.parseInt(movie_id.getText()))
-                    movieExists = true;
-            }
+            rent.setUser(selectedUser);
 
-            if(!movieExists){
+            Movies selectedMovie = movieComboBox.getValue();
+            if (selectedMovie == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
-                alert.setHeaderText("Invalid data. Movie ID does not exist in the system!");
+                alert.setHeaderText("Invalid data. Please select a movie!");
                 alert.showAndWait();
                 return;
             }
 
-
-            rent.setUser(usersManager.getById(Integer.parseInt(user_id.getText())));
-            rent.setMovie(moviesManager.getById(Integer.parseInt(movie_id.getText())));
+            rent.setMovie(selectedMovie);
 
             rentsManager.add(rent);
 
-            user_id.setText("");
-            movie_id.setText("");
+            userComboBox.getSelectionModel().clearSelection();
+            movieComboBox.getSelectionModel().clearSelection();
             rentDate_id.setValue(null);
 
             refreshTable();

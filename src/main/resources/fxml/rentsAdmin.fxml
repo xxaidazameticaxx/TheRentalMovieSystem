@@ -16,6 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.ComboBox?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #212121;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.RentsAdminController">
    <top>
       <HBox prefHeight="34.0" prefWidth="900.0" BorderPane.alignment="CENTER">
@@ -57,16 +58,16 @@
          <children>
             <VBox alignment="CENTER" prefHeight="464.0" prefWidth="199.0" style="-fx-background-color: #212121;">
                <children>
-                  <TextField fx:id="user_id" alignment="CENTER" promptText="user id" style="-fx-background-color: whitesmoke;">
+                  <ComboBox fx:id="userComboBox" prefHeight="25.0" prefWidth="181.0" promptText="select user" style="-fx-background-color: whitesmoke;">
                      <VBox.margin>
                         <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
                      </VBox.margin>
-                  </TextField>
-                  <TextField fx:id="movie_id" alignment="CENTER" promptText="movie id" style="-fx-background-color: whitesmoke;">
+                  </ComboBox>
+                  <ComboBox fx:id="movieComboBox" prefHeight="25.0" prefWidth="181.0" promptText="select movie" style="-fx-background-color: whitesmoke;">
                      <VBox.margin>
                         <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
                      </VBox.margin>
-                  </TextField>
+                  </ComboBox>
                   <DatePicker fx:id="rentDate_id" prefHeight="25.0" prefWidth="181.0" promptText="rent date">
                      <VBox.margin>
                         <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
