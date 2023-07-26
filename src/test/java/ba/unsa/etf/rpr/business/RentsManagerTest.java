@@ -2,6 +2,7 @@ package ba.unsa.etf.rpr.business;
 
 import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.dao.RentsDao;
+import ba.unsa.etf.rpr.dao.RentsDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Rents;
 import ba.unsa.etf.rpr.domain.Users;
@@ -16,6 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 import static ba.unsa.etf.rpr.dao.DaoFactory.rentsDao;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class RentsManagerTest {

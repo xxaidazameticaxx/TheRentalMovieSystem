@@ -91,6 +91,12 @@ class UsersManagerTest {
 
     }
 
-
+    /**
+     * non-existent id
+     */
+    @Test
+    void getByid() {
+        assertThrows(TheMovieRentalSystemException.class, ()->{new MoviesManager().getById(999);});
+    }
 
 }

@@ -100,7 +100,6 @@ class MoviesManagerTest {
         moviesManager.add(movie1);
         moviesManager.add(movie2);
 
-
         // Search for the movie by its name
         List<Movies> filterResults = moviesManager.filterByGenre("Test Genre");
 
