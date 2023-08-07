@@ -32,7 +32,7 @@ public class MoviesManager {
         }
     }
 
-    private boolean validateMovie(String movieName, String durationStr, String genre, String ratingsStr, String priceStr, String language, String releaseYearStr) {
+    public boolean validateMovie(String movieName, String durationStr, String genre, String ratingsStr, String priceStr, String language, String releaseYearStr) {
         return
                 !movieName.isEmpty() &&
                         Integer.parseInt(durationStr) > 0 &&
