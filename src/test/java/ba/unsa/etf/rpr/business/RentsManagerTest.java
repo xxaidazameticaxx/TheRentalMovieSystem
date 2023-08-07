@@ -13,6 +13,9 @@ import java.util.List;
 
 class RentsManagerTest {
 
+    /*
+     * Checks if the correct movies issued by a user are retrieved.
+     */
     @Test
     void getUserIssuedMovies() throws TheMovieRentalSystemException {
 
