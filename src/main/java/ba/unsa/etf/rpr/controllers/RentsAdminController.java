@@ -193,6 +193,12 @@ public class RentsAdminController {
         }
     }
 
+    public void showInputErrorAlert(String headerText) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(headerText);
+        alert.showAndWait();
+    }
 
     /**
      * Handles the button click event for the "Add" button.
@@ -202,27 +208,24 @@ public class RentsAdminController {
     public void addClick() {
         try {
             Rents rent = new Rents();
-            rent.setRent_date(java.sql.Date.valueOf(rentDate_id.getValue()));
+            if(rentDate_id.getValue() != null)
+                rent.setRent_date(java.sql.Date.valueOf(rentDate_id.getValue()));
+            else
+                rent.setRent_date(new Date());
+
             rent.setReturn_date(null);
 
             Users selectedUser = userComboBox.getValue();
             if (selectedUser == null) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Invalid data. Please select a user!");
-                alert.showAndWait();
+                showInputErrorAlert("Invalid data. Please select a user!");
                 return;
             }
-
 
             rent.setUser(selectedUser);
 
             Movies selectedMovie = movieComboBox.getValue();
             if (selectedMovie == null) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Invalid data. Please select a movie!");
-                alert.showAndWait();
+                showInputErrorAlert("Invalid data. Please select a movie!");
                 return;
             }
 
@@ -235,13 +238,12 @@ public class RentsAdminController {
             rentDate_id.setValue(null);
 
             refreshTable();
-
-        }
-        catch(TheMovieRentalSystemException e){
-
+        } catch (TheMovieRentalSystemException e) {
             e.printStackTrace();
         }
     }
+
+
 
     /**
      * Handles the button click event for the "Delete" button.
