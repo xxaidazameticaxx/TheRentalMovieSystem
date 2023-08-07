@@ -70,34 +70,23 @@ public class App {
             user.setAdmin(admin);
             usersManager.add(user);
             System.out.println("You successfully added a new user to the database!");
-        } else if (cl.hasOption(getUsers.getOpt())) {
+        }
+        else if (cl.hasOption(getUsers.getOpt())) {
             UsersManager usersManager = new UsersManager();
             List<Users> usersList = usersManager.getAll();
             usersList.forEach(user -> System.out.println(user.getId() + ". " + user.getUsername() + " (" + user.getPassword() + ")" + " (" + user.isAdmin() + ")"));
-        } else if (cl.hasOption(addMovie.getOpt())) {
-            String movieName = cl.getArgList().get(0);
-            int duration = Integer.parseInt(cl.getArgList().get(1));
-            String genre = cl.getArgList().get(2);
-            double ratings = Double.parseDouble(cl.getArgList().get(3));
-            double price = Double.parseDouble(cl.getArgList().get(4));
-            String language = cl.getArgList().get(5);
-            int releaseYear = Integer.parseInt(cl.getArgList().get(6));
+        }
+        else if (cl.hasOption(addMovie.getOpt())) {
             MoviesManager moviesManager = new MoviesManager();
-            Movies movie = new Movies();
-            movie.setMovie_name(movieName);
-            movie.setDuration(duration);
-            movie.setGenre(genre);
-            movie.setRatings(ratings);
-            movie.setPrice(price);
-            movie.setLanguage(language);
-            movie.setRelease_year(releaseYear);
-            moviesManager.add(movie);
+            moviesManager.add(cl.getArgList().get(0),cl.getArgList().get(1),cl.getArgList().get(2),cl.getArgList().get(3),cl.getArgList().get(4),cl.getArgList().get(5),cl.getArgList().get(6));
             System.out.println("You successfully added a new movie to the database!");
-        } else if (cl.hasOption(getMovies.getOpt())) {
+        }
+        else if (cl.hasOption(getMovies.getOpt())) {
             MoviesManager moviesManager = new MoviesManager();
             List<Movies> moviesList = moviesManager.getAll();
             moviesList.forEach(movie -> System.out.println(movie.getId() + ". " + movie.getMovie_name() + " (" + movie.getDuration() + ")")); //trb dodati jos
-        } else if (cl.hasOption(addRent.getOpt())) {
+        }
+        else if (cl.hasOption(addRent.getOpt())) {
             int userId = Integer.parseInt(cl.getArgList().get(0));
             int movieId = Integer.parseInt(cl.getArgList().get(1));
             UsersManager usersManager = new UsersManager();
@@ -111,14 +100,16 @@ public class App {
             rent.setRent_date(Date.valueOf(LocalDate.now()));
             rentsManager.add(rent);
             System.out.println("You successfully added a new rent to the database!");
-        } else if (cl.hasOption(getRents.getOpt())) {
+        }
+        else if (cl.hasOption(getRents.getOpt())) {
             RentsManager rentsManager = new RentsManager();
             List<Rents> rentsList = rentsManager.getAll();
             rentsList.forEach(rent -> System.out.println("Rent ID: " + rent.getId() +
                     ", User: " + rent.getUser().getUsername() +
                     ", Movie: " + rent.getMovie().getMovie_name() +
                     ", Rent Date: " + rent.getRent_date()));
-        } else {
+        }
+        else {
             printFormattedOptions(options);
             System.exit(-1);
         }

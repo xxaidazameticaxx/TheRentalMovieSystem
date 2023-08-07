@@ -16,10 +16,33 @@ public class MoviesManager {
         return DaoFactory.moviesDao().getById(id);
     }
 
-
-    public Movies add(Movies m) throws TheMovieRentalSystemException {
-        return DaoFactory.moviesDao().add(m);
+    public Movies add(String movieName, String durationStr, String genre, String ratingsStr, String priceStr, String language, String releaseYearStr) throws TheMovieRentalSystemException {
+        if (validateMovie(movieName,durationStr,genre,ratingsStr,priceStr,language,releaseYearStr)) {
+            Movies movie = new Movies();
+            movie.setMovie_name(movieName);
+            movie.setDuration(Integer.parseInt(durationStr));
+            movie.setGenre(genre);
+            movie.setRatings(Double.parseDouble(ratingsStr));
+            movie.setPrice(Double.parseDouble(priceStr));
+            movie.setLanguage(language);
+            movie.setRelease_year(Integer.parseInt(releaseYearStr));
+            return DaoFactory.moviesDao().add(movie);
+        } else {
+            throw new TheMovieRentalSystemException("Invalid movie data");
+        }
     }
+
+    private boolean validateMovie(String movieName, String durationStr, String genre, String ratingsStr, String priceStr, String language, String releaseYearStr) {
+        return
+                !movieName.isEmpty() &&
+                        Integer.parseInt(durationStr) > 0 &&
+                !genre.isEmpty() &&
+                        Double.parseDouble(ratingsStr) >= 0 && Double.parseDouble(ratingsStr) <= 10
+                        && Double.parseDouble(priceStr) >= 0 &&
+                        !language.isEmpty() &&
+                Integer.parseInt(releaseYearStr) > 0;
+    }
+
 
 
     public void update(Movies m) throws TheMovieRentalSystemException {

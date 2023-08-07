@@ -197,17 +197,15 @@ public class MoviesAdminController {
      */
     public void addClick() {
         try {
-            //REFACTOR!!!
-            Movies movie = new Movies();
-            movie.setMovie_name(name_id.getText());
-            movie.setDuration(Integer.parseInt(duration_id.getText()));
-            movie.setGenre(genre_id.getText());
-            movie.setRatings(Double.parseDouble(ratings_id.getText()));
-            movie.setPrice(Double.parseDouble(price_id.getText()));
-            movie.setLanguage(language_id.getText());
-            movie.setRelease_year(Integer.parseInt(release_year_id.getText()));
 
-            moviesManager.add(movie);
+            String movieName = name_id.getText();
+            String durationStr = duration_id.getText();
+            String genre = genre_id.getText();
+            String ratingsStr = ratings_id.getText();
+            String priceStr = price_id.getText();
+            String language = language_id.getText();
+            String releaseYearStr = release_year_id.getText();
+            moviesManager.add(movieName,durationStr,genre,ratingsStr,priceStr,language,releaseYearStr);
 
             name_id.setText("");
             genre_id.setText("");
@@ -220,9 +218,14 @@ public class MoviesAdminController {
             refreshTable();
 
         }catch(TheMovieRentalSystemException e){
-                e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Invalid data");
+            alert.setContentText("You need to input valid data to add the movie!");
+            alert.showAndWait();
         }
     }
+
 
     /**
      * Handles the button click event for the "Search" button.
