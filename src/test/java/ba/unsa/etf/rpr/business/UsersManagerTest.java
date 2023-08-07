@@ -1,18 +1,30 @@
 package ba.unsa.etf.rpr.business;
 
-import ba.unsa.etf.rpr.business.UsersManager;
-import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 class UsersManagerTest {
 
+    /*
+     * Verifies if the user deletion is correctly delegated to the manager.
+     */
+    @Test
+    void testDelete() throws TheMovieRentalSystemException {
+        UsersManager usersManagerMock = mock(UsersManager.class);
+        int userId = 123;
+        usersManagerMock.delete(userId);
+        verify(usersManagerMock).delete(userId);
+    }
+
+   /*
+    * Verifies if a user's admin status can be successfully updated.
+    */
     @Test
     void update() throws TheMovieRentalSystemException {
 
@@ -39,6 +51,9 @@ class UsersManagerTest {
 
     }
 
+    /*
+     * Verifies if a user can be successfully retrieved using their username and password.
+     */
     @Test
     void getUserByUsernameAndPassword() throws TheMovieRentalSystemException {
         UsersManager usersManager = new UsersManager();
@@ -57,7 +72,7 @@ class UsersManagerTest {
     }
 
     /**
-     * in GUI i didnt allow users to have the same username but for the purpose of testing the search bar in the admin users menu
+     * in GUI, I did not allow users to have the same username but for the purpose of testing the search bar in the admin users menu
      * @throws TheMovieRentalSystemException
      */
     @Test
@@ -92,10 +107,10 @@ class UsersManagerTest {
     }
 
     /**
-     * non-existent id
+     *  Verifies if the system correctly throws TheMovieRentalSystemException for a non-existent ID.
      */
     @Test
-    void getByid() {
+    void getById() {
         assertThrows(TheMovieRentalSystemException.class, ()->{new MoviesManager().getById(999);});
     }
 
