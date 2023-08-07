@@ -15,6 +15,7 @@ import ba.unsa.etf.rpr.dao.UsersDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Users;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 
@@ -89,7 +90,7 @@ public class SignupController {
             Users user = new Users();
             user.setUsername(usernameField1_id.getText());
             user.setAdmin(false);
-            user.setPassword(passwordField1_id.getText());
+            user.setPassword(UsersManager.hashPassword(passwordField1_id.getText()));
             usersManager.add(user);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
@@ -105,6 +106,8 @@ public class SignupController {
             alert.setHeaderText(e.getMessage()+" too short!");
             alert.setContentText(e.getMessage()+" must contain at least 6 characters.");
             alert.showAndWait();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
     }
 }

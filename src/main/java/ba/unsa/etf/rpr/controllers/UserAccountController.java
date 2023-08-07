@@ -7,6 +7,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
+import java.security.NoSuchAlgorithmException;
+
 public class UserAccountController {
 
     public TextField passwordField;
@@ -35,16 +37,16 @@ public class UserAccountController {
      *
      * @throws TheMovieRentalSystemException If the new password is too short (less than 6 characters).
      */
-    public void saveAccountChanges() throws TheMovieRentalSystemException {
-        Users u = usersManager.getUserByUsernameAndPassword(LoginController.getUsernameField(), LoginController.getPasswordField());
-        u.setPassword(passwordField.getText());
+    public void saveAccountChanges() throws TheMovieRentalSystemException, NoSuchAlgorithmException {
+        Users u = usersManager.getUserByUsernameAndPassword(LoginController.getUsernameField(), UsersManager.hashPassword(LoginController.getPasswordField()));
+        u.setPassword(UsersManager.hashPassword(passwordField.getText()));
         u.setUsername(usernameField.getText());
 
         try{
             if(passwordField.getText().length()<6) throw new TheMovieRentalSystemException("Password");
             usersManager.update(u);
             LoginController.setUsernameField(usernameField.getText());
-            LoginController.setPasswordField(passwordField.getText());
+            LoginController.setPasswordField(UsersManager.hashPassword(passwordField.getText()));
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Successfully changed");
             alert.setHeaderText("You can now log into your account using the new password!");
@@ -56,6 +58,8 @@ public class UserAccountController {
             alert.setHeaderText(e.getMessage()+" too short!");
             alert.setContentText(e.getMessage()+" must contain at least 6 characters.");
             alert.showAndWait();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
 
     }

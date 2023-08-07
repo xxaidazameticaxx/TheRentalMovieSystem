@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
 public class LoginController {
@@ -93,9 +94,12 @@ public class LoginController {
         usernameField = usernameField_id;
         passwordField = passwordField_id;
         try{
-            user = usersManager.getUserByUsernameAndPassword(usernameField_id.getText(),passwordField_id.getText());
+            if(!Objects.equals(passwordField_id.getText(), "admin"))
+            user = usersManager.getUserByUsernameAndPassword(usernameField_id.getText(),UsersManager.hashPassword(passwordField_id.getText()));
+            else
+                user = usersManager.getUserByUsernameAndPassword(usernameField_id.getText(),passwordField_id.getText());
 
-        } catch(TheMovieRentalSystemException error){
+        } catch(TheMovieRentalSystemException | NoSuchAlgorithmException error){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("User does not exist");

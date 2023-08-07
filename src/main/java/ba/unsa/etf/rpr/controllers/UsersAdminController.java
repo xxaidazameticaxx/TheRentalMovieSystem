@@ -18,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.converter.BooleanStringConverter;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Objects;
 
@@ -153,7 +154,7 @@ public class UsersAdminController {
             Users user = new Users();
             user.setUsername(username_id.getText());
             user.setAdmin(Boolean.parseBoolean(admin_id.getText()));
-            user.setPassword(password_id.getText());
+            user.setPassword(UsersManager.hashPassword(password_id.getText()));
 
             usersManager.add(user);
 
@@ -179,6 +180,8 @@ public class UsersAdminController {
                 alert.setContentText(e.getMessage()+" must contain at least 6 characters.");
                 alert.showAndWait();
             }
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
     }
 

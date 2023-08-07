@@ -3,6 +3,10 @@ package ba.unsa.etf.rpr.business;
 import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
+
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
@@ -36,6 +40,18 @@ public class UsersManager {
 
     public List<Users> getUsersByUsername(String username) throws TheMovieRentalSystemException {
         return DaoFactory.usersDao().getUsersByUsername(username);
+    }
+
+    private static final String HASHING_ALGORITHM = "SHA-256";
+
+    public static String hashPassword(String password) throws NoSuchAlgorithmException {
+        MessageDigest messageDigest = MessageDigest.getInstance(HASHING_ALGORITHM);
+        messageDigest.update(password.getBytes());
+        byte[] hashPassword = messageDigest.digest();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (byte b : hashPassword)
+            stringBuilder.append(String.format("%02x",b));
+        return stringBuilder.toString();
     }
 
 
