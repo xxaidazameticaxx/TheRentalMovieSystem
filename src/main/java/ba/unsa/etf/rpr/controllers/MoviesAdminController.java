@@ -193,7 +193,6 @@ public class MoviesAdminController {
     /**
      * Handles the button click event for the "Add" button.
      * This method adds a new movie to the database based on the input in the GUI.
-     * The method should be refactored to validate the input.
      */
     public void addClick() {
         try {

@@ -46,7 +46,7 @@ public class UserAccountController {
             if(passwordField.getText().length()<6) throw new TheMovieRentalSystemException("Password");
             usersManager.update(u);
             LoginController.setUsernameField(usernameField.getText());
-            LoginController.setPasswordField(UsersManager.hashPassword(passwordField.getText()));
+            LoginController.setPasswordField(passwordField.getText());
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Successfully changed");
             alert.setHeaderText("You can now log into your account using the new password!");
@@ -58,8 +58,6 @@ public class UserAccountController {
             alert.setHeaderText(e.getMessage()+" too short!");
             alert.setContentText(e.getMessage()+" must contain at least 6 characters.");
             alert.showAndWait();
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
         }
 
     }

@@ -17,6 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 
@@ -99,9 +100,11 @@ public class MyMoviesUserController {
         try {
             // data changes not refreshing in some cases, so I added the clear method to force the tableview to change
             myMoviesTable_id.getItems().clear();
-            myMoviesTable_id.setItems(FXCollections.observableArrayList(rentsManager.getUserIssuedMovies(usersManager.getUserByUsernameAndPassword(LoginController.getUsernameField(),LoginController.getPasswordField()))));
+            myMoviesTable_id.setItems(FXCollections.observableArrayList(rentsManager.getUserIssuedMovies(usersManager.getUserByUsernameAndPassword(LoginController.getUsernameField(),UsersManager.hashPassword(LoginController.getPasswordField())))));
         } catch (TheMovieRentalSystemException e) {
             e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
     }
 

@@ -26,7 +26,6 @@ public class SignupController {
     public TextField usernameField1_id;
     private final UsersManager usersManager = new UsersManager();
 
-
     /**
      * Initializes the SignupController by adding listeners to the username and password fields for input validation.
      */
