@@ -20,8 +20,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
+
+import static ba.unsa.etf.rpr.controllers.LoginController.getPasswordField;
 
 public class MoviesUserController {
 
@@ -206,17 +209,16 @@ public class MoviesUserController {
      * Rents the selected movie and adds a new Rent record to the database.
      * Shows a confirmation alert upon successful renting.
      */
-    public void rentClick() throws TheMovieRentalSystemException {
+    public void rentClick() throws TheMovieRentalSystemException, NoSuchAlgorithmException {
         Movies selectedMovie = movieTable_id.getSelectionModel().getSelectedItem();
         if(selectedMovie != null){
             Rents rent = new Rents();
             rent.setRent_date(new Date());
-            rent.setUser(usersManager.getUserByUsernameAndPassword(LoginController.getUsernameField(),LoginController.getPasswordField()));
+            rent.setUser(usersManager.getUserByUsernameAndPassword(LoginController.getUsernameField(),UsersManager.hashPassword(LoginController.getPasswordField())));
             rent.setReturn_date(null);
             rent.setMovie(selectedMovie);
             rentsManager.add(rent);
-
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Successfully rented");
             alert.setHeaderText("The movie is waiting for you in the nearest Movie Rental Shop!");
             alert.setContentText("You have two days to pick it up...");

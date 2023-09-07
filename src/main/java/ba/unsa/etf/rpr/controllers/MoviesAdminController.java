@@ -205,6 +205,13 @@ public class MoviesAdminController {
             String priceStr = price_id.getText();
             String language = language_id.getText();
             String releaseYearStr = release_year_id.getText();
+
+            if (movieName.isEmpty() || durationStr.isEmpty() || genre.isEmpty() ||
+                    ratingsStr.isEmpty() || priceStr.isEmpty() || language.isEmpty() ||
+                    releaseYearStr.isEmpty()) {
+                throw new TheMovieRentalSystemException("All fields must be filled out.");
+            }
+
             moviesManager.add(movieName,durationStr,genre,ratingsStr,priceStr,language,releaseYearStr);
 
             name_id.setText("");

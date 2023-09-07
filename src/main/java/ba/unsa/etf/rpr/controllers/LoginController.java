@@ -95,7 +95,7 @@ public class LoginController {
         passwordField = passwordField_id;
         try{
             if(!Objects.equals(passwordField_id.getText(), "admin"))
-            user = usersManager.getUserByUsernameAndPassword(usernameField_id.getText(),UsersManager.hashPassword(passwordField_id.getText()));
+                user = usersManager.getUserByUsernameAndPassword(usernameField_id.getText(),UsersManager.hashPassword(passwordField_id.getText()));
             else
                 user = usersManager.getUserByUsernameAndPassword(usernameField_id.getText(),passwordField_id.getText());
 
