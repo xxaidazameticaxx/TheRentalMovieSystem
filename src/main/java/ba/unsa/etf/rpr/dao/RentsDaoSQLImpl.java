@@ -55,4 +55,33 @@ public class RentsDaoSQLImpl extends AbstractDao<Rents> implements RentsDao{
         return executeQuery("SELECT * FROM RENTS WHERE user_id = ?",new Object[]{user.getId()});
     }
 
+    @Override
+    public List<Object[]> getRentsIssuedByOthers(Users user) throws TheMovieRentalSystemException {
+        String query = "SELECT user_id, movie_id FROM RENTS WHERE movie_id IN (SELECT movie_id FROM RENTS WHERE user_id = ?) AND user_id != ?";
+        List<Object[]> rentsByOthers = new ArrayList<>();
+
+        try (
+                PreparedStatement statement = getConnection().prepareStatement(query);
+        ) {
+            statement.setInt(1, user.getId());
+            statement.setInt(2, user.getId());
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    int userId = resultSet.getInt("user_id");
+                    int movieId = resultSet.getInt("movie_id");
+                    Object[] rentInfo = { userId, movieId };
+                    rentsByOthers.add(rentInfo);
+                }
+            }
+
+            return rentsByOthers;
+        } catch (SQLException e) {
+            throw new TheMovieRentalSystemException("Error retrieving rents issued by others", e);
+        }
+    }
+
+
+
+
 }

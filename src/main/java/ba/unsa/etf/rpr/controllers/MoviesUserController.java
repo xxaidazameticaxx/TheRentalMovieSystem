@@ -7,6 +7,7 @@ import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Rents;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -15,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -23,6 +25,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import static ba.unsa.etf.rpr.controllers.LoginController.getPasswordField;
 
@@ -45,6 +48,7 @@ public class MoviesUserController {
     private final UsersManager usersManager = new UsersManager();
     private final RentsManager rentsManager = new RentsManager();
     public Button rentButton_id;
+    public Button recommendMovie_id;
 
     /**
      * Initializes the MoviesUserController by setting up the TableView, ChoiceBox, and movie list.
@@ -230,6 +234,18 @@ public class MoviesUserController {
             alert.setHeaderText("None selected");
             alert.setContentText("You need to select a movie to rent it!");
             alert.showAndWait();
+        }
+    }
+
+    public void recommendMovieClick(ActionEvent actionEvent) {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/recommendedMovies.fxml")));
+            Stage stage = new Stage();
+            stage.setResizable(false);
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

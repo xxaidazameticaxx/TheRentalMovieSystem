@@ -7,6 +7,7 @@ import ba.unsa.etf.rpr.domain.Movies;
 import ba.unsa.etf.rpr.domain.Rents;
 import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,6 +28,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class RentsAdminController {
 
@@ -153,6 +155,46 @@ public class RentsAdminController {
         TableColumn<Rents, Date> returnColumn = new TableColumn<>("RETURN DATE");
         returnColumn.setCellValueFactory(new PropertyValueFactory<>("return_date"));
 
+        TableColumn<Rents, Integer> durationColumn = new TableColumn<>("RENT DURATION");
+        durationColumn.setCellValueFactory(cell -> {
+            Rents rent = cell.getValue();
+            Date rentDate = rent.getRent_date();
+            Date returnDate = rent.getReturn_date();
+
+            long duration;
+            if (returnDate != null) {
+                duration = TimeUnit.DAYS.convert(returnDate.getTime() - rentDate.getTime(), TimeUnit.MILLISECONDS);
+            } else {
+                Date currentDate = new Date();
+                duration = TimeUnit.DAYS.convert(currentDate.getTime() - rentDate.getTime(), TimeUnit.MILLISECONDS);
+            }
+
+            return new ReadOnlyObjectWrapper<>((int) duration);
+        });
+
+        TableColumn<Rents, String> penaltyColumn = new TableColumn<>("RENT PENALTY");
+        penaltyColumn.setCellValueFactory(cell -> {
+            Rents rent = cell.getValue();
+            Date rentDate = rent.getRent_date();
+            Date returnDate = rent.getReturn_date();
+
+            long duration;
+            if (returnDate != null) {
+                duration = TimeUnit.DAYS.convert(returnDate.getTime() - rentDate.getTime(), TimeUnit.MILLISECONDS);
+            } else {
+                Date currentDate = new Date();
+                duration = TimeUnit.DAYS.convert(currentDate.getTime() - rentDate.getTime(), TimeUnit.MILLISECONDS);
+            }
+
+            double penalty = duration * rent.getMovie().getPrice();
+            String penaltyString = String.valueOf(penalty);
+
+            return new ReadOnlyObjectWrapper<>(penaltyString);
+        });
+
+
+
+
         returnColumn.setCellFactory(col -> new TextFieldTableCell<>(new DateStringConverter("yyyy-MM-dd")));
 
         returnColumn.setOnEditCommit(event -> {
@@ -166,7 +208,7 @@ public class RentsAdminController {
             }
         });
 
-        addColumnsToTableView(idColumn,rentColumn,returnColumn,userColumn,movieColumn);
+        addColumnsToTableView(idColumn,rentColumn,returnColumn,userColumn,movieColumn,durationColumn,penaltyColumn);
 
     }
 

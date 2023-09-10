@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Movies;
+import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 import java.sql.*;
 import java.util.*;
@@ -73,6 +74,19 @@ public class MoviesDaoSQLImpl extends AbstractDao<Movies> implements MoviesDao{
     public List<Movies> searchByMovie_name(String movie_name) throws TheMovieRentalSystemException {
         return executeQuery("SELECT * FROM MOVIES WHERE movie_name = ?",new Object[]{movie_name});
     }
+
+    @Override
+    public List<Movies> getRecommendedMovies(Users user) throws TheMovieRentalSystemException {
+        return executeQuery("SELECT * FROM MOVIES WHERE id IN (SELECT movie_id from RENTS WHERE user_id IN( SELECT user_id from RENTS where user_id IN(SELECT user_id FROM RENTS WHERE movie_id IN (SELECT movie_id FROM RENTS WHERE user_id = ?) )) and movie_id NOT IN (SELECT movie_id FROM RENTS WHERE user_id = ?)) ORDER BY ratings DESC LIMIT 3;",new Object[]{user.getId(),user.getId()});
+    }
+
+    @Override
+    public List<Movies> getRandomMovies(Users user) throws TheMovieRentalSystemException {
+        return executeQuery(" SELECT * FROM MOVIES WHERE id NOT IN (SELECT movie_id FROM RENTS WHERE user_id = ?) ORDER BY RAND();",new Object[]{user.getId()});
+    }
+
+
+
 
 
 }

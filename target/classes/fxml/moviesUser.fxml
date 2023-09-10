@@ -51,6 +51,11 @@
             </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="53.0" prefWidth="358.0">
                <children>
+                  <Button fx:id="recommendMovie_id" mnemonicParsing="false" onAction="#recommendMovieClick" style="-fx-background-color: whitesmoke;" text="Recommend Movie">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
                   <ImageView fx:id="backButtonMovies_id" fitHeight="40.0" fitWidth="51.0" onMouseClicked="#backClick" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/white-arrow-icon-5.png" />

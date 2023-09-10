@@ -5,6 +5,7 @@ import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -16,4 +17,6 @@ import java.util.List;
 public interface RentsDao extends Dao<Rents>{
 
     List<Rents> getUserIssuedMovies(Users user) throws TheMovieRentalSystemException;
+
+    List<Object[]> getRentsIssuedByOthers(Users user) throws TheMovieRentalSystemException;
 }

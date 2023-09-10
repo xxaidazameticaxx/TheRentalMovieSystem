@@ -2,6 +2,7 @@ package ba.unsa.etf.rpr.business;
 
 import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Movies;
+import ba.unsa.etf.rpr.domain.Users;
 import ba.unsa.etf.rpr.exceptions.TheMovieRentalSystemException;
 
 import java.util.List;
@@ -65,6 +66,19 @@ public class MoviesManager {
     public List<Movies> searchByMovie_name(String movie_name) throws TheMovieRentalSystemException {
         return DaoFactory.moviesDao().searchByMovie_name(movie_name);
     }
+
+    public List<Movies> getRecommendedMovies(Users user)throws TheMovieRentalSystemException {
+        return DaoFactory.moviesDao().getRecommendedMovies(user);
+    }
+
+    public List<Movies> getRandomMovies(Users user) throws TheMovieRentalSystemException {
+        return DaoFactory.moviesDao().getRandomMovies(user);
+    }
+
+
+
+
+
 
 
 }
